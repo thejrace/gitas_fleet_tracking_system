@@ -1,3 +1,10 @@
+/*
+ *  Gitas Fleet Tracking System 2019
+ *
+ *  Contributors:
+ *      - Ahmet Ziya Kanbur
+ *
+ */
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ui.MainScreen;
