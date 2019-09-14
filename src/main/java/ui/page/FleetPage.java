@@ -7,5 +7,14 @@
  */
 package ui.page;
 
-public class FleetPage {
+public class FleetPage extends UIPage{
+
+    public FleetPage(){
+        loadFXML("fleet_page");
+    }
+
+    @Override
+    public FleetPageController getController(){
+        return (FleetPageController)controller;
+    }
 }

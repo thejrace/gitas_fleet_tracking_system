@@ -7,15 +7,15 @@
  */
 package ui.page;
 
-public class FleetPageController extends UIPage {
+import javafx.fxml.Initializable;
 
-    public FleetPageController(){
-        loadFXML("project_form_page");
-    }
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class FleetPageController extends UIPageController implements Initializable {
 
     @Override
-    public FleetPageController getController(){
-        return (FleetPageController)controller;
-    }
+    public void initialize(URL location, ResourceBundle resources) {
 
+    }
 }

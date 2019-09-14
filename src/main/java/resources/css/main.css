@@ -4,6 +4,7 @@
     -fx-box-border: transparent;
     -fx-padding:0;
     -fx-text-fill:#272727;
+    -fx-background-color:#302e2e;
 }
 .scroll-pane  {
     -fx-focus-color: transparent;
@@ -28,9 +29,6 @@
 .label {
     -fx-font-smoothing-type: gray;
     -fx-font-weight:bold;
-}
-.main-bg-color {
-    -fx-background-color: #222b2e;
 }
 
 

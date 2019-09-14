@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import ui.block.ContentContainer;
 import ui.block.TopBar;
+import ui.block.TopBarController;
 import ui.popup.Popup;
 
 import java.net.URL;
@@ -81,11 +82,13 @@ public class MainScreenController implements Initializable {
             uiContentWrapper.getChildren().add( CONTENT_CONTAINER );
             AnchorPane.setLeftAnchor(CONTENT_CONTAINER, 0.0);
             AnchorPane.setRightAnchor(CONTENT_CONTAINER, 0.0);
-            AnchorPane.setTopAnchor(CONTENT_CONTAINER, 150.0);
+            AnchorPane.setTopAnchor(CONTENT_CONTAINER, 35.0);
             AnchorPane.setBottomAnchor(CONTENT_CONTAINER, 0.0);
 
             // initialize popup
             Popup.initialize( uiPopupOverlay, uiPopup );
+
+            ((TopBarController)topBar.getController()).initEvents();
 
         } catch( Exception e ){
             e.printStackTrace();
