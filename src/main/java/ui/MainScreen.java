@@ -14,7 +14,7 @@ public class MainScreen extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/main_screen.fxml"));
             Parent content = loader.load();
-            primaryStage.setTitle("Gitas FTS");
+            primaryStage.setTitle("Gitas FTS Obarey");
 
             //Map<String, Double> resData = Common.calculateAppWindowSize();
             primaryStage.setScene(new Scene(content, 1280, 1024 )); // @todo - calculate client's width-height, give offset to that
