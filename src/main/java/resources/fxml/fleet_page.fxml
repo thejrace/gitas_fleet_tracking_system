@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.page.FleetPageController">
+   <children>
+      <Label fx:id="uiTitle">
+         <styleClass>
+            <String fx:value="title" />
+            <String fx:value="lbl-white" />
+            <String fx:value="lbl-h4" />
+         </styleClass>
+         <VBox.margin>
+            <Insets bottom="25.0" />
+         </VBox.margin>
+      </Label>
+   </children>
+</VBox>

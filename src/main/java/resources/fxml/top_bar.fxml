@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="106.0" prefHeight="21.0" prefWidth="1024.0" styleClass="top-bar" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.block.TopBarController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="35.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Alarmlar">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Tümünü Görüldü Yap" />
+                  <MenuItem mnemonicParsing="false" text="Tümünü Göster" />
+                  <MenuItem mnemonicParsing="false" text="Alarm Ayarlarına Git" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Filo">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Filo Ayarlarına Git" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Raporlar">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Ek Sefer Önerileri" />
+                  <MenuItem mnemonicParsing="false" text="Filo Raporları" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Kullanıcı">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Ayarlar" />
+                  <MenuItem mnemonicParsing="false" text="Çıkış Yap" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Ayarlar">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Genel" />
+                  <MenuItem mnemonicParsing="false" text="Arayüz" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Hakkında">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Program Hakkında" />
+                  <MenuItem mnemonicParsing="false" text="Geribildirim" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
