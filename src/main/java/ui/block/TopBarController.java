@@ -1,7 +1,9 @@
 package ui.block;
 
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuBar;
 import ui.MainScreenController;
 import ui.page.UIPage;
 import ui.popup.Popup;
@@ -12,6 +14,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class TopBarController implements Initializable {
+
+    @FXML
+    private MenuBar uiMenuBar;
 
     private int PIDProjects = 1,
                 PIDProjectForm = 2,
