@@ -11,6 +11,7 @@ public class SettingsPage extends UIPage {
 
     public SettingsPage(){
         loadFXML("settings_page");
+        getController().setTitle("Ayarlar");
     }
 
     @Override

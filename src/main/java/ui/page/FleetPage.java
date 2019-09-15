@@ -11,6 +11,7 @@ public class FleetPage extends UIPage{
 
     public FleetPage(){
         loadFXML("fleet_page");
+        getController().setTitle("Filo");
     }
 
     @Override

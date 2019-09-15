@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import ui.custom_control.TopNavButton?>
 <AnchorPane maxHeight="106.0" prefHeight="19.0" prefWidth="1024.0" styleClass="top-bar" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.block.TopBarController">
    <children>
       <Button fx:id="uiDashboardBtn" mnemonicParsing="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -28,20 +29,10 @@
                         <FontAwesomeIconView fill="#d06519" glyphName="BELL" size="14.0" />
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Alarm Ayarlarına Git">
-                     <graphic>
-                        <FontAwesomeIconView fill="#3778b5" glyphName="GEAR" size="14.0" />
-                     </graphic>
-                  </MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Filo">
             <items>
-              <MenuItem mnemonicParsing="false" text="Filo Ayarlarına Git">
-                     <graphic>
-                        <FontAwesomeIconView fill="#3778b5" glyphName="GEAR" size="14.0" />
-                     </graphic>
-                  </MenuItem>
                   <MenuItem mnemonicParsing="false" text="Veri Almayı Durdur">
                      <graphic>
                         <FontAwesomeIconView fill="#eb3535" glyphName="STOP" size="14.0" />
@@ -51,39 +42,22 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Raporlar">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Ek Sefer Önerileri">
-                     <graphic>
-                        <FontAwesomeIconView fill="#3778b5" glyphName="HISTORY" size="14.0" />
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Filo Raporları">
-                     <graphic>
-                        <FontAwesomeIconView fill="#19a8a8" glyphName="CLIPBOARD" size="14.0" />
-                     </graphic>
-                  </MenuItem>
+                  <TopNavButton page="RunSuggestionsPage" fill="#3778b5" iconName="HISTORY" text="Ek Sefer Önerileri" />
+                  <TopNavButton page="ReportsPage" fill="#19a8a8" iconName="CLIPBOARD" text="Filo Raporları" />
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Kullanıcı">
             <items>
-              <MenuItem mnemonicParsing="false" text="Ayarlar">
-                     <graphic>
-                        <FontAwesomeIconView fill="#3778b5" glyphName="GEAR" size="14.0" />
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Çıkış Yap">
-                     <graphic>
-                        <FontAwesomeIconView fill="#575a5c" glyphName="SIGN_OUT" size="14.0" />
-                     </graphic>
-                  </MenuItem>
+              <MenuItem mnemonicParsing="false" text="Çıkış Yap">
+                 <graphic>
+                    <FontAwesomeIconView fill="#575a5c" glyphName="SIGN_OUT" size="14.0" />
+                 </graphic>
+              </MenuItem>
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Ayarlar">
                <items>
-                  <MenuItem fx:id="uiSettingsBtn" mnemonicParsing="false" text="Ayarlara Git">
-                     <graphic>
-                        <FontAwesomeIconView fill="#3778b5" glyphName="WRENCH" size="14.0" />
-                     </graphic>
-                  </MenuItem>
+                   <TopNavButton page="SettingsPage" fill="#3778b5" iconName="GEAR" text="Program Ayarları" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Hakkında">

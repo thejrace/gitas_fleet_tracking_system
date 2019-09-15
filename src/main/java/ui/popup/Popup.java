@@ -9,14 +9,18 @@ import ui.MainScreenController;
 public class Popup {
 
     private static VBox POPUP_OVERLAY, POPUP_CONTENT, LOADER_CONTENT;
+    private static boolean shown = false;
 
     public static void show(){
         MainScreenController.WRAPPER.getChildren().setAll(reverseElems());
+        shown = true;
     }
 
     public static void hide(){
+        if( !shown ) return;
         MainScreenController.WRAPPER.getChildren().setAll(reverseElems());
         POPUP_CONTENT.getChildren().clear();
+        shown = false;
     }
 
     public static void showLoader(){
@@ -43,6 +47,5 @@ public class Popup {
     public static void setContent( Node content ){
         POPUP_CONTENT.getChildren().add(content);
     }
-
 
 }

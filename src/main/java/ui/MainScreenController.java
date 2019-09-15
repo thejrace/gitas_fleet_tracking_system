@@ -88,7 +88,6 @@ public class MainScreenController implements Initializable {
             // initialize popup
             Popup.initialize( uiPopupOverlay, uiPopup );
 
-            ((TopBarController)topBar.getController()).initEvents();
 
         } catch( Exception e ){
             e.printStackTrace();
