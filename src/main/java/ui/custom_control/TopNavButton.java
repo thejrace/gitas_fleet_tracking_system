@@ -14,9 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
 import javafx.scene.paint.Color;
 import ui.block.TopBarController;
-import ui.page.PageFactory;
-import ui.page.UIPage;
-import ui.popup.Popup;
 
 import java.io.IOException;
 
@@ -49,20 +46,7 @@ public class TopNavButton extends MenuItem {
 
             // page load action
             setOnAction( ev -> {
-                if( TopBarController.pagesCached.containsKey(page) ){
-                    TopBarController.loadPage(page);
-                    System.out.println("FROM CACHE");
-                } else {
-                    System.out.println("INIT");
-                    Popup.showLoader();
-                    Thread load = new Thread( () -> {
-                        UIPage pageClass = PageFactory.getPage(page);
-                        TopBarController.pagesCached.put(page, pageClass);
-                        TopBarController.loadPage(page);
-                    });
-                    load.setDaemon(true);
-                    load.start();
-                }
+                TopBarController.switchPage(page);
             });
         } catch (IOException e) {
             throw new RuntimeException(e);

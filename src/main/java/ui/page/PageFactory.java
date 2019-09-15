@@ -1,9 +1,21 @@
+/*
+ *  Gitas Fleet Tracking System 2019
+ *
+ *  Contributors:
+ *      - Ahmet Ziya Kanbur
+ *
+ */
 package ui.page;
 
 public class PageFactory {
-
+    /**
+     * Return the page object with given class name.
+     *
+     * @param className class name of the page.
+     *
+     * @return Page class.
+     */
     public static UIPage getPage( String className ){
-        String page;
         switch( className ){
             case "FleetPage":
                 return new FleetPage();
@@ -17,5 +29,4 @@ public class PageFactory {
                 return null;
         }
     }
-
 }

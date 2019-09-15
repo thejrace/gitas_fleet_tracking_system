@@ -15,7 +15,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import ui.block.ContentContainer;
 import ui.block.TopBar;
-import ui.block.TopBarController;
 import ui.popup.Popup;
 
 import java.net.URL;
@@ -64,7 +63,6 @@ public class MainScreenController implements Initializable {
         try {
             // initialize main UI blocks
             TopBar topBar = new TopBar();
-
             ContentContainer contentContainer = new ContentContainer();
             topBar.initUI();
             contentContainer.initUI();
@@ -87,7 +85,6 @@ public class MainScreenController implements Initializable {
 
             // initialize popup
             Popup.initialize( uiPopupOverlay, uiPopup );
-
 
         } catch( Exception e ){
             e.printStackTrace();
