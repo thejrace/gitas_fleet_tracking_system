@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
@@ -10,7 +9,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<VBox alignment="CENTER" prefWidth="278.0" styleClass="fts-box" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" prefWidth="278.0" styleClass="fts-box" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.component.BusBoxController">
    <children>
       <AnchorPane styleClass="fts-header-container">
          <children>
@@ -164,41 +164,41 @@
       </HBox>
       <HBox fx:id="uiNavContainer" alignment="CENTER" prefWidth="199.0" spacing="10.0">
          <children>
-            <JFXButton fx:id="uiEmpPlanBtn1" contentDisplay="CENTER" prefHeight="24.0" prefWidth="24.0" ripplerFill="#7b3275" styleClass="emp-box-btn" HBox.hgrow="ALWAYS">
+            <Button fx:id="uiEmpPlanBtn1" contentDisplay="CENTER" prefHeight="24.0" prefWidth="24.0" styleClass="emp-box-btn" HBox.hgrow="ALWAYS">
                <graphic>
                   <FontAwesomeIconView glyphName="CALENDAR" size="14" styleClass="emp-box-btn-icon" />
                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="uiEmpWorksBtn" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="24.0" ripplerFill="#7b3275" styleClass="emp-box-btn">
+            </Button>
+            <Button fx:id="uiEmpWorksBtn" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="24.0"  styleClass="emp-box-btn">
                <graphic>
                   <FontAwesomeIconView glyphName="COMMENT" size="14" styleClass="emp-box-btn-icon" />
                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="uiEmpMessageBtn" contentDisplay="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="24.0" prefWidth="24.0" ripplerFill="#7b3275" styleClass="emp-box-btn">
+            </Button>
+            <Button fx:id="uiEmpMessageBtn" contentDisplay="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="24.0" prefWidth="24.0" styleClass="emp-box-btn">
                <graphic>
                   <FontAwesomeIconView glyphName="USER" size="14" styleClass="emp-box-btn-icon" />
                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="uiEmpDetailsBtn" contentDisplay="CENTER" layoutX="90.0" layoutY="10.0" prefHeight="24.0" prefWidth="24.0" ripplerFill="#7b3275" styleClass="emp-box-btn">
+            </Button>
+            <Button fx:id="uiEmpDetailsBtn" contentDisplay="CENTER" layoutX="90.0" layoutY="10.0" prefHeight="24.0" prefWidth="24.0" styleClass="emp-box-btn">
                <graphic>
                   <FontAwesomeIconView glyphName="DASHBOARD" size="14" styleClass="emp-box-btn-icon" />
                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="uiEmpDetailsBtn1" contentDisplay="CENTER" layoutX="153.0" layoutY="15.0" prefHeight="24.0" prefWidth="24.0" ripplerFill="#7b3275" styleClass="emp-box-btn">
+            </Button>
+            <Button fx:id="uiEmpDetailsBtn1" contentDisplay="CENTER" layoutX="153.0" layoutY="15.0" prefHeight="24.0" prefWidth="24.0" styleClass="emp-box-btn">
                <graphic>
                   <FontAwesomeIconView glyphName="WRENCH" size="14" styleClass="emp-box-btn-icon" />
                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="uiEmpMessageBtn1" contentDisplay="CENTER" layoutX="154.0" layoutY="15.0" prefHeight="24.0" prefWidth="24.0" ripplerFill="#7b3275" styleClass="emp-box-btn">
+            </Button>
+            <Button fx:id="uiEmpMessageBtn1" contentDisplay="CENTER" layoutX="154.0" layoutY="15.0" prefHeight="24.0" prefWidth="24.0" styleClass="emp-box-btn">
                <graphic>
                   <FontAwesomeIconView glyphName="BAR_CHART" size="14" styleClass="emp-box-btn-icon" />
                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="uiEmpMessageBtn11" contentDisplay="CENTER" layoutX="212.0" layoutY="15.0" prefHeight="24.0" prefWidth="24.0" ripplerFill="#7b3275" styleClass="emp-box-btn">
+            </Button>
+            <Button fx:id="uiEmpMessageBtn11" contentDisplay="CENTER" layoutX="212.0" layoutY="15.0" prefHeight="24.0" prefWidth="24.0" styleClass="emp-box-btn">
                <graphic>
                   <FontAwesomeIconView glyphName="SEARCH" size="14" styleClass="emp-box-btn-icon" />
                </graphic>
-            </JFXButton>
+            </Button>
          </children>
          <padding>
             <Insets bottom="10.0" top="5.0" />

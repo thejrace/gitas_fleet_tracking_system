@@ -38,6 +38,10 @@ public class TopBarController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb ){
         loadPage("FleetPage");
+
+        uiDashboardBtn.setOnMouseClicked( ev -> {
+            switchPage("FleetPage");
+        });
     }
 
     /**
