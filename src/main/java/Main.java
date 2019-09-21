@@ -8,6 +8,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ui.MainScreen;
+import ui.start_splash.StartSplashScreen;
 
 public class Main extends Application {
 
@@ -15,11 +16,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
 
-        // entry point - check user etc..
+        StartSplashScreen splashPage = new StartSplashScreen();
+        splashPage.start(new Stage());
 
-        // for testing, directy go to MainScreen
-        MainScreen main = new MainScreen();
-        main.start(new Stage());
+        /*MainScreen main = new MainScreen();
+        main.start(new Stage());*/
 
 
     }
