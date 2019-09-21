@@ -21,9 +21,9 @@ public class BusRepository {
     }
 
     public void fetchBuses(){
-        APIRequest.API_TOKEN = "wPpN8i1RiNmRMqRcnWeMND9YlSX69MUca2gBkhLxpTyrx0PcC66EeJCElCyn";
+        /*APIRequest.API_TOKEN = "wPpN8i1RiNmRMqRcnWeMND9YlSX69MUca2gBkhLxpTyrx0PcC66EeJCElCyn";
         JSONObject result = new JSONObject(APIRequest.GET("http://gitfilo.com/api/buses"));
-        data = result.getJSONArray("data");
+        data = result.getJSONArray("data");*/
     }
 
     public JSONArray getData(){

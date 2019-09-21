@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" styleClass="sub-nav-bar" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIconView fill="#797979" glyphName="USER" size="14.0" />
+            <Label styleClass="lbl-gray1" text="Hüseyin Özbek" />
+            <ComboBox prefWidth="150.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="icon-btn">
+                     <graphic>
+                        <FontAwesomeIconView fill="#8bbc68" glyphName="PLAY" size="14.0" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="23.0" mnemonicParsing="false" styleClass="icon-btn">
+                     <graphic>
+                        <FontAwesomeIconView fill="#ce5959" glyphName="STOP" size="14.0" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="icon-btn">
+                     <graphic>
+                        <FontAwesomeIconView fill="#6ba8c0" glyphName="BELL" size="14.0" />
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" styleClass="icon-btn">
+                     <graphic>
+                        <FontAwesomeIconView fill="#797979" glyphName="BELL_SLASH" size="14.0" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="23.0" mnemonicParsing="false" styleClass="icon-btn">
+                     <graphic>
+                        <FontAwesomeIconView fill="#797979" glyphName="CHECK" size="14.0" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="38.0" layoutY="23.0" mnemonicParsing="false" styleClass="icon-btn">
+                     <graphic>
+                        <FontAwesomeIconView fill="#797979" glyphName="REFRESH" size="14.0" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

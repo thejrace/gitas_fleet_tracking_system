@@ -201,10 +201,10 @@
 
 
 .fts-box {
-    -fx-background-radius: 5;
-    -fx-background-color:   linear-gradient(#343333 0%, #1f2429 20%, #191d22 100%),
-    linear-gradient(#20262b, #191d22),
-    radial-gradient(center 50% 0%, radius 100%, rgba(52, 51, 51, 0.9), rgba(255,255,255,0));
+    /*-fx-background-radius: 5;*/
+    -fx-background-color:   linear-gradient(#222020 0%, #272727 100%);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2),15, 0, 0, 0);
+
 }
 
 .fts-header-container{
@@ -316,4 +316,18 @@
 
 .tab .icon {
     -fx-fill:#d3d3d3;
+}
+
+.sub-nav-bar{
+    -fx-background-color:#3c3f41;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color:#656d72;
+    -fx-padding:0 5;
+}
+
+.sub-nav-bar .icon-btn {
+    -fx-background-color:transparent;
+}
+.sub-nav-bar .icon-btn:hover {
+    -fx-background-color:#616161;
 }

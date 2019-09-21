@@ -3,13 +3,14 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<?import javafx.scene.control.Button?>
+
 <VBox alignment="CENTER" prefWidth="278.0" styleClass="fts-box" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.component.BusBoxController">
    <children>
       <AnchorPane styleClass="fts-header-container">
@@ -169,7 +170,7 @@
                   <FontAwesomeIconView glyphName="CALENDAR" size="14" styleClass="emp-box-btn-icon" />
                </graphic>
             </Button>
-            <Button fx:id="uiEmpWorksBtn" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="24.0"  styleClass="emp-box-btn">
+            <Button fx:id="uiEmpWorksBtn" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="24.0" styleClass="emp-box-btn">
                <graphic>
                   <FontAwesomeIconView glyphName="COMMENT" size="14" styleClass="emp-box-btn-icon" />
                </graphic>

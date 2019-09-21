@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import ui.block.ContentContainer;
+import ui.block.SubNavBar;
 import ui.block.TopBar;
 import ui.popup.Popup;
 
@@ -48,6 +49,11 @@ public class MainScreenController implements Initializable {
     private AnchorPane uiTopBar;
 
     /**
+     * Top sub nav bar container
+     */
+    private AnchorPane uiSubNavBar;
+
+    /**
      * Static UI instance of the uiContentWrapper.
      * It's accessed from navigation for changing the page.
      */
@@ -63,11 +69,14 @@ public class MainScreenController implements Initializable {
         try {
             // initialize main UI blocks
             TopBar topBar = new TopBar();
+            SubNavBar subNavBar = new SubNavBar();
             ContentContainer contentContainer = new ContentContainer();
             topBar.initUI();
+            subNavBar.initUI();
             contentContainer.initUI();
 
             uiTopBar = (AnchorPane)topBar.getUI();
+            uiSubNavBar = (AnchorPane)subNavBar.getUI();
             CONTENT_CONTAINER = (ScrollPane)contentContainer.getUI();
             WRAPPER = uiWrapper;
 
@@ -77,10 +86,15 @@ public class MainScreenController implements Initializable {
             AnchorPane.setTopAnchor(uiTopBar, 0.0);
             AnchorPane.setRightAnchor(uiTopBar, 0.0);
 
+            uiContentWrapper.getChildren().add( uiSubNavBar );
+            AnchorPane.setLeftAnchor(uiSubNavBar, 0.0);
+            AnchorPane.setTopAnchor(uiSubNavBar, 30.0);
+            AnchorPane.setRightAnchor(uiSubNavBar, 0.0);
+
             uiContentWrapper.getChildren().add( CONTENT_CONTAINER );
             AnchorPane.setLeftAnchor(CONTENT_CONTAINER, 0.0);
             AnchorPane.setRightAnchor(CONTENT_CONTAINER, 0.0);
-            AnchorPane.setTopAnchor(CONTENT_CONTAINER, 35.0);
+            AnchorPane.setTopAnchor(CONTENT_CONTAINER, 75.0);
             AnchorPane.setBottomAnchor(CONTENT_CONTAINER, 0.0);
 
             // initialize popup
