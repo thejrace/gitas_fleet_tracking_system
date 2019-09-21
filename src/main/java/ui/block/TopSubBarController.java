@@ -12,7 +12,7 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
-public class SubNavBarController implements Initializable {
+public class TopSubBarController implements Initializable {
 
 
     @Override

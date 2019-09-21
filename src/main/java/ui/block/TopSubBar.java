@@ -9,10 +9,10 @@ package ui.block;
 
 import ui.UIComponent;
 
-public class SubNavBar extends UIComponent {
+public class TopSubBar extends UIComponent {
 
 
-    public SubNavBar(){
+    public TopSubBar(){
 
     }
 
