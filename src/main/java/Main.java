@@ -9,13 +9,14 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import ui.MainScreen;
 import ui.start_splash.StartSplashScreen;
+import utils.SharedConfig;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-
+        System.out.println("VERSION = " + SharedConfig.VERSION );
         StartSplashScreen splashPage = new StartSplashScreen();
         splashPage.start(new Stage());
 

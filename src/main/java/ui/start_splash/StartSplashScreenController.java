@@ -1,5 +1,6 @@
 package ui.start_splash;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -31,8 +32,10 @@ public class StartSplashScreenController extends UIComponent implements Initiali
     }
 
     public void updateStatus(String notf, String subNotf){
-        this.notf.setValue(subNotf);
-        this.subNotf.setValue(subNotf);
+        Platform.runLater(() -> {
+            this.notf.setValue(notf);
+            this.subNotf.setValue(subNotf);
+        });
     }
 
 }

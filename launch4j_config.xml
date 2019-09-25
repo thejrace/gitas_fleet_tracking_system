@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\JesterPC\IdeaProjects\gitas_fleet_tracking_system\target\gitas_fleet_tracking_system-1.0-ALPHA-jar-with-dependencies.jar</jar>
+  <outfile>C:\Users\JesterPC\IdeaProjects\gitas_fleet_tracking_system\GFTS.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\JesterPC\IdeaProjects\gitas_fleet_tracking_system\gpts_ico_etn_icon.ico</icon>
+  <singleInstance>
+    <mutexName>gfts</mutexName>
+    <windowTitle>Gitaş FTS</windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.6.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <messages>
+    <startupErr>Program başlatılırkenbir hata oluştu.</startupErr>
+    <bundledJreErr>Bilgisayarınızda Java Runtime Environment bulunamadı veya dosyaları bozulmuş</bundledJreErr>
+    <jreVersionErr>Programı kullanabilmek için Java Runtime Environment bilgisayarınızda kurulu olmalıdır.</jreVersionErr>
+    <launcherErr>Java Runtime Environment başlatılırken bir hata oluştu.</launcherErr>
+    <instanceAlreadyExistsMsg>Program zaten çalışıyor.</instanceAlreadyExistsMsg>
+  </messages>
+</launch4jConfig>
