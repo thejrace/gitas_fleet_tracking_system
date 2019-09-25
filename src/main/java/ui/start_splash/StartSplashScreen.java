@@ -7,13 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.json.JSONObject;
 import ui.MainScreen;
-import utils.APIRequest;
 import utils.SharedConfig;
 import utils.UpdateChecker;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class StartSplashScreen extends Application {
 
@@ -50,7 +51,7 @@ public class StartSplashScreen extends Application {
                         controller.updateStatus("Yeni versiyon indirildi!", "Bu pencere kapandıktan sonra programı tekrar başlatabilirsiniz.");
 
                         try {
-                            Thread.sleep(2500);
+                            Thread.sleep(1000);
                         } catch( InterruptedException e ){
                             e.printStackTrace();
                         }
@@ -61,34 +62,37 @@ public class StartSplashScreen extends Application {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
+                                try {
+                                    Process proc = Runtime.getRuntime().exec("java -jar fts_update_helper.jar");
+                                } catch( IOException e ){
+                                    e.printStackTrace();
+                                }
                                 Platform.exit();
                             }
                         });
 
                     } else {
-                        controller.updateStatus("Güncelleme yok.", "");
+                        // download user data
+                        controller.updateStatus("Senkronizasyon yapılıyor..", "Lütfen bekleyin..");
+
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    // kill platform when main screen is closed
+                                    Platform.setImplicitExit(true);
+                                    closeUpdateScreen();
+
+                                    MainScreen mainScreen = new MainScreen();
+                                    mainScreen.start( new Stage() );
+                                } catch( Exception e ){
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+
                     }
                 }
-
-                // download user data
-                controller.updateStatus("Senkronizasyon yapılıyor..", "Lütfen bekleyin..");
-
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            // kill platform when main screen is closed
-                            Platform.setImplicitExit(true);
-                            closeUpdateScreen();
-
-                            MainScreen mainScreen = new MainScreen();
-                            mainScreen.start( new Stage() );
-                        } catch( Exception e ){
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
             });
             thread.setDaemon(true);
             thread.start();

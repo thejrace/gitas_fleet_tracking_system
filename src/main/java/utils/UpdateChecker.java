@@ -2,6 +2,9 @@ package utils;
 
 import interfaces.ActionCallback;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -27,13 +30,6 @@ public class UpdateChecker {
             public void onSuccess(String... params) {
                 System.out.println("Yeni versiyon indirildi! Yedekler temizleniyor..");
                 if( !Common.deleteFile( SharedConfig.DATA.getString("installDir") + "GFTS_old.exe") ) System.out.println("Yedekler temizlenemedi..");
-
-                try {
-                    // Run a java app in a separate system process
-                    Process proc = Runtime.getRuntime().exec("java -jar "+SharedConfig.DATA.getString("installDir")+"fts_update_helper.jar");
-                } catch( IOException e){
-                    e.printStackTrace();
-                }
             }
             @Override
             public void onError(int type) {
