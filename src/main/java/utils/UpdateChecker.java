@@ -22,7 +22,7 @@ public class UpdateChecker {
             Common.copyFile( new File( SharedConfig.DATA.getString("installDir") + "GFTS.exe"), new File( SharedConfig.DATA.getString("installDir") + "GFTS_old.exe" ) );
         }
 
-        FileDownload.downloadFileFromUrl(SharedConfig.DATA.getString("download_url") + "GFTS.json", SharedConfig.DATA.getString("installDir") + "GFTS_new.exe", new ActionCallback() {
+        FileDownload.downloadFileFromUrl(SharedConfig.DATA.getString("download_url"), SharedConfig.DATA.getString("installDir") + "GFTS_new.exe", new ActionCallback() {
             @Override
             public void onSuccess(String... params) {
                 System.out.println("Yeni versiyon indirildi! Yedekler temizleniyor..");

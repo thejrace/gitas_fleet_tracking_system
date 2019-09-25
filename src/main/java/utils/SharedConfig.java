@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 public class SharedConfig {
 
-    public static String VERSION = "1.0.0";
+    public static String VERSION = "1.0.1";
 
     public static JSONObject DATA = new JSONObject();
 
