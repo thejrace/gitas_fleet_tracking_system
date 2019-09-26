@@ -5,17 +5,13 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ui.MainScreen;
 import utils.SharedConfig;
 import utils.UpdateChecker;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 public class StartSplashScreen extends Application {
 
     public static Stage stage = null;
@@ -33,7 +29,7 @@ public class StartSplashScreen extends Application {
 
             stage = primaryStage;
 
-            //stage.getIcons().add(new Image(getClass().getResource("/gpts/res/img/gpts_ico.png").toExternalForm()));
+            stage.getIcons().add(new Image(getClass().getResource("/img/login_logo.png").toExternalForm()));
             primaryStage.show();
 
             StartSplashScreenController controller = loader.getController();
@@ -74,6 +70,8 @@ public class StartSplashScreen extends Application {
                     } else {
                         // download user data
                         controller.updateStatus("Senkronizasyon yapılıyor..", "Lütfen bekleyin..");
+
+
 
                         Platform.runLater(new Runnable() {
                             @Override

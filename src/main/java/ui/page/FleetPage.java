@@ -14,7 +14,7 @@ public class FleetPage extends UIPage{
 
     public FleetPage(){
         loadFXML("fleet_page");
-        getController().setTitle("Filo Takip 10");
+        getController().setTitle("Filo Takip");
 
         Thread thread = new Thread(() -> {
             BusRepository busRepository = new BusRepository();

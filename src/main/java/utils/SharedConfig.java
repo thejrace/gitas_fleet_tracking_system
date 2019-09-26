@@ -4,19 +4,21 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SharedConfig {
 
-    public static String VERSION = "1.0.9";
+    public static String VERSION = "1.0.13";
 
     public static JSONObject DATA = new JSONObject();
 
     public static boolean read(){
-        if( Common.checkFile( "app_config.json" ) ){
+        if( /*Common.checkFile( "app_config.json" )*/ true ){
             try {
-                DATA = new JSONObject( Common.readJSONFile("app_config.json") );
+                //DATA = new JSONObject( Common.readJSONFile("app_config.json") );
+                DATA = testConfig();
             } catch (JSONException e ){
                 e.printStackTrace();
             }
@@ -33,6 +35,19 @@ public class SharedConfig {
             });
         }
         return false;
+    }
+
+    private static JSONObject testConfig(){
+        JSONObject config = new JSONObject();
+        JSONArray apiURLS = new JSONArray();
+        apiURLS.put("http://gitas_api.test/api/");
+        apiURLS.put("http://gitfilo.com/api/");
+        config.put("base_api", apiURLS);
+
+        config.put("download_url", "http://gitas_api.test/storage/fts_download/GFTS.json");
+        config.put("installDir", "C://gfts/");
+
+        return config;
     }
 
 }
