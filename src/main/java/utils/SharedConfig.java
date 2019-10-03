@@ -12,6 +12,8 @@ public class SharedConfig {
 
     public static String VERSION = "1.0.13";
 
+    public static int USER_ID = 1;
+
     public static JSONObject DATA = new JSONObject();
 
     public static boolean read(){
@@ -19,6 +21,9 @@ public class SharedConfig {
             try {
                 //DATA = new JSONObject( Common.readJSONFile("app_config.json") );
                 DATA = testConfig();
+
+                // @todo ffix
+                APIRequest.API_URL = DATA.getJSONArray("base_api").getString(0);
             } catch (JSONException e ){
                 e.printStackTrace();
             }

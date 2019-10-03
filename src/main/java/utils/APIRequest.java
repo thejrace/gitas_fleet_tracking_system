@@ -17,6 +17,8 @@ public class APIRequest {
 
     public static String API_TOKEN;
 
+    public static String API_URL;
+
     /**
      * Sends PUT request
      *

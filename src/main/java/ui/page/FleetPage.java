@@ -20,6 +20,8 @@ public class FleetPage extends UIPage{
             BusRepository busRepository = new BusRepository();
             busRepository.fetchBuses();
 
+
+
             Platform.runLater(() -> {
                 getController().setData(busRepository.getData());
             });

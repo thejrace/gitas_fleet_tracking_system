@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ui.MainScreen;
+import utils.APIRequest;
 import utils.SharedConfig;
 import utils.UpdateChecker;
 import java.io.IOException;
@@ -38,6 +39,9 @@ public class StartSplashScreen extends Application {
                 // read config
                 if( SharedConfig.read() ){
                     System.out.println(SharedConfig.DATA);
+
+                    // @todo login
+                    APIRequest.API_TOKEN = "8AcrA55LvVwhfWfTiBhZDTSikRLHz2pRJmmtVNglZnhuiVqGpTZs9BhwoxXs";
 
                     controller.updateStatus("Güncellemeler kontrol ediliyor..", "Lütfen bekleyin...");
                     if( UpdateChecker.action() ){
