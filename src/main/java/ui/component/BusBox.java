@@ -11,20 +11,14 @@ import model.Bus;
 import ui.UIComponent;
 
 public class BusBox extends UIComponent {
-
     private Bus bus;
 
     public BusBox(Bus bus){
         this.bus = bus;
     }
 
-    public BusBox(){
-
-    }
-
-    public void initUI(Bus bus){
+    public void initUI(){
         loadFXML("bus_box");
         ((BusBoxController)getController()).setData(bus);
     }
-
 }

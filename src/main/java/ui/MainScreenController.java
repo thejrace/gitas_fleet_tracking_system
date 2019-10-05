@@ -67,6 +67,11 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb ){
         try {
+            WRAPPER = uiWrapper;
+
+            // initialize popup
+            Popup.initialize( uiPopupOverlay, uiPopup );
+
             // initialize main UI blocks
             TopBar topBar = new TopBar();
             TopSubBar subNavBar = new TopSubBar();
@@ -78,7 +83,6 @@ public class MainScreenController implements Initializable {
             uiTopBar = (AnchorPane)topBar.getUI();
             uiSubNavBar = (AnchorPane)subNavBar.getUI();
             CONTENT_CONTAINER = (ScrollPane)contentContainer.getUI();
-            WRAPPER = uiWrapper;
 
             // make them sticky during resize
             uiContentWrapper.getChildren().add( uiTopBar );
@@ -96,9 +100,6 @@ public class MainScreenController implements Initializable {
             AnchorPane.setRightAnchor(CONTENT_CONTAINER, 0.0);
             AnchorPane.setTopAnchor(CONTENT_CONTAINER, 75.0);
             AnchorPane.setBottomAnchor(CONTENT_CONTAINER, 0.0);
-
-            // initialize popup
-            Popup.initialize( uiPopupOverlay, uiPopup );
 
         } catch( Exception e ){
             e.printStackTrace();
