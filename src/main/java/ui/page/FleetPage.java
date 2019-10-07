@@ -25,15 +25,15 @@ public class FleetPage extends UIPage{
         loadFXML("fleet_page");
         getController().setTitle("Filo Takip");
 
-        Popup.showLoader();
-
         initialize();
     }
 
     private void initialize(){
-        ThreadHelper.func(() -> {
+        //ThreadHelper.func(() -> {
             // init cookie agent first
             CookieAgent.initialize();
+
+            System.out.println(CookieAgent.FILO5_COOKIE);
 
             // get buses
             BusRepository busRepository = new BusRepository();
@@ -51,7 +51,7 @@ public class FleetPage extends UIPage{
                 getController().setData(buses);
                 Popup.hide();
             });
-        });
+        //});
     }
 
     @Override

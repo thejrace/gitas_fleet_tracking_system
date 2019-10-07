@@ -8,6 +8,9 @@
 package cookie_agent;
 
 
+import enums.DataSourceSettings;
+import utils.SharedConfig;
+
 public class CookieAgent {
     /**
      * Shared cookie
@@ -21,12 +24,32 @@ public class CookieAgent {
 
     public static void initialize(){
         // check user settings for data source
+        int source = SharedConfig.SETTINGS.getInt("data_source");
 
+        if( source == DataSourceSettings.FLEET.ordinal() ){
+            getCookieFromFleet();
+        } else {
+            getCookieFromServer();
+        }
 
         while( !checkCookie() ){
 
         }
         // get cookie accordingly
+    }
+
+    private static void getCookieFromFleet() {
+        // we will start captcha screen, embed it to popup
+
+
+
+
+    }
+
+    private static void getCookieFromServer() {
+        // get cookie from api
+
+
     }
 
     private static boolean checkCookie(){ // @todo
