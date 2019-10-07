@@ -9,7 +9,12 @@ package cookie_agent;
 
 
 import enums.DataSourceSettings;
+import interfaces.ActionCallback;
+import javafx.application.Platform;
+import ui.block.CaptchaWebview;
+import ui.popup.Popup;
 import utils.SharedConfig;
+import utils.ThreadHelper;
 
 public class CookieAgent {
     /**
@@ -21,6 +26,9 @@ public class CookieAgent {
      * Status flag
      */
     public static boolean READY = false;
+
+    public static String LOGIN = "dk_oasfilo";
+    public static String PASS = "1453.oas";
 
     public static void initialize(){
         // check user settings for data source
@@ -34,14 +42,39 @@ public class CookieAgent {
 
         while( !checkCookie() ){
 
+            ThreadHelper.delay(10000);
+            break;
         }
-        // get cookie accordingly
+
+
     }
 
     private static void getCookieFromFleet() {
+        // get fleet credentials
+        CaptchaWebview captchaWebview = new CaptchaWebview();
+        captchaWebview.initUI();
+        captchaWebview.setListener(new ActionCallback() {
+            @Override
+            public void onSuccess(String... params) {
+                System.out.println("SUCCESS!");
+                System.out.println(CookieAgent.FILO5_COOKIE);
+                Platform.runLater(() -> {
+                    // show loader again for bus fetch action
+                    //Popup.showLoader();
+                });
+            }
+
+            @Override
+            public void onError(int type) {
+                System.out.println("ERROR!!");
+            }
+        });
+
+        Platform.runLater(() -> {
+            Popup.setContent(captchaWebview.getUI());
+        });
+
         // we will start captcha screen, embed it to popup
-
-
 
 
     }
@@ -53,7 +86,7 @@ public class CookieAgent {
     }
 
     private static boolean checkCookie(){ // @todo
-        return true;
+        return false;
     }
 
     /**

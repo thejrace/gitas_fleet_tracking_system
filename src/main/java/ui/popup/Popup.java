@@ -83,6 +83,7 @@ public class Popup {
      * @param content UI layouts.
      */
     public static void setContent( Node content ){
+        POPUP_CONTENT.getChildren().clear();
         POPUP_CONTENT.getChildren().add(content);
     }
 

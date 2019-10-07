@@ -29,29 +29,29 @@ public class FleetPage extends UIPage{
     }
 
     private void initialize(){
-        //ThreadHelper.func(() -> {
-            // init cookie agent first
-            CookieAgent.initialize();
 
-            System.out.println(CookieAgent.FILO5_COOKIE);
+        // init cookie agent first
+        CookieAgent.initialize();
 
-            // get buses
-            BusRepository busRepository = new BusRepository();
-            busRepository.fetchBuses();
+        System.out.println(CookieAgent.FILO5_COOKIE);
 
-            // create bus instances
-            Bus bus;
-            for( int k = 0; k < busRepository.getData().length(); k++ ){
-                bus = new Bus(busRepository.getData().getJSONObject(k));
-                buses.put(bus.getCode(), bus);
-            }
+        // get buses
+        BusRepository busRepository = new BusRepository();
+        busRepository.fetchBuses();
 
-            // feed bus data to controller
-            Platform.runLater(() -> {
-                getController().setData(buses);
-                Popup.hide();
-            });
-        //});
+        // create bus instances
+        Bus bus;
+        for( int k = 0; k < busRepository.getData().length(); k++ ){
+            bus = new Bus(busRepository.getData().getJSONObject(k));
+            buses.put(bus.getCode(), bus);
+        }
+
+        // feed bus data to controller
+        Platform.runLater(() -> {
+            getController().setData(buses);
+            Popup.hide();
+        });
+
     }
 
     @Override
