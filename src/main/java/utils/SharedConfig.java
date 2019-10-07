@@ -15,12 +15,15 @@ public class SharedConfig {
     public static int USER_ID = 1;
 
     public static JSONObject DATA = new JSONObject();
+    public static JSONObject SETTINGS = new JSONObject();
 
     public static boolean read(){
         if( /*Common.checkFile( "app_config.json" )*/ true ){
             try {
                 //DATA = new JSONObject( Common.readJSONFile("app_config.json") );
+                //SETTINGS = new JSONObject( Common.readJSONFile("settings.json") );
                 DATA = testConfig();
+                SETTINGS = testSettings();
 
                 // @todo ffix
                 APIRequest.API_URL = DATA.getJSONArray("base_api").getString(0);
@@ -51,6 +54,19 @@ public class SharedConfig {
 
         config.put("download_url", "http://gitas_api.test/storage/fts_download/GFTS.json");
         config.put("installDir", "C://gfts/");
+
+        return config;
+    }
+
+    private static JSONObject testSettings(){
+        JSONObject config = new JSONObject();
+        config.put("data_source", 0);
+        config.put("data_download_frequency", "");
+        config.put("alert_frequency", "");
+        config.put("alert_visible_delay", "");
+        config.put("bus_box_template", 0);
+        config.put("alert_filters", "");
+        config.put("filters", "");
 
         return config;
     }
