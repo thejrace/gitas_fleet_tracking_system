@@ -9,11 +9,22 @@ package ui.popup;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import ui.MainScreenController;
 
 public class Popup {
+
+    /**
+     * Class identifiers for show message method.
+     */
+    public static int DANGER = 0;
+    public static int WARNING = 1;
+    public static int INFO = 3;
+    public static int SUCCESS = 4;
+    public static int DEFAULT = 5;
 
     /**
      * Popup elements.
@@ -75,6 +86,21 @@ public class Popup {
         POPUP_CONTENT = content;
         PopupLoaderContent popupLoaderContent = new PopupLoaderContent();
         LOADER_CONTENT = (VBox)popupLoaderContent.getUI();
+    }
+
+    /**
+     * Show message in the popup.
+     *
+     * @param type
+     * @param text
+     */
+    public static void showMessage(int type, String text ){
+        // todo -> make it UI component
+        Label label = new Label(text);
+        VBox container = new VBox();
+        container.getChildren().add(label);
+        container.setAlignment(Pos.CENTER);
+        setContent(container);
     }
 
     /**

@@ -19,6 +19,12 @@
       </Label>
       <Label prefHeight="20" prefWidth="400" text="Resimdeki kodu, beyaz kutucuğa girdikten sonra Giriş butonuna basın." wrapText="true">
          <styleClass>
+            <String fx:value="lbl-gitas" />
+            <String fx:value="lbl-h6" />
+         </styleClass>
+      </Label>
+      <Label fx:id="uiNotfLabel" layoutX="56.0" layoutY="124.0" prefHeight="20" prefWidth="400" wrapText="true">
+         <styleClass>
             <String fx:value="lbl-danger" />
             <String fx:value="lbl-h6" />
          </styleClass>

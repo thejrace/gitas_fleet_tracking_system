@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -22,14 +23,34 @@ import java.util.*;
 
 public class CaptchaWebviewController implements Initializable {
 
+    /**
+     * Webview container
+     */
     @FXML HBox uiWebviewContainer;
 
+    /**
+     * Notf label
+     */
+    @FXML Label uiNotfLabel;
+
+    /**
+     * Captcha webview
+     */
     private WebView webView;
 
+    /**
+     * Request url.
+     */
     private URL url;
 
+    /**
+     * Webview init flag to detect captcha errors.
+     */
     private boolean wwInited = false;
 
+    /**
+     * Observer for Cookie Agent
+     */
     private ActionCallback listener;
 
     @Override
@@ -37,14 +58,36 @@ public class CaptchaWebviewController implements Initializable {
         getSessionId();
     }
 
+    /**
+     * Setter for listener
+     *
+     * @param callback
+     */
     public void setListener(ActionCallback callback ){
         this.listener = callback;
     }
 
+    /**
+     * Gets  a session cookie from fleet.
+     */
     private void getSessionId(){
         loginThread();
     }
 
+    /**
+     * Show the given message.
+     *
+     * @param label
+     */
+    public void setNotf( String label ){
+        Platform.runLater(() -> {
+            uiNotfLabel.setText(label);
+        });
+    }
+
+    /**
+     * Initialize web view
+     */
     private void initWebView(){
         try {
             url = new URL("https://filotakip.iett.gov.tr/login.php");
@@ -103,21 +146,18 @@ public class CaptchaWebviewController implements Initializable {
 
                         if( wwInited ){
                             try {
-                                // eger <font>Yanlış kod girildi</font> yoksa bilerek exception attiriyoruz, takip scene e geciyoruz
-                                we.executeScript( " var fs = document.getElementsByTagName(\"font\");" +
+                                // throw js exception if there is not captcha image = success
+                                we.executeScript( " var fs = document.getElementById(\"captcha\");" +
                                         " fs[0].style.opacity = 0.3; ");
-                                listener.onError(0);
-                            } catch( netscape.javascript.JSException e ) {
                                 listener.onSuccess();
+                            } catch( netscape.javascript.JSException e ) {
+                                listener.onError(0);
                             }
                         }
                         if( !wwInited ){
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    uiWebviewContainer.getChildren().add(0, webView);
-                                    wwInited = true;
-                                }
+                            Platform.runLater(() -> {
+                                uiWebviewContainer.getChildren().add(0, webView);
+                                wwInited = true;
                             });
                         }
                     });
@@ -127,6 +167,9 @@ public class CaptchaWebviewController implements Initializable {
         }
     }
 
+    /**
+     * Make a request to the fleet.
+     */
     private void loginThread(){
         ThreadHelper.func(() -> {
             org.jsoup.Connection.Response res;

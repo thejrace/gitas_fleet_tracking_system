@@ -60,7 +60,7 @@ public class SharedConfig {
 
     private static JSONObject testSettings(){
         JSONObject config = new JSONObject();
-        config.put("data_source", 0);
+        config.put("data_source", 1);
         config.put("data_download_frequency", "");
         config.put("alert_frequency", "");
         config.put("alert_visible_delay", "");
