@@ -51,6 +51,7 @@ public class SharedConfig {
         apiURLS.put("http://gitas_api.test/api/");
         apiURLS.put("http://gitfilo.com/api/");
         config.put("base_api", apiURLS);
+        config.put("init", true); // not loggedin
 
         config.put("download_url", "http://gitas_api.test/storage/fts_download/GFTS.json");
         config.put("installDir", "C://gfts/");

@@ -1,14 +1,9 @@
 package utils;
 
 import interfaces.ActionCallback;
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 
 public class UpdateChecker {
 

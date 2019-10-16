@@ -8,6 +8,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ui.MainScreen;
+import ui.login.LoginScreen;
 import ui.start_splash.StartSplashScreen;
 import utils.SharedConfig;
 
@@ -19,6 +20,9 @@ public class Main extends Application {
         System.out.println("VERSION = " + SharedConfig.VERSION );
         StartSplashScreen splashPage = new StartSplashScreen();
         splashPage.start(new Stage());
+
+        /*LoginScreen loginScreen = new LoginScreen();
+        loginScreen.start(new Stage());*/
 
         /*MainScreen main = new MainScreen();
         main.start(new Stage());*/

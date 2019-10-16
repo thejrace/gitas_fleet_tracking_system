@@ -79,12 +79,14 @@ public class APIRequest {
      * @param data data to be sent
      */
     public static String POST( String url, String data ){
+        Connection.Response response = null;
         try {
-            Connection.Response response = Jsoup.connect(url)
+            response = Jsoup.connect(url)
                     .method(Connection.Method.POST)
-                    .data("data", data)
                     .header("Authorization", "Bearer " + API_TOKEN)
                     .header("Accept", "application/json")
+                    .header("Content-Type", "application/x-www-form-urlencoded")
+                    .data("data", data)
                     .ignoreContentType(true)
                     .execute();
 

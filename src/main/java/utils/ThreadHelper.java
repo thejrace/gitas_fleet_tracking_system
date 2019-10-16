@@ -8,6 +8,7 @@
 package utils;
 
 import interfaces.ThreadCallback;
+import javafx.application.Platform;
 
 public class ThreadHelper {
 
@@ -32,5 +33,15 @@ public class ThreadHelper {
         }
     }
 
+    /**
+     * Execute callback on UI Thread
+     *
+     * @param cb
+     */
+    public static void runOnUIThread(ThreadCallback cb){
+        Platform.runLater(() -> {
+            cb.action();
+        });
+    }
 
 }
