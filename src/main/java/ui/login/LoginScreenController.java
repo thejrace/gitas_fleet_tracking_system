@@ -33,6 +33,8 @@ public class LoginScreenController implements Initializable {
     @FXML
     private Label uiErrorNotf;
 
+    private Stage loginStage;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -52,6 +54,9 @@ public class LoginScreenController implements Initializable {
 
                             MainScreen mainScreen = new MainScreen();
                             mainScreen.start( new Stage() );
+
+                            loginStage.close();
+
                         } catch( Exception e ){
                             e.printStackTrace();
                         }
@@ -65,5 +70,9 @@ public class LoginScreenController implements Initializable {
                 }
             });
         });
+    }
+
+    public void setStage( Stage loginStage ){
+        this.loginStage = loginStage;
     }
 }
