@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 public class SharedConfig {
 
-    public static String VERSION = "1.0.13";
+    public static String VERSION = "1.0.0";
 
     public static int USER_ID = 1;
 
