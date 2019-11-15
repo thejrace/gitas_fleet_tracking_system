@@ -36,6 +36,7 @@ public class LoginScreen extends Application {
             });
 
             LoginScreenController controller = loader.getController();
+            controller.setStage(primaryStage);
 
         } catch( Exception e ){
             e.printStackTrace();
