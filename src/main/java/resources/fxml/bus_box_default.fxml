@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
+<?import ui.custom_control.BusBoxButton?>
 <VBox styleClass="bus-box-default" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.component.BusBoxController">
    <stylesheets>
       <URL value="@../css/bus_box_default.css" />
@@ -83,36 +84,14 @@
       </VBox>
       <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0">
          <children>
-            <Button mnemonicParsing="false" styleClass="box-nav-btn">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" size="15" styleClass="icon" />
-               </graphic>
-            </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="box-nav-btn">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="BAR_CHART" size="15" styleClass="icon" />
-               </graphic>
-            </Button>
-            <Button layoutX="80.0" layoutY="10.0" mnemonicParsing="false" styleClass="box-nav-btn">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="COMMENT" size="15" styleClass="icon" />
-               </graphic>
-            </Button>
-            <Button layoutX="150.0" layoutY="10.0" mnemonicParsing="false" styleClass="box-nav-btn">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="USER" size="15" styleClass="icon" />
-               </graphic>
-            </Button>
-            <Button layoutX="220.0" layoutY="10.0" mnemonicParsing="false" styleClass="box-nav-btn">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="INFO" size="15" styleClass="icon" />
-               </graphic>
-            </Button>
-            <Button layoutX="10.0" layoutY="40.0" mnemonicParsing="false" styleClass="box-nav-btn">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="MAP_MARKER" size="15" styleClass="icon" />
-               </graphic>
-            </Button>
+
+            <BusBoxButton tooltipText="Plan" mnemonicParsing="false" iconName="CALENDAR" action="0" />
+            <BusBoxButton tooltipText="Rapor" mnemonicParsing="false" iconName="BAR_CHART" action="3" />
+            <BusBoxButton tooltipText="Mesaj" mnemonicParsing="false" iconName="COMMENT" action="1" />
+            <BusBoxButton tooltipText="Sürücü" mnemonicParsing="false" iconName="USER" action="2" />
+            <BusBoxButton tooltipText="IYS" mnemonicParsing="false" iconName="INFO" action="4" />
+            <BusBoxButton tooltipText="Harita" mnemonicParsing="false" iconName="MAP_MARKER" action="5" />
+
          </children>
          <padding>
             <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
