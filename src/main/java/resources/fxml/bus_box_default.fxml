@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox styleClass="bus-box-default" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.component.BusBoxController">
+   <stylesheets>
+      <URL value="@../css/bus_box_default.css" />
+      <URL value="@../css/main.css" />
+   </stylesheets>
+   <children>
+      <AnchorPane prefHeight="200.0" styleClass="bus-box-default-header">
+         <children>
+            <Circle fx:id="uiLed" fill="DODGERBLUE" radius="11.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0">
+               <styleClass>
+                  <String fx:value="status-led" />
+                  <String fx:value="green" />
+               </styleClass>
+            </Circle>
+            <Label fx:id="uiBusCodeLabel" styleClass="bus-box-header-label" text="A-1636" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="5.0" />
+            <Label fx:id="uiPlateLabel" styleClass="box-header-plate" text="34 AG 3882" AnchorPane.leftAnchor="95.0" AnchorPane.topAnchor="5.0" />
+            <Label fx:id="uiRouteLabel" layoutX="42.0" layoutY="15.0" styleClass="bus-box-header-label" text="15BK" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+         </children>
+      </AnchorPane>
+      <VBox spacing="5.0" styleClass="bus-box-default-content">
+         <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <Label styleClass="box-notf" text="Veri bekleniyor..." />
+                  <Label styleClass="box-sub-notf" text="Veri bekleniyor..." />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="0">
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="gray" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="0">
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="white" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="0">
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="green" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="10.0" text="0">
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="pink" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="10.0" text="0">
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="red" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0">
+         <children>
+            <Button mnemonicParsing="false" styleClass="box-nav-btn">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" size="15" styleClass="icon" />
+               </graphic>
+            </Button>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="box-nav-btn">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="BAR_CHART" size="15" styleClass="icon" />
+               </graphic>
+            </Button>
+            <Button layoutX="80.0" layoutY="10.0" mnemonicParsing="false" styleClass="box-nav-btn">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="COMMENT" size="15" styleClass="icon" />
+               </graphic>
+            </Button>
+            <Button layoutX="150.0" layoutY="10.0" mnemonicParsing="false" styleClass="box-nav-btn">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER" size="15" styleClass="icon" />
+               </graphic>
+            </Button>
+            <Button layoutX="220.0" layoutY="10.0" mnemonicParsing="false" styleClass="box-nav-btn">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="INFO" size="15" styleClass="icon" />
+               </graphic>
+            </Button>
+            <Button layoutX="10.0" layoutY="40.0" mnemonicParsing="false" styleClass="box-nav-btn">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="MAP_MARKER" size="15" styleClass="icon" />
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
+      </FlowPane>
+      <AnchorPane styleClass="box-vd-log-container">
+         <children>
+            <HBox alignment="CENTER" spacing="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="1.0">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="btn-vd-log-default" text="F" />
+                  <Label text="xx:xx (x)" />
+                  <Button mnemonicParsing="false" styleClass="btn-vd-log-default" text="P" />
+                  <Label text="xx:xx" />
+                  <Button layoutX="74.0" layoutY="10.0" mnemonicParsing="false" styleClass="btn-vd-log-blue" text="G" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="20.0" layoutY="13.0" spacing="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="1.0">
+               <children>
+                  <Label text="HIZ: 15 km/s" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

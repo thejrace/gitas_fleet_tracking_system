@@ -27,34 +27,10 @@ public class BusBoxController implements Initializable {
     private Label uiBusCodeLabel;
 
     @FXML
-    private Label uiNotfLabel;
-
-    @FXML
-    private Label uiStopLabel;
-
-    @FXML
-    private Label uiRouteLabel;
-
-    @FXML
     private Label uiPlateLabel;
 
     @FXML
-    private Label uiSpeedLabel;
-
-    @FXML
-    private Label uiStatsLabelD;
-
-    @FXML
-    private Label uiStatsLabelW;
-
-    @FXML
-    private Label uiStatsLabelA;
-
-    @FXML
-    private Label uiStatsLabelH;
-
-    @FXML
-    private Label uiStatsLabelC;
+    private Label uiRouteLabel;
 
 
     @Override

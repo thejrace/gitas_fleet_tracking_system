@@ -54,6 +54,7 @@ public class APIRequest {
      */
     public static String GET( String url ){
         try {
+            System.out.println(API_TOKEN);
             Connection.Response response = Jsoup.connect(url)
                     .method(Connection.Method.GET)
                     .header("Authorization", "Bearer " + API_TOKEN)

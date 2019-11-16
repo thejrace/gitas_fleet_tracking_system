@@ -29,6 +29,8 @@ public class LoginAttempt {
             if( response.has("error") ){
                 cb.onError(1);
             } else{
+                APIRequest.API_TOKEN = response.getJSONObject("data").getString("api_token");
+                SharedConfig.USER_ID = response.getJSONObject("data").getInt("user_id");
                 cb.onSuccess();
             }
         });

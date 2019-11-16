@@ -60,10 +60,10 @@ public class CookieAgent {
             getCookieFromServer();
         }
 
-        while( !checkCookie() ){
+        /*while( !checkCookie() ){
             ThreadHelper.delay(10000); // testing purposes
             break;
-        }
+        }*/
     }
 
     /**

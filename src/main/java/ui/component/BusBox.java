@@ -18,7 +18,7 @@ public class BusBox extends UIComponent {
     }
 
     public void initUI(){
-        loadFXML("bus_box");
+        loadFXML("bus_box_default");
         ((BusBoxController)getController()).setData(bus);
     }
 }
