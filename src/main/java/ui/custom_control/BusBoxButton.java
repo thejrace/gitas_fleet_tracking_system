@@ -48,6 +48,8 @@ public class BusBoxButton extends Button {
             // click action
             setOnAction( ev -> {
 
+                // @todo, static bus list e ulaşıp, tetik vericez
+
                 System.out.println(BusBoxButtonAction.values()[action] + " ---  " + busCode );
 
             });
@@ -57,8 +59,8 @@ public class BusBoxButton extends Button {
         }
     }
 
-    public void setData( String test ){
-        busCode = test;
+    public void setKey( String key ){
+        busCode = key;
     }
 
 }

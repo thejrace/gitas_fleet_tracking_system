@@ -40,10 +40,6 @@ public class Bus {
         this.activePlate = activePlate;
     }
 
-    private void downloadData(){
-
-    }
-
     public BusBox getBox() {
         return box;
     }

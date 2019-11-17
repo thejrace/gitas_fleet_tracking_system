@@ -85,12 +85,12 @@
       <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0">
          <children>
 
-            <BusBoxButton tooltipText="Plan" mnemonicParsing="false" iconName="CALENDAR" action="0" />
-            <BusBoxButton tooltipText="Rapor" mnemonicParsing="false" iconName="BAR_CHART" action="3" />
-            <BusBoxButton tooltipText="Mesaj" mnemonicParsing="false" iconName="COMMENT" action="1" />
-            <BusBoxButton tooltipText="Sürücü" mnemonicParsing="false" iconName="USER" action="2" />
-            <BusBoxButton tooltipText="IYS" mnemonicParsing="false" iconName="INFO" action="4" />
-            <BusBoxButton tooltipText="Harita" mnemonicParsing="false" iconName="MAP_MARKER" action="5" fx:id="uiTest"/>
+            <BusBoxButton tooltipText="Plan" mnemonicParsing="false" iconName="CALENDAR" action="0" fx:id="uiBB0"/>
+            <BusBoxButton tooltipText="Rapor" mnemonicParsing="false" iconName="BAR_CHART" action="3" fx:id="uiBB3" />
+            <BusBoxButton tooltipText="Mesaj" mnemonicParsing="false" iconName="COMMENT" action="1" fx:id="uiBB1"/>
+            <BusBoxButton tooltipText="Sürücü" mnemonicParsing="false" iconName="USER" action="2" fx:id="uiBB2"/>
+            <BusBoxButton tooltipText="IYS" mnemonicParsing="false" iconName="INFO" action="4" fx:id="uiBB4" />
+            <BusBoxButton tooltipText="Harita" mnemonicParsing="false" iconName="MAP_MARKER" action="5" fx:id="uiBB5"/>
 
          </children>
          <padding>

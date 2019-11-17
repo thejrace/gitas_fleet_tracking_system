@@ -1,3 +1,10 @@
+/*
+ *  Gitas Fleet Tracking System 2019
+ *
+ *  Contributors:
+ *      - Ahmet Ziya Kanbur
+ *
+ */
 package ui.start_splash;
 
 import javafx.application.Application;
@@ -10,7 +17,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ui.MainScreen;
 import ui.login.LoginScreen;
-import utils.APIRequest;
 import utils.SharedConfig;
 import utils.ThreadHelper;
 import utils.UpdateChecker;

@@ -34,7 +34,7 @@ public class BusBoxController implements Initializable {
     private Label uiRouteLabel;
 
     @FXML
-    private BusBoxButton uiTest;
+    private BusBoxButton uiBB0, uiBB1, uiBB2, uiBB3, uiBB4, uiBB5;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,7 +44,13 @@ public class BusBoxController implements Initializable {
     public void setData(Bus bus){
         this.bus = bus;
 
-        uiTest.setData(bus.getCode());
+        // @todo FIX this
+        uiBB0.setKey(bus.getCode());
+        uiBB1.setKey(bus.getCode());
+        uiBB2.setKey(bus.getCode());
+        uiBB3.setKey(bus.getCode());
+        uiBB4.setKey(bus.getCode());
+        uiBB5.setKey(bus.getCode());
 
         updateUI();
     }
