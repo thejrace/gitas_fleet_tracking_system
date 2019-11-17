@@ -24,6 +24,7 @@ public class LoginAttempt {
             JSONObject params = new JSONObject();
             params.put("email", email);
             params.put("password", password);
+            System.out.println(APIRequest.API_URL);
             JSONObject response = new JSONObject(APIRequest.POST(APIRequest.API_URL + "login", params.toString()));
             System.out.println(response);
             if( response.has("error") ){
@@ -31,6 +32,7 @@ public class LoginAttempt {
             } else{
                 APIRequest.API_TOKEN = response.getJSONObject("data").getString("api_token");
                 SharedConfig.USER_ID = response.getJSONObject("data").getInt("user_id");
+                SharedConfig.updateStaticConfigToRememberUser();
                 cb.onSuccess();
             }
         });

@@ -78,6 +78,7 @@ public class StartSplashScreen extends Application {
                                     LoginScreen loginScreen = new LoginScreen();
                                     loginScreen.start(new Stage());
                                 } else {
+                                    SharedConfig.copyUserCredentials();
                                     MainScreen mainScreen = new MainScreen();
                                     mainScreen.start( new Stage() );
                                 }

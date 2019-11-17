@@ -90,7 +90,7 @@
             <BusBoxButton tooltipText="Mesaj" mnemonicParsing="false" iconName="COMMENT" action="1" />
             <BusBoxButton tooltipText="Sürücü" mnemonicParsing="false" iconName="USER" action="2" />
             <BusBoxButton tooltipText="IYS" mnemonicParsing="false" iconName="INFO" action="4" />
-            <BusBoxButton tooltipText="Harita" mnemonicParsing="false" iconName="MAP_MARKER" action="5" />
+            <BusBoxButton tooltipText="Harita" mnemonicParsing="false" iconName="MAP_MARKER" action="5" fx:id="uiTest"/>
 
          </children>
          <padding>

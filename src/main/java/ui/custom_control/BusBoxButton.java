@@ -22,6 +22,8 @@ public class BusBoxButton extends Button {
     @FXML
     private FontAwesomeIconView icon;
 
+    private String busCode;
+
     /**
      * Constructor
      *
@@ -46,13 +48,17 @@ public class BusBoxButton extends Button {
             // click action
             setOnAction( ev -> {
 
-                System.out.println(BusBoxButtonAction.values()[action]);
+                System.out.println(BusBoxButtonAction.values()[action] + " ---  " + busCode );
 
             });
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setData( String test ){
+        busCode = test;
     }
 
 }

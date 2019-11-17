@@ -55,6 +55,18 @@ public class Common {
         }
     }
 
+    public static boolean writeStaticData( String filePath, String content ){
+        try{
+            PrintWriter writer = new PrintWriter( filePath, "UTF-8");
+            writer.print(content);
+            writer.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static boolean deleteFile( String path ){
         try{
             File f = new File( path );

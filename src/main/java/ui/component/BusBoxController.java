@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import model.Bus;
+import ui.custom_control.BusBoxButton;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +33,8 @@ public class BusBoxController implements Initializable {
     @FXML
     private Label uiRouteLabel;
 
+    @FXML
+    private BusBoxButton uiTest;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -40,6 +43,9 @@ public class BusBoxController implements Initializable {
 
     public void setData(Bus bus){
         this.bus = bus;
+
+        uiTest.setData(bus.getCode());
+
         updateUI();
     }
 
