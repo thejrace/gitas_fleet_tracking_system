@@ -7,20 +7,15 @@
  */
 package ui;
 
+import controller.ControllerHub;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import ui.alarm.AlarmPopup;
 
 public class MainScreen extends Application {
-
-    /**
-     * Alarm Popup component
-     */
-    public static AlarmPopup ALARM_POPUP;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -47,8 +42,9 @@ public class MainScreen extends Application {
             MainScreenController controller = loader.getController();
             controller.screenResizeAction();
 
-            ALARM_POPUP = new AlarmPopup();
-            ALARM_POPUP.initialize();
+            // initialize static controllers
+            ControllerHub controllerHub = new ControllerHub();
+            controllerHub.initialize();
 
         } catch( Exception e ){
             e.printStackTrace();

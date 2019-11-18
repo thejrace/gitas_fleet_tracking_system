@@ -7,6 +7,7 @@
  */
 package ui.alarm;
 
+import controller.ControllerHub;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import enums.AlarmType;
@@ -15,7 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import model.Alarm;
-import ui.MainScreen;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,7 +35,7 @@ public class AlarmItemController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         uiContainer.setOnMouseClicked(ev -> {
-            MainScreen.ALARM_POPUP.removeAlarm(ID);
+            ControllerHub.AlarmController.markAsSeen(ID);
         });
     }
 

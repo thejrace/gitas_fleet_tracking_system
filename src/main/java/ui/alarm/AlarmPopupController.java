@@ -7,10 +7,10 @@
  */
 package ui.alarm;
 
+import controller.ControllerHub;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
-import ui.MainScreen;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,11 +22,11 @@ public class AlarmPopupController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         uiContainer.setOnMouseEntered(ev -> {
-            MainScreen.ALARM_POPUP.setMouseOverFlag(true);
+            ControllerHub.AlarmController.updateMouseOverlayFlag(true);
         });
 
         uiContainer.setOnMouseExited(ev -> {
-            MainScreen.ALARM_POPUP.setMouseOverFlag(false);
+            ControllerHub.AlarmController.updateMouseOverlayFlag(false);
         });
     }
 }

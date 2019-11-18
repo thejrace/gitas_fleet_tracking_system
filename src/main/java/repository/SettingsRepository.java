@@ -5,12 +5,7 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package broadcast;
+package repository;
 
-public class Broadcaster {
-
-    public static void start(){
-
-    }
-
+public class SettingsRepository {
 }

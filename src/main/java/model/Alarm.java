@@ -27,6 +27,11 @@ public class Alarm {
     private AlarmType type;
 
     /**
+     * Status of the alarm. It can be seen or disabled in the settings.
+     */
+    private boolean hidden = false;
+
+    /**
      * Constructor
      *
      * @param type
@@ -91,5 +96,23 @@ public class Alarm {
      */
     public void setType(AlarmType type) {
         this.type = type;
+    }
+
+    /**
+     * Getter for hidden flag
+     *
+     * @return
+     */
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    /**
+     * Setter for hidden flag
+     *
+     * @param hidden
+     */
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 }
