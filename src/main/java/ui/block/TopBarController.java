@@ -46,7 +46,7 @@ public class TopBarController implements Initializable {
 
     /**
      * Load the page with given key.
-     * This method is triggered from TopNavButton's controller
+     * This method is triggered from TopNavButton's controllers
      *
      * @param page page class name
      */

@@ -7,7 +7,7 @@
  */
 package ui.alarm;
 
-import controller.ControllerHub;
+import controllers.ControllerHub;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import enums.AlarmType;
@@ -15,7 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import model.Alarm;
+import models.Alarm;
 
 import java.net.URL;
 import java.util.ResourceBundle;

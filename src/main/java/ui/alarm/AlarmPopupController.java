@@ -7,7 +7,7 @@
  */
 package ui.alarm;
 
-import controller.ControllerHub;
+import controllers.ControllerHub;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;

@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
-import model.Bus;
+import models.Bus;
 import ui.custom_control.BusBoxButton;
 
 import java.net.URL;

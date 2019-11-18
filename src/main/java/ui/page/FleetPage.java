@@ -9,10 +9,9 @@ package ui.page;
 
 import cookie_agent.CookieAgent;
 import javafx.application.Platform;
-import model.Bus;
-import repository.BusRepository;
+import models.Bus;
+import repositories.BusRepository;
 import ui.popup.Popup;
-import utils.ThreadHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +45,7 @@ public class FleetPage extends UIPage{
             buses.put(bus.getCode(), bus);
         }
 
-        // feed bus data to controller
+        // feed bus data to controllers
         Platform.runLater(() -> {
             getController().setData(buses);
             Popup.hide();

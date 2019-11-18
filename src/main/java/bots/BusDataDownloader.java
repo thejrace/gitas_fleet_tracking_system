@@ -1,10 +1,9 @@
-package bot;
+package bots;
 
 import cookie_agent.CookieAgent;
-import model.BusRun;
+import models.BusRun;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import utils.SharedConfig;
 
 import java.io.IOException;
 import java.util.ArrayList;

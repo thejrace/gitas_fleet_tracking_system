@@ -5,9 +5,9 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package controller;
+package controllers;
 
-import model.Alarm;
+import models.Alarm;
 import ui.alarm.AlarmPopup;
 
 import java.util.ArrayList;

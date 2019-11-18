@@ -5,7 +5,7 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package model;
+package models;
 
 import org.json.JSONException;
 import org.json.JSONObject;

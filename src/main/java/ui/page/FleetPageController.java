@@ -10,7 +10,7 @@ package ui.page;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
-import model.Bus;
+import models.Bus;
 
 import java.net.URL;
 import java.util.Map;

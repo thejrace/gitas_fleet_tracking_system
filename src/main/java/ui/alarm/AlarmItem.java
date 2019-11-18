@@ -7,7 +7,7 @@
  */
 package ui.alarm;
 
-import model.Alarm;
+import models.Alarm;
 import ui.UIComponent;
 
 public class AlarmItem extends UIComponent {

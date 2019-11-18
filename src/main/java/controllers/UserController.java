@@ -5,7 +5,7 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package controller;
+package controllers;
 
-public class SettingsController {
+public class UserController {
 }

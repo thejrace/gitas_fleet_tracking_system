@@ -5,7 +5,7 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package model;
+package models;
 
 import enums.AlarmType;
 

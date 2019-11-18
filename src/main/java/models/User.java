@@ -5,7 +5,7 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package repository;
+package models;
 
-public class UserRepository {
+public class User {
 }

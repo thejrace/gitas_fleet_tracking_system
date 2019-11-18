@@ -5,7 +5,7 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package bot;
+package bots;
 
 public class FleetDataDownloader {
 

@@ -7,7 +7,7 @@
  */
 package ui.component;
 
-import model.Bus;
+import models.Bus;
 import ui.UIComponent;
 
 public class BusBox extends UIComponent {

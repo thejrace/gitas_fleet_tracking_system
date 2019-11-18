@@ -10,7 +10,7 @@ package ui.alarm;
 import enums.AlarmType;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Popup;
-import model.Alarm;
+import models.Alarm;
 import ui.MainScreenController;
 import ui.UIComponent;
 import utils.ThreadHelper;

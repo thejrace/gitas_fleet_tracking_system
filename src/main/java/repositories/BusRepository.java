@@ -5,7 +5,7 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package repository;
+package repositories;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -5,7 +5,7 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package repository;
+package controllers;
 
-public class SettingsRepository {
+public class SettingsController {
 }

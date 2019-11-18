@@ -7,7 +7,7 @@
  */
 package ui;
 
-import controller.ControllerHub;
+import controllers.ControllerHub;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -13,7 +13,7 @@ public class CaptchaWebview extends UIComponent {
     }
 
     /**
-     * Set listener to controller.
+     * Set listener to controllers.
      *
      * @param listener
      */
@@ -22,7 +22,7 @@ public class CaptchaWebview extends UIComponent {
     }
 
     /**
-     * Pass notf message to the controller.
+     * Pass notf message to the controllers.
      * @param notfText
      */
     public void setNotf(String notfText){
