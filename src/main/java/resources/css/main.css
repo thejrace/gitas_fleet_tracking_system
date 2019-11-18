@@ -331,3 +331,77 @@
 .sub-nav-bar .icon-btn:hover {
     -fx-background-color:#616161;
 }
+
+.alarm-popup-container {
+    -fx-background-color: rgba(0,0,0,0.01);
+}
+
+.alarm-item {
+    -fx-border-width:2;
+    -fx-border-radius: 10;
+    -fx-background-color: #232628;
+    -fx-background-radius: 10;
+    -fx-cursor:hand;
+}
+
+.alarm-item:hover {
+    -fx-background-color: #343739;
+}
+
+.alarm-item .title {
+    -fx-font-size:12;
+    -fx-font-family:"Montserrat Bold";
+}
+
+.alarm-item .details {
+    -fx-font-size:11;
+    -fx-font-family:"Montserrat SemiBold";
+}
+
+.alarm-item.red {
+    -fx-border-color: #701c1c;
+}
+
+.alarm-item.green {
+    -fx-border-color: #00721d;
+}
+
+.alarm-item.white {
+    -fx-border-color: #3e3d3d;
+}
+
+.alarm-item.pink {
+    -fx-border-color: #5e2f2f;
+}
+
+.alarm-item.blue {
+    -fx-border-color: #2b4081;
+}
+
+
+.alarm-item.red .text,
+.alarm-item.red .icon{
+    -fx-fill:#ff4242;
+}
+.alarm-item.green .text,
+.alarm-item.green .icon {
+    -fx-fill: #00ff36;
+}
+.alarm-item.gray .text,
+.alarm-item.gray .icon{
+    -fx-fill: #c5c5c5;
+}
+.alarm-item.white .text,
+.alarm-item.white .icon {
+    -fx-fill: #fff;
+}
+.alarm-item.pink .text,
+.alarm-item.pink .icon {
+    -fx-fill: #ff8686;
+}
+
+.alarm-item.blue .text,
+.alarm-item.blue .icon {
+    -fx-fill: #5383ff;
+}
+

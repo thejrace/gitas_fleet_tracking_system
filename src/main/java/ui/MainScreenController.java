@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import ui.alarm.AlarmPopup;
 import ui.block.ContentContainer;
 import ui.block.TopSubBar;
 import ui.block.TopBar;
@@ -76,6 +77,7 @@ public class MainScreenController implements Initializable {
             TopBar topBar = new TopBar();
             TopSubBar subNavBar = new TopSubBar();
             ContentContainer contentContainer = new ContentContainer();
+
             topBar.initUI();
             subNavBar.initUI();
             contentContainer.initUI();
