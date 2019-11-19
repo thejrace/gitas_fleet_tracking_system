@@ -7,7 +7,6 @@
  */
 package ui.alarm;
 
-import enums.AlarmType;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Popup;
 import models.Alarm;
@@ -42,6 +41,9 @@ public class AlarmPopup extends UIComponent {
      */
     private double containerHeight = 0;
 
+    /**
+     * Trigger flag
+     */
     private boolean triggerEnabledFlag = true;
 
     /**
@@ -69,27 +71,6 @@ public class AlarmPopup extends UIComponent {
         popup.setAutoHide(false);
         popup.setAutoHide(false);
         popup.setHideOnEscape(true);
-
-        AlarmItem test = new AlarmItem();
-        test.initUI();
-        test.setData(new Alarm(AlarmType.BLUE, "testx", "test"));
-
-        AlarmItem test2 = new AlarmItem();
-        test2.initUI();
-        test2.setData(new Alarm(AlarmType.GREEN, "testy", "test"));
-
-        AlarmItem test3 = new AlarmItem();
-        test3.initUI();
-        test3.setData(new Alarm(AlarmType.RED, "testz", "test"));
-
-        AlarmItem test4 = new AlarmItem();
-        test4.initUI();
-        test4.setData(new Alarm(AlarmType.WHITE, "testt", "test"));
-
-        addAlarm(test);
-        addAlarm(test2);
-        addAlarm(test3);
-        addAlarm(test4);
 
         // check if user has trigger alarm enabled to start loop
 //        triggerEnabledFlag =
@@ -155,12 +136,12 @@ public class AlarmPopup extends UIComponent {
     /**
      * Add alarm to the container
      *
-     * @param alarmItem
+     * @param alarm
      */
-    public void addAlarm( AlarmItem alarmItem ){
+    public void addAlarm( Alarm alarm ){
         containerHeight += AlarmItem.HEIGHT + 10;
         resizeContainer();
-        container.getChildren().add(alarmItem.getUI());
+        container.getChildren().add(alarm.getUiComponent().getUI());
     }
 
     /**

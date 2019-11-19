@@ -8,6 +8,7 @@
 package controllers;
 
 import models.Alarm;
+import ui.alarm.AlarmItem;
 import ui.alarm.AlarmPopup;
 
 import java.util.ArrayList;
@@ -23,6 +24,11 @@ public class AlarmController {
      * Popup UI component
      */
     private AlarmPopup alarmPopup;
+
+    /**
+     * Counter for the alarms array
+     */
+    private int indexCounter = 0;
 
     /**
      * Empty constructor
@@ -46,30 +52,44 @@ public class AlarmController {
      * @param alarm
      */
     public void addAlarm( Alarm alarm ){
+        alarm.setIndex(indexCounter);
         alarms.add(alarm);
+        indexCounter++;
+        alarm.setUiComponent(new AlarmItem(alarm));
+        alarmPopup.addAlarm(alarm);
     }
 
     /**
-     * Mark as seen the alarm wtih given ID
+     * Mark as seen the alarm
      *
-     * @param ID
+     * @param alarm
      */
-    public void markAsSeen( String ID ){
-        alarmPopup.removeAlarm(ID);
+    public void markAsSeen( Alarm alarm ){
+        alarmPopup.removeAlarm(alarm.getID());
+        alarms.get(alarm.getIndex()).setSeen(true);
     }
 
     /**
      * Mark as seen all visible alarms
      */
     public void markAllAsSeen(){
-
+        for( Alarm alarm : alarms ){
+            if( alarm.getSeen() ) continue;
+            alarm.setSeen(true);
+            alarmPopup.removeAlarm(alarm.getID());
+        }
     }
 
     /**
      * Unmark all seen alarms
      */
     public void markAllAsNotSeen(){
-
+        for( Alarm alarm : alarms ){
+            if( !alarm.getSeen() ) continue;
+            alarm.setSeen(false);
+            alarmPopup.addAlarm(alarm);
+        }
+        showAlarms();
     }
 
     /**

@@ -1,3 +1,10 @@
+/*
+ *  Gitas Fleet Tracking System 2019
+ *
+ *  Contributors:
+ *      - Ahmet Ziya Kanbur
+ *
+ */
 package ui.login;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;

@@ -8,6 +8,7 @@
 package models;
 
 import enums.AlarmType;
+import ui.alarm.AlarmItem;
 
 public class Alarm {
 
@@ -27,9 +28,24 @@ public class Alarm {
     private AlarmType type;
 
     /**
+     * ID of the Alarm. Used to access AlarmItem UI component
+     */
+    private String ID;
+
+    /**
+     * Index of the Alarm in the list
+     */
+    private int index;
+
+    /**
      * Status of the alarm. It can be seen or disabled in the settings.
      */
-    private boolean hidden = false;
+    private boolean seen = false;
+
+    /**
+     * UI component of the alarm
+     */
+    private AlarmItem uiComponent;
 
     /**
      * Constructor
@@ -42,6 +58,7 @@ public class Alarm {
         this.type = type;
         this.title = title;
         this.details = details;
+        this.ID = type.name()+"-"+title;
     }
 
     /**
@@ -103,16 +120,70 @@ public class Alarm {
      *
      * @return
      */
-    public boolean isHidden() {
-        return hidden;
+    public boolean getSeen() {
+        return seen;
     }
 
     /**
      * Setter for hidden flag
      *
-     * @param hidden
+     * @param seen
      */
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
+    /**
+     * Getter for ID
+     *
+     * @return
+     */
+    public String getID() {
+        return ID;
+    }
+
+    /**
+     * Setter for ID
+     *
+     * @param ID
+     */
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    /**
+     * Getter for index
+     *
+     * @return
+     */
+    public int getIndex() {
+        return index;
+    }
+
+    /**
+     * Setter for index
+     *
+     * @param index
+     */
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    /**
+     * Getter for AlarmItem
+     *
+     * @return
+     */
+    public AlarmItem getUiComponent() {
+        return uiComponent;
+    }
+
+    /**
+     * Setter for UI component
+     *
+     * @param uiComponent
+     */
+    public void setUiComponent(AlarmItem uiComponent) {
+        this.uiComponent = uiComponent;
     }
 }

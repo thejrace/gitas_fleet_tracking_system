@@ -30,6 +30,16 @@ public class AlarmItem extends UIComponent {
     }
 
     /**
+     * Second constructor
+     *
+     * @param alarm
+     */
+    public AlarmItem( Alarm alarm ){
+        initUI();
+        setData(alarm);
+    }
+
+    /**
      * Initialize fxml
      */
     public void initUI(){

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" styleClass="sub-nav-bar" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="ui.block.TopSubBarController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" styleClass="sub-nav-bar" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -18,22 +18,22 @@
          <children>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
                <children>
-                  <Button mnemonicParsing="false" styleClass="icon-btn">
+                  <Button mnemonicParsing="false" styleClass="icon-btn" fx:id="uiShowAlarmsBtn">
                      <graphic>
                         <FontAwesomeIconView fill="#6ba8c0" glyphName="BELL" size="14.0" />
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="icon-btn">
+                  <Button mnemonicParsing="false" styleClass="icon-btn" fx:id="uiHideAlarmsBtn">
                      <graphic>
                         <FontAwesomeIconView fill="#797979" glyphName="BELL_SLASH" size="14.0" />
                      </graphic>
                   </Button>
-                  <Button layoutX="10.0" layoutY="23.0" mnemonicParsing="false" styleClass="icon-btn">
+                  <Button layoutX="10.0" layoutY="23.0" mnemonicParsing="false" styleClass="icon-btn" fx:id="uiMarkAllAsSeenBtn">
                      <graphic>
                         <FontAwesomeIconView fill="#797979" glyphName="CHECK" size="14.0" />
                      </graphic>
                   </Button>
-                  <Button layoutX="38.0" layoutY="23.0" mnemonicParsing="false" styleClass="icon-btn">
+                  <Button layoutX="38.0" layoutY="23.0" mnemonicParsing="false" styleClass="icon-btn" fx:id="uiMarkAllAsNotSeen">
                      <graphic>
                         <FontAwesomeIconView fill="#797979" glyphName="REFRESH" size="14.0" />
                      </graphic>

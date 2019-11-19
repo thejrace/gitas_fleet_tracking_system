@@ -30,40 +30,42 @@ public class AlarmItemController implements Initializable {
 
     @FXML private Label uiDetails;
 
-    private String ID;
+    /**
+     * Alarm model
+     */
+    private Alarm alarm;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         uiContainer.setOnMouseClicked(ev -> {
-            ControllerHub.AlarmController.markAsSeen(ID);
+            ControllerHub.AlarmController.markAsSeen(alarm);
         });
     }
 
     /**
      * Get data for view
      *
-     * @param alarmData
+     * @param alarm
      */
-    public void setData(Alarm alarmData){
-        // assign a unique ID to container for seen action
-        ID = alarmData.getType().name()+"-"+alarmData.getTitle();
-        uiContainer.setId(ID);
+    public void setData(Alarm alarm){
+        this.alarm = alarm;
+        uiContainer.setId(alarm.getID());
 
-        uiTitle.setText(alarmData.getTitle());
-        uiDetails.setText(alarmData.getDetails());
+        uiTitle.setText(alarm.getTitle());
+        uiDetails.setText(alarm.getDetails());
 
         // conditional styling
         String containerClass;
-        if( alarmData.getType() == AlarmType.RED ){
+        if( alarm.getType() == AlarmType.RED ){
             containerClass = "red";
             uiIcon.setGlyphName(FontAwesomeIcon.CLOSE.name());
-        } else if( alarmData.getType() == AlarmType.GREEN ){
+        } else if( alarm.getType() == AlarmType.GREEN ){
             containerClass = "green";
             uiIcon.setGlyphName(FontAwesomeIcon.CHECK.name());
-        } else if( alarmData.getType() == AlarmType.BLUE ){
+        } else if( alarm.getType() == AlarmType.BLUE ){
             containerClass = "blue";
             uiIcon.setGlyphName(FontAwesomeIcon.INFO.name());
-        } else if( alarmData.getType() == AlarmType.WHITE ){
+        } else if( alarm.getType() == AlarmType.WHITE ){
             containerClass = "white";
             uiIcon.setGlyphName(FontAwesomeIcon.EXCLAMATION.name());
         } else { // gray
