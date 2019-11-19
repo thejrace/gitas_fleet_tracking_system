@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<?import ui.custom_control.FleetFilterButton?>
+<?import ui.custom_control.BusBoxStyleButton?>
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="40.0" styleClass="fleet-filter-container" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.block.FleetFilterBarController">
+   <children>
+      <HBox spacing="10.0">
+         <children>
+            <Label text="\%15">
+               <styleClass>
+                  <String fx:value="summary-widget" />
+                  <String fx:value="purple" />
+               </styleClass>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" text="\%15">
+               <styleClass>
+                  <String fx:value="summary-widget" />
+                  <String fx:value="white" />
+               </styleClass>
+            </Label>
+            <Label layoutX="35.0" layoutY="10.0" text="\%15">
+               <styleClass>
+                  <String fx:value="summary-widget" />
+                  <String fx:value="green" />
+               </styleClass>
+            </Label>
+            <Label layoutX="60.0" layoutY="10.0" text="\%15">
+               <styleClass>
+                  <String fx:value="summary-widget" />
+                  <String fx:value="red" />
+               </styleClass>
+            </Label>
+         </children>
+      </HBox>
+      <HBox spacing="10.0">
+         <children>
+            <FleetFilterButton className="green" text="AKTİF" action="0"/>
+            <FleetFilterButton className="red" text="ZAYİ" action="1"/>
+            <FleetFilterButton className="gray" text="PLAKA" action="2"/>
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
+         <children>
+            <BusBoxStyleButton mnemonicParsing="false" action="1"/>
+            <BusBoxStyleButton mnemonicParsing="false" action="2"/>
+            <BusBoxStyleButton mnemonicParsing="false" action="3"/>
+         </children>
+      </HBox>
+   </children>
+</HBox>

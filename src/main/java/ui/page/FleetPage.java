@@ -8,21 +8,29 @@
 package ui.page;
 
 import controllers.ControllerHub;
+import controllers.FleetController;
 import cookie_agent.CookieAgent;
 import enums.AlarmType;
-import javafx.application.Platform;
 import models.Alarm;
-import models.Bus;
-import repositories.BusRepository;
+import ui.block.FleetFilterBar;
 import ui.popup.Popup;
-
-import java.util.HashMap;
-import java.util.Map;
+import utils.ThreadHelper;
 
 public class FleetPage extends UIPage{
 
-    private Map<String, Bus> buses = new HashMap<>();
+    /**
+     * FleetFilterBar instance
+     */
+    public static FleetFilterBar FilterBar;
 
+    /**
+     * FleetController instance
+     */
+    public static FleetController FleetController;
+
+    /**
+     * Empty constructor
+     */
     public FleetPage(){
         loadFXML("fleet_page");
         getController().setTitle("Filo Takip");
@@ -30,27 +38,24 @@ public class FleetPage extends UIPage{
         initialize();
     }
 
+    /**
+     * Initialize the page
+     */
     private void initialize(){
+        FleetController = new FleetController();
+
+        FilterBar = new FleetFilterBar();
+        FilterBar.initUI();
+        getController().initFilterBar();
 
         // init cookie agent first
         CookieAgent.initialize();
 
-        System.out.println(CookieAgent.FILO5_COOKIE);
-
-        // get buses
-        BusRepository busRepository = new BusRepository();
-        busRepository.fetchBuses();
-
-        // create bus instances
-        Bus bus;
-        for( int k = 0; k < busRepository.getData().length(); k++ ){
-            bus = new Bus(busRepository.getData().getJSONObject(k));
-            buses.put(bus.getCode(), bus);
-        }
+        FleetController.downloadBuses();
 
         // feed bus data to controllers
-        Platform.runLater(() -> {
-            getController().setData(buses);
+        ThreadHelper.runOnUIThread(() -> {
+            getController().showFleet();
             Popup.hide();
 
             ControllerHub.AlarmController.start();

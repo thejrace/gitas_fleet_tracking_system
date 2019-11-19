@@ -10,26 +10,30 @@ package ui.page;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import models.Bus;
 
 import java.net.URL;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class FleetPageController extends UIPageController implements Initializable {
 
-    @FXML
-    private FlowPane uiBusContainer;
+    @FXML private FlowPane uiBusContainer;
+
+    @FXML private HBox uiFilterContainer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void setData(Map<String, Bus> data){
-        for( Map.Entry<String, Bus> entry : data.entrySet() ){
-            entry.getValue().getBox().initUI();
-            uiBusContainer.getChildren().add(entry.getValue().getBox().getUI());
+    public void showFleet(){
+        for( Bus bus : FleetPage.FleetController.getBuses() ){
+            uiBusContainer.getChildren().add(bus.getUiComponent().getUI());
         }
+    }
+
+    public void initFilterBar(){
+        uiFilterContainer.getChildren().add(FleetPage.FilterBar.getUI());
     }
 }

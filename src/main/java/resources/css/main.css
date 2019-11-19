@@ -405,3 +405,67 @@
     -fx-fill: #5383ff;
 }
 
+.fleet-filter-container {
+
+}
+
+.fleet-filter-container .summary-widget{
+    -fx-padding:5 10;
+    -fx-font-family:"Montserrat Bold";
+    -fx-font-size:13;
+    -fx-border-width:2;
+    -fx-border-radius:5;
+    -fx-text-fill:#d3d3d3;
+}
+.fleet-filter-container .summary-widget.purple {
+    -fx-border-color: #9268a0;
+}
+.fleet-filter-container .summary-widget.green {
+    -fx-border-color: #538f53;
+}
+.fleet-filter-container .summary-widget.red {
+    -fx-border-color: #b55454;
+}
+.fleet-filter-container .summary-widget.white {
+    -fx-border-color: #bfbfbf;
+}
+.fleet-filter-container .filter-btn {
+    -fx-background-color:#3c3f41;
+    -fx-background-radius:5;
+    -fx-font-family:"Montserrat SemiBold";
+    -fx-font-size:13;
+    -fx-padding:5 10;
+    -fx-border-width:2;
+    -fx-border-radius:5;
+    -fx-border-color:transparent;
+}
+
+.fleet-filter-container .filter-btn .icon {
+    -fx-fill:#828282;
+}
+
+.fleet-filter-container .filter-btn.green {
+    -fx-text-fill:#538f53;
+}
+.fleet-filter-container .filter-btn.red {
+    -fx-text-fill:#b55454;
+}
+.fleet-filter-container .filter-btn.gray {
+    -fx-text-fill:#828282;
+}
+
+.fleet-filter-container .filter-btn.active {
+    -fx-border-color:#9268a0;
+}
+
+.fleet-filter-container .filter-btn.red:hover {
+    -fx-border-color:#b55454;
+}
+
+.fleet-filter-container .filter-btn.green:hover {
+    -fx-border-color:#538f53;
+}
+.fleet-filter-container .filter-btn.gray:hover {
+    -fx-border-color:#828282;
+}
+
