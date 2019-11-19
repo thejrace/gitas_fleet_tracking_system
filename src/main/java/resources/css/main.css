@@ -454,18 +454,20 @@
     -fx-text-fill:#828282;
 }
 
-.fleet-filter-container .filter-btn.active {
-    -fx-border-color:#9268a0;
-}
-
-.fleet-filter-container .filter-btn.red:hover {
+.fleet-filter-container .filter-btn.red:hover,
+.fleet-filter-container .filter-btn.red.active{
     -fx-border-color:#b55454;
 }
 
-.fleet-filter-container .filter-btn.green:hover {
+.fleet-filter-container .filter-btn.green:hover,
+.fleet-filter-container .filter-btn.green.active{
     -fx-border-color:#538f53;
 }
-.fleet-filter-container .filter-btn.gray:hover {
+.fleet-filter-container .filter-btn.gray:hover,
+.fleet-filter-container .filter-btn.gray.active{
     -fx-border-color:#828282;
 }
 
+.fleet-filter-container .filter-btn.active {
+    -fx-border-color:#9268a0;
+}

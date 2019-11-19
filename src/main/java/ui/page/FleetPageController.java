@@ -9,6 +9,7 @@ package ui.page;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import models.Bus;
@@ -27,13 +28,21 @@ public class FleetPageController extends UIPageController implements Initializab
 
     }
 
+    public void applyFilters(){
+
+    }
+
+    public void applyStyles(){
+
+    }
+
     public void showFleet(){
         for( Bus bus : FleetPage.FleetController.getBuses() ){
             uiBusContainer.getChildren().add(bus.getUiComponent().getUI());
         }
     }
 
-    public void initFilterBar(){
-        uiFilterContainer.getChildren().add(FleetPage.FilterBar.getUI());
+    public void initFilterBar(Node filterBarUI){
+        uiFilterContainer.getChildren().add(filterBarUI);
     }
 }

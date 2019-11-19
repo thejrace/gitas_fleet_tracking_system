@@ -10,6 +10,7 @@ package ui.custom_control;
 import javafx.beans.NamedArg;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import ui.page.FleetPage;
 
 import java.io.IOException;
 
@@ -30,12 +31,24 @@ public class BusBoxStyleButton extends Button {
             fxmlLoader.load();
 
             setText(String.valueOf(action));
+            setId("style_"+action);
+
+            // select first one as active
+            // @todo we will get this from user settings
+            if( action == 0 ){
+                getStyleClass().add("active");
+            }
 
             // click action
             setOnAction( ev -> {
+                if( FleetPage.FleetFilterController.getStyleChoice() == action ) return;
 
-                System.out.println(action);
+                // remove active class of the previous selection
+                BusBoxStyleButton previousButton = (BusBoxStyleButton)(getParent().lookup("#style_"+FleetPage.FleetFilterController.getStyleChoice()));
+                previousButton.getStyleClass().remove(3);
 
+                FleetPage.FleetFilterController.updateStyleChoice(action);
+                getStyleClass().add("active");
             });
 
         } catch (IOException e) {

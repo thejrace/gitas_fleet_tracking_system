@@ -45,9 +45,9 @@
       </HBox>
       <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
          <children>
+            <BusBoxStyleButton mnemonicParsing="false" action="0"/>
             <BusBoxStyleButton mnemonicParsing="false" action="1"/>
             <BusBoxStyleButton mnemonicParsing="false" action="2"/>
-            <BusBoxStyleButton mnemonicParsing="false" action="3"/>
          </children>
       </HBox>
    </children>

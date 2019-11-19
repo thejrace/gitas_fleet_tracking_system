@@ -9,6 +9,7 @@ package ui.page;
 
 import controllers.ControllerHub;
 import controllers.FleetController;
+import controllers.FleetFilterController;
 import cookie_agent.CookieAgent;
 import enums.AlarmType;
 import models.Alarm;
@@ -19,14 +20,14 @@ import utils.ThreadHelper;
 public class FleetPage extends UIPage{
 
     /**
-     * FleetFilterBar instance
-     */
-    public static FleetFilterBar FilterBar;
-
-    /**
      * FleetController instance
      */
     public static FleetController FleetController;
+
+    /**
+     * FleetFilterController instance
+     */
+    public static FleetFilterController FleetFilterController;
 
     /**
      * Empty constructor
@@ -43,10 +44,12 @@ public class FleetPage extends UIPage{
      */
     private void initialize(){
         FleetController = new FleetController();
+        FleetController.passPageController(getController());
+        FleetFilterController = new FleetFilterController();
 
-        FilterBar = new FleetFilterBar();
-        FilterBar.initUI();
-        getController().initFilterBar();
+        FleetFilterBar fleetFilterBar = new FleetFilterBar();
+        fleetFilterBar.initUI();
+        getController().initFilterBar(fleetFilterBar.getUI());
 
         // init cookie agent first
         CookieAgent.initialize();

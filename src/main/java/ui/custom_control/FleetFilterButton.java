@@ -11,10 +11,13 @@ import enums.FleetFilterButtonAction;
 import javafx.beans.NamedArg;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import ui.page.FleetPage;
 
 import java.io.IOException;
 
 public class FleetFilterButton extends Button {
+
+    private boolean active = false;
 
     /**
      * Constructor
@@ -36,9 +39,13 @@ public class FleetFilterButton extends Button {
 
             // click action
             setOnAction( ev -> {
-
-                System.out.println(FleetFilterButtonAction.values()[action]);
-
+                if( active ){
+                    getStyleClass().remove(3);
+                } else {
+                    getStyleClass().add("active");
+                }
+                active = !active;
+                FleetPage.FleetFilterController.updateFilterStates(FleetFilterButtonAction.values()[action], active);
             });
 
         } catch (IOException e) {
