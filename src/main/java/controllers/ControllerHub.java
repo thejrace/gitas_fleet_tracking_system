@@ -14,6 +14,9 @@ public class ControllerHub {
      */
     public static AlarmController AlarmController;
 
+    /**
+     * UserController instance
+     */
     public static UserController UserController;
 
     /**

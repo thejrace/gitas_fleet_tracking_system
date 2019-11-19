@@ -9,16 +9,19 @@ package ui.login;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import interfaces.ActionCallback;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import ui.MainScreen;
 import utils.LoginAttempt;
 import utils.ThreadHelper;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -50,32 +53,46 @@ public class LoginScreenController implements Initializable {
         });
 
         uiActionBtn.setOnMouseClicked( ev -> {
-            LoginAttempt loginAttempt = new LoginAttempt(uiEmailInput.getText(), uiPassInput.getText());
-            loginAttempt.commit(new ActionCallback() {
-                @Override
-                public void onSuccess(String... params) {
-                    // open main screen
-                    ThreadHelper.runOnUIThread(() -> {
-                        try {
-                            System.out.println("SUCCESS!!!");
+            attempt();
+        });
 
-                            MainScreen mainScreen = new MainScreen();
-                            mainScreen.start( new Stage() );
+        uiEmailInput.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                attempt();
+            }
+        });
 
-                            loginStage.close();
+        uiPassInput.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                attempt();
+            }
+        });
 
-                        } catch( Exception e ){
-                            e.printStackTrace();
-                        }
-                    });
-                }
-                @Override
-                public void onError(int type) {
-                    ThreadHelper.runOnUIThread(() -> {
-                        uiErrorNotf.setText("Hata oluştu. ["+type+"]");
-                    });
-                }
-            });
+    }
+
+    private void attempt(){
+        LoginAttempt loginAttempt = new LoginAttempt(uiEmailInput.getText(), uiPassInput.getText());
+        loginAttempt.commit(new ActionCallback() {
+            @Override
+            public void onSuccess(String... params) {
+                // open main screen
+                ThreadHelper.runOnUIThread(() -> {
+                    try {
+                        MainScreen mainScreen = new MainScreen();
+                        mainScreen.start( new Stage() );
+
+                        loginStage.close();
+                    } catch( Exception e ){
+                        e.printStackTrace();
+                    }
+                });
+            }
+            @Override
+            public void onError(int type) {
+                ThreadHelper.runOnUIThread(() -> {
+                    uiErrorNotf.setText("Hata oluştu. ["+type+"]");
+                });
+            }
         });
     }
 

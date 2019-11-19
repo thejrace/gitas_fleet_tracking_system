@@ -10,8 +10,7 @@ package controllers;
 import interfaces.ActionCallback;
 import models.User;
 import org.json.JSONException;
-import org.json.JSONObject;
-import utils.APIRequest;
+import repositories.UserRepository;
 import utils.SharedConfig;
 
 public class UserController {
@@ -37,12 +36,9 @@ public class UserController {
         try {
             // read api token from static config file
             model.setApiToken(SharedConfig.DATA.getString("api_key"));
-            JSONObject response = new JSONObject(APIRequest.POST(APIRequest.API_URL + "fts/rememberMe", ""));
-            JSONObject data = response.getJSONObject("data");
-            model.batchUpdate(data);
+            model.batchUpdate(UserRepository.remember());
             callback.onSuccess();
         } catch( JSONException e ){
-            System.out.println("INVALID LOGIN");
             callback.onError(0);
             e.printStackTrace();
         }
