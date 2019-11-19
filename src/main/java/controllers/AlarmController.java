@@ -47,6 +47,14 @@ public class AlarmController {
     }
 
     /**
+     * Read user settings and then start Alarm system
+     */
+    public void start(){
+        // @todo read user settings
+        alarmPopup.start();
+    }
+
+    /**
      * Adds new alarm
      *
      * @param alarm
@@ -123,5 +131,4 @@ public class AlarmController {
     public void updateMouseOverlayFlag( boolean newState ){
         alarmPopup.setMouseOverFlag(newState);
     }
-
 }

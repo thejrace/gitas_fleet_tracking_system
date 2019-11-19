@@ -7,15 +7,19 @@
  */
 package ui.start_splash;
 
+import controllers.ControllerHub;
+import interfaces.ActionCallback;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ui.MainScreen;
+import ui.alert_prompt.AlertPrompt;
 import ui.login.LoginScreen;
 import utils.SharedConfig;
 import utils.ThreadHelper;
@@ -75,27 +79,47 @@ public class StartSplashScreen extends Application {
 
                         ThreadHelper.runOnUIThread(() -> {
                             try {
-                                // kill platform when main screen is closed
-                                Platform.setImplicitExit(true);
-                                closeUpdateScreen();
-
                                 // check user logged in or not
                                 if( SharedConfig.DATA.has("init") ){
+                                    // kill platform when main screen is closed
+                                    Platform.setImplicitExit(true);
+                                    closeUpdateScreen();
+
                                     LoginScreen loginScreen = new LoginScreen();
                                     loginScreen.start(new Stage());
                                 } else {
-                                    SharedConfig.copyUserCredentials();
-                                    MainScreen mainScreen = new MainScreen();
-                                    mainScreen.start( new Stage() );
+                                    ControllerHub.UserController.remember(new ActionCallback() {
+                                        @Override
+                                        public void onSuccess(String... params) {
+                                            try {
+                                                // kill platform when main screen is closed
+                                                Platform.setImplicitExit(true);
+                                                closeUpdateScreen();
+
+                                                MainScreen mainScreen = new MainScreen();
+                                                mainScreen.start( new Stage() );
+                                            } catch( Exception e ){
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                        @Override
+                                        public void onError(int type) {
+                                            AlertPrompt.showAndWait(Alert.AlertType.ERROR,"Hata oluştu. Kod: YETKI_HATASI", "Sistem yöneticisine hatayı bildirin." );
+                                            Platform.exit();
+                                        }
+                                    });
                                 }
                             } catch( Exception e ){
                                 e.printStackTrace();
                             }
                         });
-
                     }
+                } else {
+                    ThreadHelper.runOnUIThread(() -> {
+                        AlertPrompt.showAndWait(Alert.AlertType.ERROR,"Hata oluştu. Kod: CONFIG_EKSIK", "Sistem yöneticisine hatayı bildirin." );
+                        Platform.exit();
+                    });
                 }
-
             });
 
         } catch( Exception e ){

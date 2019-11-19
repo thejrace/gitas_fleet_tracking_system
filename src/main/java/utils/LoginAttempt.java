@@ -1,6 +1,8 @@
 package utils;
 
+import controllers.ControllerHub;
 import interfaces.ActionCallback;
+import models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,15 +26,13 @@ public class LoginAttempt {
             JSONObject params = new JSONObject();
             params.put("email", email);
             params.put("password", password);
-            System.out.println(APIRequest.API_URL);
             JSONObject response = new JSONObject(APIRequest.POST(APIRequest.API_URL + "login", params.toString()));
             System.out.println(response);
             if( response.has("error") ){
                 cb.onError(1);
             } else{
-                APIRequest.API_TOKEN = response.getJSONObject("data").getString("api_token");
-                SharedConfig.USER_ID = response.getJSONObject("data").getInt("user_id");
-                SharedConfig.updateStaticConfigToRememberUser();
+                ControllerHub.UserController.setModel(new User(response.getJSONObject("data")));
+                ControllerHub.UserController.updateStaticConfigAfterLogin();
                 cb.onSuccess();
             }
         });

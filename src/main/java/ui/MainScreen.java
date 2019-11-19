@@ -7,7 +7,6 @@
  */
 package ui;
 
-import controllers.ControllerHub;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +15,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MainScreen extends Application {
+
+    public static Stage Stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -37,14 +38,11 @@ public class MainScreen extends Application {
             primaryStage.setScene(new Scene(content, 1280, 1024 )); // @todo - calculate client's width-height, give offset to that
 
             //stage.getIcons().add(new Image(getClass().getResource("/gpts/res/img/gpts_ico.png").toExternalForm()));
+            Stage = primaryStage;
             primaryStage.show();
 
             MainScreenController controller = loader.getController();
             controller.screenResizeAction();
-
-            // initialize static controllers
-            ControllerHub controllerHub = new ControllerHub();
-            controllerHub.initialize();
 
         } catch( Exception e ){
             e.printStackTrace();

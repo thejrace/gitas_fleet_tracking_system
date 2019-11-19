@@ -14,12 +14,16 @@ public class ControllerHub {
      */
     public static AlarmController AlarmController;
 
+    public static UserController UserController;
+
     /**
      * Initialize static controllers
      */
     public void initialize(){
         AlarmController = new AlarmController();
         AlarmController.initialize();
+
+        UserController = new UserController();
     }
 
 }

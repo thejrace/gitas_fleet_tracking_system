@@ -7,11 +7,11 @@
  */
 package ui.block;
 
-import controllers.AlarmController;
 import controllers.ControllerHub;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 
@@ -23,6 +23,7 @@ public class TopSubBarController implements Initializable {
     @FXML private Button uiHideAlarmsBtn;
     @FXML private Button uiMarkAllAsSeenBtn;
     @FXML private Button uiMarkAllAsNotSeen;
+    @FXML private Label uiUserNameLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb ){
@@ -42,6 +43,8 @@ public class TopSubBarController implements Initializable {
         uiMarkAllAsNotSeen.setOnMouseClicked(ev->{
             ControllerHub.AlarmController.markAllAsNotSeen();
         });
+
+        uiUserNameLabel.setText(ControllerHub.UserController.getModel().getName());
 
     }
 

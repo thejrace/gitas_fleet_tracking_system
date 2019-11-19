@@ -71,9 +71,12 @@ public class AlarmPopup extends UIComponent {
         popup.setAutoHide(false);
         popup.setAutoHide(false);
         popup.setHideOnEscape(true);
+    }
 
-        // check if user has trigger alarm enabled to start loop
-//        triggerEnabledFlag =
+    /**
+     * Start showing alarms
+     */
+    public void start(){
         triggerAction();
     }
 

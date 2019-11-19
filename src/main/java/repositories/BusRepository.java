@@ -7,11 +7,10 @@
  */
 package repositories;
 
+import controllers.ControllerHub;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import utils.APIRequest;
-import utils.SharedConfig;
-
 
 public class BusRepository {
 
@@ -22,7 +21,7 @@ public class BusRepository {
     }
 
     public void fetchBuses(){
-        JSONObject result = new JSONObject(APIRequest.GET(APIRequest.API_URL + "users/"+ SharedConfig.USER_ID+"/buses"));
+        JSONObject result = new JSONObject(APIRequest.GET(APIRequest.API_URL + "users/" + ControllerHub.UserController.getModel().getID() + "/buses"));
         data = result.getJSONArray("data");
         System.out.println(data);
     }

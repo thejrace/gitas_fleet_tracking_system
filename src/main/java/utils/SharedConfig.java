@@ -7,10 +7,6 @@
  */
 package utils;
 
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,11 +17,6 @@ public class SharedConfig { // @todo Hash the static config files
      * Version string
      */
     public static String VERSION = "1.0.0";
-
-    /**
-     * Active userId
-     */
-    public static int USER_ID;
 
     /**
      * Application config data
@@ -58,16 +49,6 @@ public class SharedConfig { // @todo Hash the static config files
                 e.printStackTrace();
             }
             return true;
-        } else {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Gitaş FTS");
-                alert.setHeaderText("Hata oluştu. Kod: CONFIG_EKSIK");
-                alert.setContentText("Sistem yöneticisine hatayı bildirin.");
-                ButtonType cancelBtn = new ButtonType("İptal", ButtonBar.ButtonData.CANCEL_CLOSE);
-                alert.getButtonTypes().setAll(cancelBtn );
-                alert.showAndWait();
-            });
         }
         return false;
     }
@@ -75,22 +56,23 @@ public class SharedConfig { // @todo Hash the static config files
     /**
      * Updates static config file to contain user credentials data after login
      */
-    public static void updateStaticConfigToRememberUser(){
+    public static void updateStaticConfigToRememberUser(String apiToken){
         JSONObject oldData = new JSONObject(Common.readJSONFile(setupFolderTemp + "app_config.json"));
         if( oldData.has("init") ){
             oldData.remove("init");
-            oldData.put("user_id", SharedConfig.USER_ID);
-            oldData.put("api_key", APIRequest.API_TOKEN);
+            oldData.put("api_key", apiToken);
             Common.writeStaticData(setupFolderTemp + "app_config.json", oldData.toString());
         }
     }
 
     /**
-     * Cache the user credentials after remember me action
+     * Updates the static config file after logout
      */
-    public static void copyUserCredentials(){
-        SharedConfig.USER_ID = DATA.getInt("user_id");
-        APIRequest.API_TOKEN = DATA.getString("api_key");
+    public static void resetStaticConfigToForgetUser(){
+        JSONObject oldData = new JSONObject(Common.readJSONFile(setupFolderTemp + "app_config.json"));
+        oldData.remove("api_key");
+        oldData.put("init", true);
+        Common.writeStaticData(setupFolderTemp + "app_config.json", oldData.toString());
     }
 
     /**

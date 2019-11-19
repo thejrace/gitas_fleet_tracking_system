@@ -7,14 +7,17 @@
  */
 package ui.block;
 
+import controllers.ControllerHub;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import ui.MainScreenController;
 import ui.page.PageFactory;
 import ui.page.UIPage;
 import ui.popup.Popup;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +25,9 @@ import java.util.ResourceBundle;
 
 public class TopBarController implements Initializable {
 
-    @FXML
-    private Button uiDashboardBtn;
+    @FXML private Button uiDashboardBtn;
+
+    @FXML private MenuItem uiLogoutButton;
 
     /**
      * Key of the activate page.
@@ -38,6 +42,17 @@ public class TopBarController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb ){
         loadPage("FleetPage");
+
+        uiLogoutButton.setOnAction( ev -> {
+            ControllerHub.UserController.logout();
+            try {
+
+                Platform.exit(); // @todo implement reset to not to close application
+
+            } catch( Exception e ){
+                e.printStackTrace();
+            }
+        });
 
         uiDashboardBtn.setOnMouseClicked( ev -> {
             switchPage("FleetPage");

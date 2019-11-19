@@ -53,16 +53,14 @@ public class FleetPage extends UIPage{
             getController().setData(buses);
             Popup.hide();
 
+            ControllerHub.AlarmController.start();
+
             ControllerHub.AlarmController.addAlarm(new Alarm(AlarmType.RED, "C-1889", "Obarey beybe"));
             ControllerHub.AlarmController.addAlarm(new Alarm(AlarmType.GREEN, "C-1885", "Obarey beybe 2"));
             ControllerHub.AlarmController.addAlarm(new Alarm(AlarmType.BLUE, "C-1884", "Obarey beybe 3"));
             ControllerHub.AlarmController.addAlarm(new Alarm(AlarmType.WHITE, "C-1889", "Obarey beybe 4"));
 
         });
-
-
-
-
     }
 
     @Override

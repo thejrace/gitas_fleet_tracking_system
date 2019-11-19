@@ -7,6 +7,7 @@
  * */
 package utils;
 
+import controllers.ControllerHub;
 import org.jsoup.Connection;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
@@ -15,8 +16,9 @@ import java.io.IOException;
 
 public class APIRequest {
 
-    public static String API_TOKEN;
-
+    /**
+     * Main API URL
+     */
     public static String API_URL;
 
     /**
@@ -31,7 +33,7 @@ public class APIRequest {
             Connection.Response response = Jsoup.connect(url)
                     .method(Connection.Method.PUT)
                     .data("data", data)
-                    .header("Authorization", "Bearer " + API_TOKEN)
+                    .header("Authorization", "Bearer " + ControllerHub.UserController.getModel().getApiToken())
                     .header("Accept", "application/json")
                     .ignoreContentType(true)
                     .execute();
@@ -54,15 +56,18 @@ public class APIRequest {
      */
     public static String GET( String url ){
         try {
-            System.out.println(API_TOKEN);
-            Connection.Response response = Jsoup.connect(url)
-                    .method(Connection.Method.GET)
-                    .header("Authorization", "Bearer " + API_TOKEN)
-                    .header("Accept", "application/json")
+            Connection connection = Jsoup.connect(url)
+                    .method(Connection.Method.GET);
+            try {
+                connection.header("Authorization", "Bearer " + ControllerHub.UserController.getModel().getApiToken());
+            } catch( NullPointerException e ){
+
+            }
+            connection.header("Accept", "application/json")
                     .ignoreContentType(true)
                     .execute();
 
-            return response.parse().text();
+            return connection.execute().parse().text();
         } catch (HttpStatusException e) {
             e.printStackTrace();
             System.out.println("sendDataToAPI !!!!check API Token!!!!");
@@ -80,18 +85,21 @@ public class APIRequest {
      * @param data data to be sent
      */
     public static String POST( String url, String data ){
-        Connection.Response response = null;
         try {
-            response = Jsoup.connect(url)
-                    .method(Connection.Method.POST)
-                    .header("Authorization", "Bearer " + API_TOKEN)
-                    .header("Accept", "application/json")
+            Connection connection = Jsoup.connect(url)
+                    .method(Connection.Method.POST);
+
+            try {
+                connection.header("Authorization", "Bearer " + ControllerHub.UserController.getModel().getApiToken());
+            } catch( NullPointerException e ){
+
+            }
+            connection.header("Accept", "application/json")
                     .header("Content-Type", "application/x-www-form-urlencoded")
                     .data("data", data)
-                    .ignoreContentType(true)
-                    .execute();
+                    .ignoreContentType(true);
 
-            return response.parse().text();
+            return connection.execute().parse().text();
         } catch (HttpStatusException e) {
             e.printStackTrace();
             System.out.println("sendDataToAPI !!!!check API Token!!!!");

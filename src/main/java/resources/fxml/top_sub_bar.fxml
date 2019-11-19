@@ -11,7 +11,7 @@
       <HBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <FontAwesomeIconView fill="#797979" glyphName="USER" size="14.0" />
-            <Label styleClass="lbl-gray1" text="Hüseyin Özbek" />
+            <Label styleClass="lbl-gray1" text="Obarey" fx:id="uiUserNameLabel" />
          </children>
       </HBox>
       <HBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

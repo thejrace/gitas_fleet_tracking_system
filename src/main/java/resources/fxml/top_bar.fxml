@@ -23,9 +23,9 @@
                   <TopNavButton page="ReportsPage" fill="#19a8a8" iconName="CLIPBOARD" text="Filo Raporları" />
                </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Kullanıcı">
+          <Menu mnemonicParsing="false" text="Kullanıcı" >
             <items>
-              <MenuItem mnemonicParsing="false" text="Çıkış Yap">
+              <MenuItem mnemonicParsing="false" text="Çıkış Yap" fx:id="uiLogoutButton">
                  <graphic>
                     <FontAwesomeIconView fill="#575a5c" glyphName="SIGN_OUT" size="14.0" />
                  </graphic>
