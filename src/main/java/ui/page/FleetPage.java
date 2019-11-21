@@ -54,6 +54,17 @@ public class FleetPage extends UIPage{
         // init cookie agent first
         CookieAgent.initialize();
 
+        while( !CookieAgent.checkCookie() ){
+            System.out.println("Checking cookiee!");
+            ThreadHelper.delay(1000);
+        }
+
+        System.out.println("Cookie is valid, continue");
+        ThreadHelper.runOnUIThread( () -> {
+            // show loader again for bus fetch action
+            Popup.showMessage(Popup.DEFAULT, "Fetcing buses!");
+        });
+
         FleetController.downloadBuses();
 
         // feed bus data to controllers

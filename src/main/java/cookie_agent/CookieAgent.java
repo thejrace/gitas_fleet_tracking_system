@@ -7,7 +7,6 @@
  * */
 package cookie_agent;
 
-
 import enums.DataSourceSettings;
 import interfaces.ActionCallback;
 import javafx.application.Platform;
@@ -31,13 +30,13 @@ public class CookieAgent {
     /**
      * Status flag
      */
-    public static boolean READY = false;
+    public static boolean ReadyToCheckCookieFlag = false;
 
     /**
      * Test login credentials
      */
-    public static String LOGIN = "dk_oasfilo";
-    public static String PASS = "1453.oas";
+    public static String LOGIN = "dk_gitas";
+    public static String PASS = "eVCb4Y/p";
 
     /**
      * Cookie server urls @todo will get from shared config?
@@ -59,45 +58,43 @@ public class CookieAgent {
         } else {
             getCookieFromServer();
         }
-
-        /*while( !checkCookie() ){
-            ThreadHelper.delay(10000); // testing purposes
-            break;
-        }*/
     }
 
     /**
      * Get cookie from fleet via web view
      */
-    private static void getCookieFromFleet() {
+    public static void getCookieFromFleet() {
         // @todo get fleet credentials
 
-        // we will start captcha screen, embed it to popup
-        CaptchaWebview captchaWebview = new CaptchaWebview();
-        captchaWebview.initUI();
-        captchaWebview.setListener(new ActionCallback() {
-            @Override
-            public void onSuccess(String... params) {
-                System.out.println("SUCCESS!");
-                System.out.println(CookieAgent.FILO5_COOKIE);
-                Platform.runLater(() -> {
-                    // show loader again for bus fetch action
-                    Popup.showMessage(Popup.DEFAULT, "Fetcing buses!");
-                });
-            }
+        if( !tryLoginWithoutCaptcha() ){
+            // we will start captcha screen, embed it to popup
+            CaptchaWebview captchaWebview = new CaptchaWebview();
+            captchaWebview.initUI();
+            captchaWebview.setListener(new ActionCallback() {
+                @Override
+                public void onSuccess(String... params) {
+                    System.out.println("SUCCESS!");
+                    System.out.println(CookieAgent.FILO5_COOKIE);
+                    ReadyToCheckCookieFlag = true;
+                    ThreadHelper.runOnUIThread( () -> {
+                        // show loader again for bus fetch action
+                        Popup.showMessage(Popup.DEFAULT, "Cookie kontrol ediliyor...");
+                    });
+                }
+                @Override
+                public void onError(int type) {
+                    System.out.println("ERROR!!");
+                    Platform.runLater(() -> {
+                        captchaWebview.setNotf("Hatalı kod girildi.");
+                    });
+                }
+            });
 
-            @Override
-            public void onError(int type) {
-                System.out.println("ERROR!!");
-                Platform.runLater(() -> {
-                    captchaWebview.setNotf("Hatalı kod girildi.");
-                });
-            }
-        });
+            Platform.runLater(() -> {
+                Popup.setContent(captchaWebview.getUI());
+            });
 
-        Platform.runLater(() -> {
-            Popup.setContent(captchaWebview.getUI());
-        });
+        }
     }
 
     /**
@@ -133,6 +130,7 @@ public class CookieAgent {
             } catch( NullPointerException e ){
                 FILO5_COOKIE = newCookie;
             }
+            ReadyToCheckCookieFlag = true;
         } catch( IOException e) {
             return false;
         }
@@ -144,34 +142,59 @@ public class CookieAgent {
      *
      * @return
      */
-    private static boolean checkCookie(){
+    public static boolean checkCookie(){
+        if( !ReadyToCheckCookieFlag ){
+            System.out.println("CookieAgent.Nothing to check");
+            return false;
+        }
         Connection.Response res;
         try {
             res = Jsoup.connect("https://filotakip.iett.gov.tr/_FYS/000/sorgu.php?konum=ana&konu=sefer&hat=15BK")
-                    .method(Connection.Method.POST)
+                    .method(Connection.Method.GET)
+                    .cookie("PHPSESSID", FILO5_COOKIE)
                     .timeout(2000)
                     .execute();
 
             Document document = res.parse();
             try {
                 document.getElementById("captcha").text();
-                System.out.println("Invalid captcha, trying login without captcha!");
+                System.out.println("Invalid cookie!");
+
+                // @todo we can login with invalid captcha at the moment, but when they
+                // @todo fix it, we'll trigger CatpchaWebView from here. [22.11.2019]
                 return false;
             } catch( NullPointerException e ){
-                System.out.println("Valid captcha!");
+                System.out.println("Valid cookie!");
+                return true;
             }
         } catch( IOException e) {
             return false;
         }
-        return true;
     }
 
     /**
-     * Getter for READY flag
+     * There is a bug in the fleet at the moment which allows us to login
+     * with random 3 character captcha.
      *
-     * @return ready flag
+     * @return
      */
-    public static boolean isReady(){
-        return READY;
+    public static boolean tryLoginWithoutCaptcha(){
+        org.jsoup.Connection.Response res;
+        try{
+            System.out.println( "Login without captcha");
+            res = Jsoup.connect("https://filotakip.iett.gov.tr/login.php")
+                    .method(org.jsoup.Connection.Method.POST)
+                    .data("login", CookieAgent.LOGIN, "password", CookieAgent.PASS, "captcha", "xxx")
+                    .timeout(0)
+                    .execute();
+
+            CookieAgent.FILO5_COOKIE = res.cookies().get("PHPSESSID");
+            ReadyToCheckCookieFlag = true;
+            return true;
+        } catch( IOException e ){
+            e.printStackTrace();
+            return false;
+        }
     }
+
 }

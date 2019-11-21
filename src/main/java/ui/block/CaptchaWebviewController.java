@@ -1,3 +1,10 @@
+/*
+ *  Kahya - Gitas 2019
+ *
+ *  Contributors:
+ *      Ahmet Ziya Kanbur 2019-
+ *
+ * */
 package ui.block;
 
 import cookie_agent.CookieAgent;
@@ -71,7 +78,7 @@ public class CaptchaWebviewController implements Initializable {
      * Gets  a session cookie from fleet.
      */
     private void getSessionId(){
-        loginThread();
+        getSessionID();
     }
 
     /**
@@ -149,9 +156,9 @@ public class CaptchaWebviewController implements Initializable {
                                 // throw js exception if there is not captcha image = success
                                 we.executeScript( " var fs = document.getElementById(\"captcha\");" +
                                         " fs[0].style.opacity = 0.3; ");
-                                listener.onSuccess();
-                            } catch( netscape.javascript.JSException e ) {
                                 listener.onError(0);
+                            } catch( netscape.javascript.JSException e ) {
+                                listener.onSuccess();
                             }
                         }
                         if( !wwInited ){
@@ -170,28 +177,23 @@ public class CaptchaWebviewController implements Initializable {
     /**
      * Make a request to the fleet.
      */
-    private void loginThread(){
-        ThreadHelper.func(() -> {
-            org.jsoup.Connection.Response res;
-            try{
-                System.out.println( "Filo phpsessid alınıyor..");
-                res = Jsoup.connect("https://filotakip.iett.gov.tr/login.php")
-                        .method(org.jsoup.Connection.Method.POST)
-                        .timeout(0)
-                        .execute();
+    private void getSessionID(){
+        org.jsoup.Connection.Response res;
+        try{
+            System.out.println( "Filo phpsessid alınıyor..");
+            res = Jsoup.connect("https://filotakip.iett.gov.tr/login.php")
+                    .method(org.jsoup.Connection.Method.POST)
+                    .timeout(0)
+                    .execute();
 
-                CookieAgent.FILO5_COOKIE = res.cookies().get("PHPSESSID");
-                System.out.println( " phpsessid alındı. -c["+res.cookies().get("PHPSESSID")+"]");
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        initWebView();
-                    }
-                });
-            } catch( IOException e ){
-                e.printStackTrace();
-                System.out.println( " HATA");
-            }
-        });
+            CookieAgent.FILO5_COOKIE = res.cookies().get("PHPSESSID");
+            System.out.println( " phpsessid alındı. -c["+res.cookies().get("PHPSESSID")+"]");
+            ThreadHelper.runOnUIThread(() -> {
+                initWebView();
+            });
+        } catch( IOException e ){
+            e.printStackTrace();
+            System.out.println( " HATA");
+        }
     }
 }
