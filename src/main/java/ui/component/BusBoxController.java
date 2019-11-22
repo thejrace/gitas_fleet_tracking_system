@@ -109,6 +109,11 @@ public class BusBoxController implements Initializable {
     private void updateUI(){
         uiBusCodeLabel.setText(bus.getCode());
         uiPlateLabel.setText(bus.getActivePlate());
+
+        if( !bus.getActivePlate().equals(bus.getOfficialPlate()) ){
+            uiPlateLabel.getStyleClass().add(1, "warning");
+        }
+
         uiRouteLabel.setText(bus.getRouteCode());
     }
 
