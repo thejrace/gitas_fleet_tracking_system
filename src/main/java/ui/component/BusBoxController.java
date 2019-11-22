@@ -13,8 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import models.Bus;
 import ui.custom_control.BusBoxButton;
+import utils.ThreadHelper;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class BusBoxController implements Initializable {
@@ -33,6 +35,10 @@ public class BusBoxController implements Initializable {
     @FXML
     private Label uiRouteLabel;
 
+    @FXML private Label uiNotfLabel;
+
+    @FXML private Label uiSubNotfLabel;
+
     @FXML
     private BusBoxButton uiBB0, uiBB1, uiBB2, uiBB3, uiBB4, uiBB5;
 
@@ -41,7 +47,7 @@ public class BusBoxController implements Initializable {
 
     }
 
-    public void setData(Bus bus){
+    public void setData(Bus bus, Map<String, Integer> runStatusSummary ){
         this.bus = bus;
 
         // @todo FIX this
@@ -55,9 +61,17 @@ public class BusBoxController implements Initializable {
         updateUI();
     }
 
+    public void setStatusData( String status, String statusLabel, String subStatusLabel ){
+        ThreadHelper.runOnUIThread( () -> {
+            uiNotfLabel.setText(statusLabel);
+            uiSubNotfLabel.setText(subStatusLabel);
+        });
+    }
+
     private void updateUI(){
         uiBusCodeLabel.setText(bus.getCode());
         uiPlateLabel.setText(bus.getActivePlate());
+        uiRouteLabel.setText(bus.getRouteCode());
     }
 
 }

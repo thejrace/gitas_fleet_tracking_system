@@ -34,8 +34,8 @@
          <children>
             <VBox alignment="CENTER">
                <children>
-                  <Label styleClass="box-notf" text="Veri bekleniyor..." />
-                  <Label styleClass="box-sub-notf" text="Veri bekleniyor..." />
+                  <Label styleClass="box-notf" text="Veri bekleniyor..."  fx:id="uiNotfLabel"/>
+                  <Label styleClass="box-sub-notf" text="Veri bekleniyor..." fx:id="uiSubNotfLabel" />
                </children>
             </VBox>
             <HBox alignment="CENTER" spacing="10.0">

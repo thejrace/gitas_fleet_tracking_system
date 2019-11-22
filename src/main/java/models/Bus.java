@@ -36,6 +36,11 @@ public class Bus {
     private int index;
 
     /**
+     * Route code of the bus
+     */
+    private String routeCode;
+
+    /**
      * Active run data
      */
     private ArrayList<BusRun> runData;
@@ -168,5 +173,23 @@ public class Bus {
      */
     public void setUiComponent(BusBox uiComponent) {
         this.uiComponent = uiComponent;
+    }
+
+    /**
+     * Getter for routeCode
+     *
+     * @return
+     */
+    public String getRouteCode() {
+        return routeCode;
+    }
+
+    /**
+     * Setter for routeCode
+     *
+     * @param routeCode
+     */
+    public void setRouteCode(String routeCode) {
+        this.routeCode = routeCode;
     }
 }

@@ -20,6 +20,11 @@ public class BusRun {
     private String currentStop;
 
     /**
+     * Service code of the run
+     */
+    private String serviceCode;
+
+    /**
      * ORER
      */
     private String ORER;
@@ -33,6 +38,11 @@ public class BusRun {
      * Time of arrival
      */
     private String arrivalTime;
+
+    /**
+     *  Alternative orer ( amir )
+     */
+    private String alternativeORER;
 
     /**
      * Estimated end time of the run
@@ -65,6 +75,11 @@ public class BusRun {
     private String statusCode;
 
     /**
+     * Driver ID
+     */
+    private String driverCode;
+
+    /**
      * Run no
      */
     private int departureNo;
@@ -80,9 +95,11 @@ public class BusRun {
      * @param busCode
      * @param route
      * @param departureNo
+     * @param serviceCode
      * @param currentStop
      * @param arrivalTime
      * @param ORER
+     * @param alternativeORER
      * @param departureTime
      * @param estimatedEndTime
      * @param endTime
@@ -90,13 +107,16 @@ public class BusRun {
      * @param status
      * @param statusCode
      */
-    public BusRun( String busCode, String route, int departureNo, String currentStop, String arrivalTime, String ORER, String departureTime, String estimatedEndTime, String endTime, String routeDetails, String status, String statusCode ){
+    public BusRun( String busCode, String route, String driverCode, int departureNo, String serviceCode, String currentStop, String arrivalTime, String ORER, String alternativeORER, String departureTime, String estimatedEndTime, String endTime, String routeDetails, String status, String statusCode ){
         this.busCode = busCode;
         this.route = route;
+        this.driverCode = driverCode;
         this.departureNo = departureNo;
+        this.serviceCode = serviceCode;
         this.currentStop = currentStop;
         this.arrivalTime = arrivalTime;
         this.ORER = ORER;
+        this.alternativeORER = alternativeORER;
         this.departureTime = departureTime;
         this.estimatedEndTime = estimatedEndTime;
         this.endTime = endTime;
@@ -336,5 +356,59 @@ public class BusRun {
      */
     public void setRoute(String route) {
         this.route = route;
+    }
+
+    /**
+     * Getter for service code
+     *
+     * @return
+     */
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    /**
+     * Setter for service code
+     *
+     * @param serviceCode
+     */
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
+    }
+
+    /**
+     * Getter for alternativeOrer
+     *
+     * @return
+     */
+    public String getAlternativeORER() {
+        return alternativeORER;
+    }
+
+    /**
+     * Setter for alternativeOrer
+     *
+     * @return
+     */
+    public void setAlternativeORER(String alternativeORER) {
+        this.alternativeORER = alternativeORER;
+    }
+
+    /**
+     * Getter for driverCode
+     *
+     * @return
+     */
+    public String getDriverCode() {
+        return driverCode;
+    }
+
+    /**
+     * Setter for driverCode
+     *
+     * @param driverCode
+     */
+    public void setDriverCode(String driverCode) {
+        this.driverCode = driverCode;
     }
 }

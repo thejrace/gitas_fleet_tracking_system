@@ -77,4 +77,8 @@ public class Common {
         return false;
     }
 
+    public static String regexTrim( String str ){
+        return str.replaceAll("\u00A0", "");
+    }
+
 }
