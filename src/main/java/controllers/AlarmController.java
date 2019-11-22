@@ -21,9 +21,15 @@ public class AlarmController {
     private ArrayList<Alarm> alarms;
 
     /**
+     * List of alarm ID's to prevent adding same alarm
+     */
+    private ArrayList<String> alarmIdList;
+
+    /**
      * Popup UI component
      */
     private AlarmPopup alarmPopup;
+
 
     /**
      * Counter for the alarms array
@@ -44,6 +50,7 @@ public class AlarmController {
         alarmPopup = new AlarmPopup();
         alarmPopup.initialize();
         alarms = new ArrayList<>();
+        alarmIdList = new ArrayList<>();
     }
 
     /**
@@ -60,8 +67,10 @@ public class AlarmController {
      * @param alarm
      */
     public void addAlarm( Alarm alarm ){
+        if( alarmIdList.contains(alarm.getID()) ) return;
         alarm.setIndex(indexCounter);
         alarms.add(alarm);
+        alarmIdList.add(alarm.getID());
         indexCounter++;
         alarm.setUiComponent(new AlarmItem(alarm));
         alarmPopup.addAlarm(alarm);

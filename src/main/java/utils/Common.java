@@ -9,6 +9,9 @@ package utils;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Common {
 
@@ -81,4 +84,43 @@ public class Common {
         return str.replaceAll("\u00A0", "");
     }
 
+    /**
+     * Return a current date time string
+     *
+     * @return string datetime
+     */
+    public static String getDateTime(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    public static String getCurrentDate(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    public static String getCurrentHMin() {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        return dateFormat.format(date);
+
+    }
+
+    /**
+     * Fetch stop name from string with no ( ex: 15-Beykoz -> Beykoz )
+     *
+     * @param stop stop name with no
+     *
+     * @return only stop name
+     */
+    public static String fetchStopName( String stop ){
+        try {
+            return stop.substring(stop.indexOf('-')+1, stop.indexOf(" ("));
+        } catch( StringIndexOutOfBoundsException e ){
+
+        }
+        return "N/A";
+    }
 }

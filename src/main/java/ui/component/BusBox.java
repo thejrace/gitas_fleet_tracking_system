@@ -8,6 +8,9 @@
 package ui.component;
 
 import bots.BusFleetDataDownloader;
+import controllers.BusController;
+import interfaces.BusFleetDataDownloadListener;
+import interfaces.MultipleActionCallback;
 import models.Bus;
 import repositories.BusStatusRepository;
 import ui.UIComponent;
@@ -17,52 +20,119 @@ import java.util.HashMap;
 
 public class BusBox extends UIComponent {
 
+    /**
+     * Bus Model
+     */
     private Bus bus;
 
+    /**
+     * Data download thread guard
+     */
     private boolean activeFlag = true;
 
-    private BusFleetDataDownloader fleetDataDownloader;
+    /**
+     * BusController instance
+     */
+    private BusController busController;
 
-    private BusStatusRepository statusRepository;
-
+    /**
+     * Constructor
+     *
+     * @param bus
+     */
     public BusBox(Bus bus){
         this.bus = bus;
     }
 
+    /**
+     * Initialize downloader bots
+     */
     public void startDownloaders(){
 
-        // we will start with fleet data download action
-        fleetDataDownloader = new BusFleetDataDownloader(bus.getCode());
-
-        statusRepository = new BusStatusRepository(bus.getCode());
+        busController = new BusController(bus);
+        busController.initialize();
 
         ThreadHelper.func( () -> {
             while( activeFlag ){
 
-                fleetDataDownloader.action();
+                triggerFleetDataAction(false);
 
-                if( !fleetDataDownloader.getErrorFlag() ){
-
-                    bus.setRouteCode(fleetDataDownloader.getRouteCode());
-                    bus.setRunData(fleetDataDownloader.getRunData());
-
-                    statusRepository.processRunData(bus, fleetDataDownloader.getRunStatusSummary(), fleetDataDownloader.getActiveRunIndex());
-
-                    ((BusBoxController)getController()).setData(bus, fleetDataDownloader.getRunStatusSummary());
-                    ((BusBoxController)getController()).setStatusData(statusRepository.getStatus(), statusRepository.getStatusLabel(), statusRepository.getSubStatusLabel());
-
-                }
-
-                ThreadHelper.delay(50000);
+                ThreadHelper.delay(50000); // @todo get from settings
             }
         });
 
+    }
+
+    /**
+     * Download and process the fleet data
+     */
+    private void downloadAndProcessFleetData(){
+        busController.downloadAndProcessFleetData(new BusFleetDataDownloadListener() {
+            @Override
+            public void onFinish(Bus updatedBus, BusFleetDataDownloader busFleetDataDownloader, BusStatusRepository busStatusRepository) {
+                // update model
+                bus = updatedBus;
+
+                // update box
+                ThreadHelper.runOnUIThread(() -> {
+                    ((BusBoxController)getController()).setData(bus, busFleetDataDownloader.getRunStatusSummary());
+                    ((BusBoxController)getController()).setStatusData(busStatusRepository.getStatus(), busStatusRepository.getStatusLabel(), busStatusRepository.getSubStatusLabel());
+                });
+            }
+            @Override
+            public void onError(String error) {
+                System.out.println(bus.getCode() + " --> " + error);
+            }
+        });
+    }
+
+    /**
+     * Trigger method to execute downloadAndProcessFleetData
+     *
+     * @param async flag to determine the action will be handled in a thread
+     */
+    public void triggerFleetDataAction( boolean async ){
+        if( async ){
+            ThreadHelper.func(() -> {
+                downloadAndProcessFleetData();
+            });
+        } else {
+            downloadAndProcessFleetData();
+        }
+    }
+
+    public void downloadPlateData(){
+
+    }
+
+    public void downloadSpeedData(){
+
+    }
+
+    public void downloadMessageData(){
+
+    }
+
+    public void downloadIYSData(){
 
     }
 
     public void initUI(){
         loadFXML("bus_box_default");
         ((BusBoxController)getController()).setData(bus, new HashMap<>());
+        ((BusBoxController)getController()).subscribeEvents(new MultipleActionCallback() {
+            @Override
+            public void onAction(int type) {
+                switch(type){
+                    case 0: // download fleet data trigger
+                        triggerFleetDataAction(true);
+                        break;
+                    case 1: // download plate data trigger
+
+                        break;
+                }
+            }
+        });
 
         startDownloaders();
     }

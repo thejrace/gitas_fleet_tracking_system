@@ -19,11 +19,7 @@
    <children>
       <AnchorPane prefHeight="200.0" styleClass="bus-box-default-header">
          <children>
-            <Circle fx:id="uiLed" fill="DODGERBLUE" radius="11.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0">
-               <styleClass>
-                  <String fx:value="status-led" />
-                  <String fx:value="green" />
-               </styleClass>
+            <Circle fx:id="uiLed" styleClass="status-led" radius="11.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0">
             </Circle>
             <Label fx:id="uiBusCodeLabel" styleClass="bus-box-header-label" text="A-1636" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="5.0" />
             <Label fx:id="uiPlateLabel" styleClass="box-header-plate" text="34 AG 3882" AnchorPane.leftAnchor="95.0" AnchorPane.topAnchor="5.0" />
@@ -40,31 +36,31 @@
             </VBox>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="0" fx:id="uiSummary0" >
                      <styleClass>
                         <String fx:value="box-summary-item" />
                         <String fx:value="gray" />
                      </styleClass>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="0" fx:id="uiSummary1">
                      <styleClass>
                         <String fx:value="box-summary-item" />
                         <String fx:value="white" />
                      </styleClass>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="0" fx:id="uiSummary2">
                      <styleClass>
                         <String fx:value="box-summary-item" />
                         <String fx:value="green" />
                      </styleClass>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="10.0" text="0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="10.0" text="0" fx:id="uiSummary3">
                      <styleClass>
                         <String fx:value="box-summary-item" />
                         <String fx:value="pink" />
                      </styleClass>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="10.0" text="0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="10.0" text="0" fx:id="uiSummary4">
                      <styleClass>
                         <String fx:value="box-summary-item" />
                         <String fx:value="red" />
@@ -99,16 +95,16 @@
          <children>
             <HBox alignment="CENTER" spacing="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="1.0">
                <children>
-                  <Button mnemonicParsing="false" styleClass="btn-vd-log-default" text="F" />
-                  <Label text="xx:xx (x)" />
-                  <Button mnemonicParsing="false" styleClass="btn-vd-log-default" text="P" />
-                  <Label text="xx:xx" />
-                  <Button layoutX="74.0" layoutY="10.0" mnemonicParsing="false" styleClass="btn-vd-log-blue" text="G" />
+                  <Button mnemonicParsing="false" styleClass="btn-vd-log-default" text="F" fx:id="uiFleetDataDownloadBtn" />
+                  <Label text="xx:xx (x)" fx:id="uiFleetDataDownloadTimestampLabel" />
+                  <Button mnemonicParsing="false" styleClass="btn-vd-log-default" text="P" fx:id="uiPlateDataDownloadBtn"/>
+                  <Label text="xx:xx" fx:id="uiPlateDataDownloadTimestampLabel" />
+                  <Button layoutX="74.0" layoutY="10.0" mnemonicParsing="false" styleClass="btn-vd-log-blue" text="G" fx:id="uiDataDownloadLogBtn" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="20.0" layoutY="13.0" spacing="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="1.0">
                <children>
-                  <Label text="HIZ: 15 km/s" />
+                  <Label text="HIZ: 15 km/s" fx:id="uiSpeedLabel"/>
                </children>
             </HBox>
          </children>

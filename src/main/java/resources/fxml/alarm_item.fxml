@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="uiContainer" alignment="CENTER" pickOnBounds="false" prefHeight="40.0" prefWidth="250.0" styleClass="alarm-item" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.alarm.AlarmItemController">
+<HBox fx:id="uiContainer" alignment="CENTER" pickOnBounds="false" prefHeight="40.0" prefWidth="350.0" styleClass="alarm-item" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.alarm.AlarmItemController">
    <children>
       <Label alignment="CENTER" prefWidth="20.0">
          <graphic>

@@ -1,8 +1,15 @@
+/*
+ *  Gitas Fleet Tracking System 2019
+ *
+ *  Contributors:
+ *      - Ahmet Ziya Kanbur
+ *
+ */
 package bots;
 
 import cookie_agent.CookieAgent;
+import enums.BusRunStatus;
 import models.BusRun;
-import org.json.JSONArray;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,34 +23,60 @@ import java.util.Map;
 
 public class BusFleetDataDownloader {
 
-    private static String URL_PREFIX = "https://filotakip.iett.gov.tr/_FYS/000/sorgu.php?konum=ana&konu=sefer&otobus=";
-
+    /**
+     * Code of the bus
+     */
     private String code;
 
+    /**
+     * Error flag
+     */
     private boolean errorFlag = false;
 
+    /**
+     * Route code of the bus
+     */
     private String routeCode;
 
+    /**
+     * Active run index counter
+     */
     private int activeRunIndex = -1;
 
+    /**
+     * All run data
+     */
     private ArrayList<BusRun> runData = new ArrayList<>();
 
+    /**
+     * Status summary
+     */
     private Map<String, Integer> runStatusSummary = new HashMap<>();
 
+    /**
+     * Constructor
+     *
+     * @param code
+     */
     public BusFleetDataDownloader(String code){
         this.code = code;
     }
 
+    /**
+     * Download action
+     */
     public void action(){
         errorFlag = false;
 
         // reset summary counters
-        runStatusSummary.put("A", 0);
-        runStatusSummary.put("B", 0);
-        runStatusSummary.put("T", 0);
-        runStatusSummary.put("I", 0);
-        runStatusSummary.put("Y", 0);
+        runStatusSummary.put(BusRunStatus.A, 0);
+        runStatusSummary.put(BusRunStatus.B, 0);
+        runStatusSummary.put(BusRunStatus.T, 0);
+        runStatusSummary.put(BusRunStatus.I, 0);
+        runStatusSummary.put(BusRunStatus.Y, 0);
         runStatusSummary.put("TOTAL", 0);
+
+        String URL_PREFIX = "https://filotakip.iett.gov.tr/_FYS/000/sorgu.php?konum=ana&konu=sefer&otobus="; // @todo get from settings
 
         try {
             org.jsoup.Connection.Response response = Jsoup.connect(URL_PREFIX + code)
@@ -58,12 +91,17 @@ public class BusFleetDataDownloader {
         }
     }
 
+    /**
+     * Parse the document of the fleet
+     *
+     * @param document
+     */
     private void parseFleetData( Document document ){
 
-        Elements table = null;
-        Elements rows = null;
-        Element row = null;
-        Elements cols = null;
+        Elements table;
+        Elements rows;
+        Element row;
+        Elements cols;
 
         try {
             table = document.select("table");
@@ -111,17 +149,15 @@ public class BusFleetDataDownloader {
                     status = statusLabel.substring(0,1);
                     statusCode = statusLabel.substring(2, statusLabel.length());
 
-                    runStatusSummary.put(status, runStatusSummary.get(status) + 1);
-
                 } catch (StringIndexOutOfBoundsException e ){
                     //e.printStackTrace();
                 }
 
                 // find the current or next run
-                if( status.equals("A") && activeIndex == -1 ){ // first active sometimes there are two active runs ( duplicate )
+                if( status.equals(BusRunStatus.A) && activeIndex == -1 ){ // first active sometimes there are two active runs ( duplicate )
                     activeIndex = index;
                 }
-                if( status.equals("B") && waitingIndex == -1 ){ // first waiting
+                if( status.equals(BusRunStatus.B) && waitingIndex == -1 ){ // first waiting
                     waitingIndex = index;
                 }
                 index++;
@@ -150,7 +186,13 @@ public class BusFleetDataDownloader {
                         statusCode
                 );
                 runData.add(tempRunData);
-                runStatusSummary.put("TOTAL", runStatusSummary.get("TOTAL") + 1);
+
+                try {
+                    runStatusSummary.put(status, runStatusSummary.get(status) + 1);
+                    runStatusSummary.put("TOTAL", runStatusSummary.get("TOTAL") + 1);
+                } catch( NullPointerException e ){
+                    e.printStackTrace();
+                }
             }
 
 
@@ -168,24 +210,48 @@ public class BusFleetDataDownloader {
         }
     }
 
+    /**
+     * Getter for runData
+     *
+     * @return
+     */
     public ArrayList<BusRun> getRunData() {
         return runData;
     }
 
+    /**
+     * Getter for runStatusSummary
+     *
+     * @return
+     */
     public Map<String, Integer> getRunStatusSummary(){
         return runStatusSummary;
     }
 
+    /**
+     * Getter for activeRunIndex
+     *
+     * @return
+     */
     public int getActiveRunIndex(){
         return activeRunIndex;
     }
 
+    /**
+     * Getter for routeCode
+     *
+     * @return
+     */
     public String getRouteCode(){
         return routeCode;
     }
 
+    /**
+     * Getter for errorFlag
+     *
+     * @return
+     */
     public boolean getErrorFlag(){
         return errorFlag;
     }
-
 }
