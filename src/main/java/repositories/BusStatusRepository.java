@@ -63,18 +63,14 @@ public class BusStatusRepository {
 
         if( runStatusSummary.get(BusRunStatus.B).equals(runStatusSummary.get("TOTAL"))){
             // all waiting
-
             statusLabel = "Seferini bekliyor.";
             subStatusLabel = "İlk sefer: " + bus.getRunData().get(0).getORER();
             status = BusRunStatus.B;
-
         } else if( runStatusSummary.get(BusRunStatus.T).equals(runStatusSummary.get("TOTAL"))){
             // 100% finished successfully
-
             statusLabel = "Günü tamamladı.";
             subStatusLabel = "Sefer yüzdesi: 100%";
             status = BusRunStatus.T;
-
         } else if( activeRunIndex == -1 ){
             // all finished or all zayi
             if( runStatusSummary.get(BusRunStatus.I) + runStatusSummary.get(BusRunStatus.Y) == runStatusSummary.get("TOTAL") ){
@@ -90,10 +86,8 @@ public class BusStatusRepository {
                 status = BusRunStatus.T;
                 addAlarm(new Alarm(AlarmType.RED, code, "Sefer iptalleri var!"));
             }
-
         } else {
             // we'll loop through runs
-
             DateFormat dateFormat = new SimpleDateFormat("HH:mm");
             Date date = new Date();
             String NOW = dateFormat.format(date);
@@ -123,19 +117,14 @@ public class BusStatusRepository {
                     try {
                         if( RunTimeDiff.calculate( runData.get(a).getEstimatedEndTime(), runData.get(a+1).getORER() ) < 0 ){
                             // its gonna be late ALARM
-                            System.out.println(code + " active but its late");
                             addAlarm(new Alarm(AlarmType.BLUE, code, "Bir sonraki sefere geç kaldı!"));
                         }
-
                         // check if it has previously zayi runs in order to show 'runs fixed alarm'
                         if( runStatusSummary.get(BusRunStatus.I) > 0 || runStatusSummary.get(BusRunStatus.Y) > 0 ){
-                            System.out.println(code + " runs fixed!");
                             addAlarm(new Alarm(AlarmType.GREEN, code, "Zayi seferler düzeltildi!"));
                         }
 
-                    } catch( IndexOutOfBoundsException e ){
-
-                    }
+                    } catch( IndexOutOfBoundsException e ){}
                 }
 
                 if( runData.get(a).getStatus().equals(BusRunStatus.B) ){
@@ -143,45 +132,31 @@ public class BusStatusRepository {
                     try {
                         if( RunTimeDiff.calculate(NOW, runData.get(a).getORER()) < 0 ){
                             // it's late
-                            System.out.println(code + " waiting and its late");
                             addAlarm(new Alarm(AlarmType.BLUE, code, "Vakti gelen seferine başlamadı!"));
                         }
-
                         // check if it has previously zayi runs in order to show 'runs fixed alarm'
                         if( runStatusSummary.get(BusRunStatus.I) > 0 || runStatusSummary.get(BusRunStatus.Y) > 0 ){
-
-                            System.out.println(code + " runs fixed!");
                             addAlarm(new Alarm(AlarmType.GREEN, code, "Zayi seferler düzeltildi!"));
                         }
-
-                    } catch( IndexOutOfBoundsException e ){
-
-                    }
-
+                    } catch( IndexOutOfBoundsException e ){}
                 }
 
                 if( runData.get(a).getStatus().equals(BusRunStatus.I)  ){
-
                     addAlarm(new Alarm(AlarmType.RED, code, "Sefer iptalleri var!"));
-
-                    System.out.println(code + " has zayi run.");
-
                 }
 
                 if( runData.get(a).getStatus().equals(BusRunStatus.Y)  ){
-
                     addAlarm(new Alarm(AlarmType.RED, code, "Yarım kalan seferler var!"));
-
-                    System.out.println(code + " has zayi half run.");
-
                 }
-
             }
-
         }
-
     }
 
+    /**
+     * Add alarm
+     *
+     * @param alarmItem
+     */
     private void addAlarm( Alarm alarmItem ){
         ThreadHelper.runOnUIThread(() -> {
             ControllerHub.AlarmController.addAlarm(alarmItem);
