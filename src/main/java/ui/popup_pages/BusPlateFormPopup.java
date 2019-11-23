@@ -38,6 +38,10 @@ public class BusPlateFormPopup extends Application {
             primaryStage.initStyle(StageStyle.UNDECORATED);
             //stage.getIcons().add(new Image(getClass().getResource("/gpts/res/img/gpts_ico.png").toExternalForm()));
 
+            // alarm popup minimizes additional windows for some reason
+            // this is a work around to overcome that problem
+            primaryStage.setAlwaysOnTop(true);
+
             primaryStage.show();
 
             Common.makeStageDraggable(primaryStage, content);
