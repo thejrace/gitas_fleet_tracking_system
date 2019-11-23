@@ -25,11 +25,20 @@ public class ControllerHub {
     public static FleetController FleetController;
 
     /**
+     * PopupPageController instance
+     */
+    public static PopupPageController PopupPageController;
+
+
+    /**
      * Initialize static controllers
      */
     public void initialize(){
         AlarmController = new AlarmController();
         AlarmController.initialize();
+
+        PopupPageController = new PopupPageController();
+        PopupPageController.initialize();
 
         UserController = new UserController();
 

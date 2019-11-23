@@ -75,7 +75,6 @@ public class FleetController {
      */
     public void updateBus(Bus bus) {
         buses.set(bus.getIndex(), bus);
-        System.out.println(buses);
     }
 
     /**

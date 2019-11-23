@@ -7,12 +7,16 @@
  */
 package ui;
 
+import controllers.ControllerHub;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class MainScreen extends Application {
 
@@ -43,6 +47,16 @@ public class MainScreen extends Application {
 
             MainScreenController controller = loader.getController();
             controller.screenResizeAction();
+
+            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent e) {
+
+                    ControllerHub.PopupPageController.closeAll();
+                    Platform.exit();
+                    System.exit(0);
+                }
+            });
 
         } catch( Exception e ){
             e.printStackTrace();

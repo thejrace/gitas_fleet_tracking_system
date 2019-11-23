@@ -12,13 +12,14 @@ import enums.BusRunStatusStyleClass;
 import interfaces.MultipleActionCallback;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import models.Bus;
 import ui.custom_control.BusBoxButton;
+import ui.popup_pages.BusPlateFormPopup;
 import utils.Common;
 import utils.ThreadHelper;
 
@@ -28,48 +29,110 @@ import java.util.ResourceBundle;
 
 public class BusBoxController implements Initializable {
 
+    /**
+     * Bus model
+     */
     private Bus bus;
 
+    /**
+     * Main wrapper VBox
+     */
     @FXML private VBox uiBusBoxWrapper;
 
-    @FXML
-    private Circle uiLed;
-
-    @FXML
-    private Label uiBusCodeLabel;
-
-    @FXML
-    private Label uiPlateLabel;
-
-    @FXML
-    private Label uiRouteLabel;
-
-    @FXML private Label uiNotfLabel;
-
-    @FXML private Label uiSubNotfLabel;
-
-    @FXML
-    private BusBoxButton uiBB0, uiBB1, uiBB2, uiBB3, uiBB4, uiBB5;
-
-    @FXML private Label uiSummary0, uiSummary1, uiSummary2, uiSummary3, uiSummary4;
-
-    @FXML private Button uiFleetDataDownloadBtn;
-
-    @FXML private Button uiPlateDataDownloadBtn;
-
-    @FXML private Button uiDataDownloadLogBtn;
-
-    @FXML private Label uiFleetDataDownloadTimestampLabel;
-
-    @FXML private Label uiPlateDataDownloadTimestampLabel;
-
+    /**
+     * Summary block ( Notf labels and summaries )
+     */
     @FXML private VBox uiSummaryBlock;
+
+    /**
+     * Navigation button block
+     */
     @FXML private FlowPane uiNavBlock;
+
+    /**
+     * Bottom data download log block
+     */
     @FXML private AnchorPane uiDataControlBlock;
 
+    /**
+     * LED indicator of the box
+     */
+    @FXML private Circle uiLed;
+
+    /**
+     * Bus code label
+     */
+    @FXML private Label uiBusCodeLabel;
+
+    /**
+     * Plate label
+     */
+    @FXML private Label uiPlateLabel;
+
+    /**
+     * Route code label
+     */
+    @FXML private Label uiRouteLabel;
+
+    /**
+     * Main status notf label.
+     */
+    @FXML private Label uiNotfLabel;
+
+    /**
+     * Sub status notf label
+     */
+    @FXML private Label uiSubNotfLabel;
+
+    /**
+     * Run summary labels
+     */
+    @FXML private Label uiSummary0, uiSummary1, uiSummary2, uiSummary3, uiSummary4;
+
+    /**
+     * BusBox navigation buttons
+     */
+    @FXML private BusBoxButton uiBB0, uiBB1, uiBB2, uiBB3, uiBB4, uiBB5;
+
+    /**
+     * Fleet data download trigger button
+     */
+    @FXML private Button uiFleetDataDownloadBtn;
+
+    /**
+     * Plate data download trigger button
+     */
+    @FXML private Button uiPlateDataDownloadBtn;
+
+    /**
+     * Data download logger trigger button
+     */
+    @FXML private Button uiDataDownloadLogBtn;
+
+    /**
+     * Last fleet data download timestamp label
+     */
+    @FXML private Label uiFleetDataDownloadTimestampLabel;
+
+    /**
+     * Last plate data download timestamp label
+     */
+    @FXML private Label uiPlateDataDownloadTimestampLabel;
+
+    /**
+     * Listener to trigger data download actions in the BusBox
+     */
     private MultipleActionCallback multipleActionCallback;
 
+    /**
+     * Flag to check if BusBox is initialized with bus data
+     */
     private boolean dataInitializedFlag = false;
+
+    /**
+     * Plate update form popup instance
+     */
+    private BusPlateFormPopup busPlateFormPopup;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,10 +144,25 @@ public class BusBoxController implements Initializable {
         uiPlateDataDownloadBtn.setOnMouseClicked( ev -> {
             multipleActionCallback.onAction(1);
         });
+
+        uiPlateLabel.setOnMouseClicked( ev -> {
+            if( busPlateFormPopup == null ){
+                busPlateFormPopup = new BusPlateFormPopup();
+            }
+            try {
+                busPlateFormPopup.start( new Stage() );
+                busPlateFormPopup.setData(bus);
+            } catch( Exception e ){
+                e.printStackTrace();
+            }
+        });
     }
 
-
-
+    /**
+     * Set initial data to the BusBox
+     *
+     * @param bus
+     */
     public void setData(Bus bus  ){
         this.bus = bus;
 
@@ -101,7 +179,6 @@ public class BusBoxController implements Initializable {
             uiBusBoxWrapper.setId(bus.getCode());
 
             dataInitializedFlag = true;
-            System.out.println("do not set again");
         }
 
         updateUI();
@@ -201,7 +278,5 @@ public class BusBoxController implements Initializable {
         block.setMinHeight(Region.USE_PREF_SIZE);
         block.setMaxHeight(Region.USE_PREF_SIZE);
     }
-
-
 
 }

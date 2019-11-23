@@ -7,6 +7,11 @@
  */
 package utils;
 
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
 import java.io.*;
 import java.nio.channels.FileChannel;
 import java.text.DateFormat;
@@ -123,4 +128,37 @@ public class Common {
         }
         return "N/A";
     }
+
+    static class Delta { double x, y; }
+
+    public static void makeDraggable(Node node) {
+        final Delta dragDelta = new Delta();
+        node.setOnMousePressed(me -> {
+            dragDelta.x = me.getX();
+            dragDelta.y = me.getY();
+        });
+        node.setOnMouseDragged(me -> {
+            node.setLayoutX(node.getLayoutX() + me.getX() - dragDelta.x);
+            node.setLayoutY(node.getLayoutY() + me.getY() - dragDelta.y);
+        });
+    }
+
+    public static void makeStageDraggable(final Stage stage, final Node byNode) {
+        final Delta dragDelta = new Delta();
+        byNode.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                // record a delta distance for the drag and drop operation.
+                dragDelta.x = stage.getX() - mouseEvent.getScreenX();
+                dragDelta.y = stage.getY() - mouseEvent.getScreenY();
+            }
+        });
+        byNode.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                stage.setX(mouseEvent.getScreenX() + dragDelta.x);
+                stage.setY(mouseEvent.getScreenY() + dragDelta.y);
+            }
+        });
+
+    }
+
 }

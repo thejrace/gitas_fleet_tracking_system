@@ -23,6 +23,11 @@ public class Bus {
     private String code;
 
     /**
+     * Backend ID of the bus
+     */
+    private int ID;
+
+    /**
      * Official plate of the bus
      */
     private String officialPlate;
@@ -67,6 +72,7 @@ public class Bus {
             this.code = data.getString("code");
             this.officialPlate = data.getString("official_plate");
             this.activePlate = data.getString("active_plate");
+            this.ID = data.getInt("id");
             this.uiComponent = new BusBox(this);
             this.uiComponent.initUI();
         } catch( JSONException e ){

@@ -471,3 +471,9 @@
 .fleet-filter-container .filter-btn.active {
     -fx-border-color:#9268a0;
 }
+
+.page-popup-header {
+    -fx-background-color: #272727;
+    -fx-border-width:0 0 2 0;
+    -fx-border-color: #7b7b7b;
+}
