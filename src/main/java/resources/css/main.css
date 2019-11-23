@@ -477,3 +477,11 @@
     -fx-border-width:0 0 2 0;
     -fx-border-color: #7b7b7b;
 }
+
+.page-popup-header-close-btn {
+    -fx-cursor:hand;
+    -fx-fill:#9f0000;
+}
+.page-popup-header-close-btn:hover {
+    -fx-fill: #d60000;
+}

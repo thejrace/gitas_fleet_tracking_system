@@ -13,6 +13,7 @@ import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class APIRequest {
 
@@ -99,6 +100,40 @@ public class APIRequest {
                     .data("data", data)
                     .ignoreContentType(true);
 
+            return connection.execute().parse().text();
+        } catch (HttpStatusException e) {
+            e.printStackTrace();
+            System.out.println("sendDataToAPI !!!!check API Token!!!!");
+        } catch( IOException e ) {
+            System.out.println("sendDataToAPI error!");
+            e.printStackTrace();
+        }
+        return "{}";
+    }
+
+    /**
+     * Sends POST request
+     *
+     * @param url request url
+     * @param params data to be sent
+     */
+    public static String POST( String url, Map<String, String> params ){
+        try {
+            Connection connection = Jsoup.connect(url)
+                    .method(Connection.Method.POST);
+
+            try {
+                connection.header("Authorization", "Bearer " + ControllerHub.UserController.getModel().getApiToken());
+            } catch( NullPointerException e ){
+
+            }
+            connection.header("Accept", "application/json")
+                    .header("Content-Type", "application/x-www-form-urlencoded")
+                    .ignoreContentType(true);
+
+            for(Map.Entry<String, String> entry : params.entrySet() ){
+                connection.data(entry.getKey(), entry.getValue());
+            }
             return connection.execute().parse().text();
         } catch (HttpStatusException e) {
             e.printStackTrace();

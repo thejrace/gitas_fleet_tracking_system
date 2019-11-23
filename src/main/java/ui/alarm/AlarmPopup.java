@@ -68,8 +68,6 @@ public class AlarmPopup extends UIComponent {
         popup.getContent().add(container);
 
         // set settings of the Popup
-        popup.setAutoHide(false);
-        popup.setAutoHide(false);
         popup.setHideOnEscape(true);
     }
 

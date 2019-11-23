@@ -81,6 +81,20 @@ public class Bus {
     }
 
     /**
+     * Updates only the plates
+     *
+     * @param data
+     */
+    public void updatePlates(JSONObject data){
+        try {
+            this.officialPlate = data.getString("official_plate");
+            this.activePlate = data.getString("active_plate");
+        } catch( JSONException e ){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Getter for the code
      *
      * @return
@@ -222,5 +236,23 @@ public class Bus {
      */
     public void setFilterFlags(Map<FleetFilterButtonAction, Boolean> filterFlags) {
         this.filterFlags = filterFlags;
+    }
+
+    /**
+     * Getter for ID
+     *
+     * @return
+     */
+    public int getID() {
+        return ID;
+    }
+
+    /**
+     * Setter for ID
+     *
+     * @param ID
+     */
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

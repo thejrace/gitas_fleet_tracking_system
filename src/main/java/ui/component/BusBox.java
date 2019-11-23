@@ -10,8 +10,10 @@ package ui.component;
 import bots.BusFleetDataDownloader;
 import controllers.BusController;
 import interfaces.BusFleetDataDownloadListener;
+import interfaces.BusPlateDataDownloadListener;
 import interfaces.MultipleActionCallback;
 import models.Bus;
+import org.json.JSONObject;
 import repositories.BusStatusRepository;
 import ui.UIComponent;
 import utils.ThreadHelper;
@@ -104,8 +106,24 @@ public class BusBox extends UIComponent {
         }
     }
 
-    public void downloadPlateData(){
+    private void downloadPlateData(){
+        busController.downloadPlateData((JSONObject data) -> {
+            bus.updatePlates(data);
+            ThreadHelper.runOnUIThread(() -> {
+                ((BusBoxController)getController()).setData(bus);
+                ((BusBoxController) getController()).updatePlateDownloadTimestamp();
+            });
+        });
+    }
 
+    public void triggerPlateDataAction( boolean async ){
+        if( async ){
+            ThreadHelper.func(() -> {
+                downloadPlateData();
+            });
+        } else {
+            downloadPlateData();
+        }
     }
 
     public void downloadSpeedData(){
@@ -131,7 +149,7 @@ public class BusBox extends UIComponent {
                         triggerFleetDataAction(true);
                         break;
                     case 1: // download plate data trigger
-
+                        triggerPlateDataAction(true);
                         break;
                 }
             }

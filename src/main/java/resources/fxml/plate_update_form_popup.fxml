@@ -33,7 +33,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </padding>
             </HBox>
-            <FontAwesomeIconView fx:id="uiCloseBtn" fill="#9f0000" glyphName="CLOSE" size="18" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0" />
+            <FontAwesomeIconView fx:id="uiCloseBtn" glyphName="CLOSE" size="18" styleClass="page-popup-header-close-btn" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0" />
          </children>
       </AnchorPane>
       <HBox alignment="CENTER" spacing="10.0">

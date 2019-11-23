@@ -10,6 +10,7 @@ package ui.component;
 import enums.BusRunStatus;
 import enums.BusRunStatusStyleClass;
 import interfaces.MultipleActionCallback;
+import interfaces.NoParamCallback;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -146,12 +147,14 @@ public class BusBoxController implements Initializable {
         });
 
         uiPlateLabel.setOnMouseClicked( ev -> {
+            // @todo check if opened before
             if( busPlateFormPopup == null ){
                 busPlateFormPopup = new BusPlateFormPopup();
             }
             try {
                 busPlateFormPopup.start( new Stage() );
                 busPlateFormPopup.setData(bus);
+                busPlateFormPopup.setListener(() -> { multipleActionCallback.onAction(1); });
             } catch( Exception e ){
                 e.printStackTrace();
             }
@@ -163,7 +166,7 @@ public class BusBoxController implements Initializable {
      *
      * @param bus
      */
-    public void setData(Bus bus  ){
+    public void setData(Bus bus){
         this.bus = bus;
 
         if( !dataInitializedFlag ){
@@ -178,10 +181,12 @@ public class BusBoxController implements Initializable {
             // set ID for UI manipulation
             uiBusBoxWrapper.setId(bus.getCode());
 
+            updatePlateDownloadTimestamp();
+
             dataInitializedFlag = true;
         }
 
-        updateUI();
+        updateBaseData();
     }
 
     /**
@@ -207,18 +212,28 @@ public class BusBoxController implements Initializable {
         });
     }
 
+    public void checkPlateClass(){
+        if( !bus.getActivePlate().equals(bus.getOfficialPlate()) ){
+            uiPlateLabel.getStyleClass().add("warning");
+        } else {
+            try {
+                uiPlateLabel.getStyleClass().remove(2);
+            } catch( IndexOutOfBoundsException  e ){}
+        }
+    }
+
+    public void updatePlateDownloadTimestamp(){
+        uiPlateDataDownloadTimestampLabel.setText(Common.getCurrentHMin());
+    }
+
     /**
      * Update header UI data
      */
-    private void updateUI(){
+    private void updateBaseData(){
         uiBusCodeLabel.setText(bus.getCode());
-        uiPlateLabel.setText(bus.getActivePlate());
-
-        if( !bus.getActivePlate().equals(bus.getOfficialPlate()) ){
-            uiPlateLabel.getStyleClass().add(1, "warning");
-        }
-
         uiRouteLabel.setText(bus.getRouteCode());
+        uiPlateLabel.setText(bus.getActivePlate());
+        checkPlateClass();
     }
 
     /**

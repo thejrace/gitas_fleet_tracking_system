@@ -8,9 +8,19 @@
 package controllers;
 
 import bots.BusFleetDataDownloader;
+import bots.BusPlateDataDownloader;
+import interfaces.ActionCallback;
 import interfaces.BusFleetDataDownloadListener;
+import interfaces.BusPlateDataDownloadListener;
 import models.Bus;
+import org.json.JSONException;
+import org.json.JSONObject;
 import repositories.BusStatusRepository;
+import utils.APIRequest;
+import utils.ThreadHelper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class BusController {
 
@@ -23,6 +33,11 @@ public class BusController {
      * BusFleetDataDownloader instance
      */
     private BusFleetDataDownloader fleetDataDownloader;
+
+    /**
+     * BusPlateDataDownloader instance
+     */
+    private BusPlateDataDownloader plateDataDownloader;
 
     /**
      * BusStatusRepository instance
@@ -46,6 +61,8 @@ public class BusController {
         fleetDataDownloader = new BusFleetDataDownloader(bus.getCode());
         // init repository
         statusRepository = new BusStatusRepository(bus.getCode());
+        // init plate download
+        plateDataDownloader = new BusPlateDataDownloader(bus.getID());
     }
 
     /**
@@ -76,6 +93,35 @@ public class BusController {
         }
     }
 
+    public void downloadPlateData(BusPlateDataDownloadListener listener){
+        plateDataDownloader.action();
+        listener.onFinish(plateDataDownloader.getData());
+    }
+
+    /**
+     * Send request to API to change plate data of the given bus
+     *
+     * @param bus
+     * @param cb
+     */
+    public static void updatePlateData(Bus bus, ActionCallback cb ){
+        ThreadHelper.func( () -> {
+            Map<String, String> params = new HashMap<>();
+            params.put("active_plate", bus.getActivePlate());
+            params.put("official_plate", bus.getOfficialPlate());
+            try {
+                JSONObject response = new JSONObject(APIRequest.POST(APIRequest.API_URL + "buses/"+bus.getID()+"/updatePlate", params));
+                if( response.getJSONObject("data").getBoolean("success") ){
+                    cb.onSuccess();
+                }
+            } catch( JSONException e ){
+                cb.onError(0);
+                e.printStackTrace();
+            }
+        });
+
+    }
+
     public void downloadMessages(String busCode){
 
     }
@@ -97,10 +143,6 @@ public class BusController {
     }
 
     public void downloadSpeedRecords(String busCode){
-
-    }
-
-    public void downloadPlateData(String busCode){
 
     }
 

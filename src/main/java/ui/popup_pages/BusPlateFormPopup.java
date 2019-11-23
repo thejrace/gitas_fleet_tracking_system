@@ -1,6 +1,7 @@
 package ui.popup_pages;
 
 import controllers.ControllerHub;
+import interfaces.NoParamCallback;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,4 +55,7 @@ public class BusPlateFormPopup extends Application {
         controller.setData(bus);
     }
 
+    public void setListener(NoParamCallback cb ){ // @todo i used to observer pattern to trigger downloadPlate data, it's not IDEAL!
+        controller.setListener(cb);
+    }
 }
