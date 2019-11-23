@@ -20,6 +20,11 @@ public class ControllerHub {
     public static UserController UserController;
 
     /**
+     * FleetController instance
+     */
+    public static FleetController FleetController;
+
+    /**
      * Initialize static controllers
      */
     public void initialize(){
@@ -27,6 +32,8 @@ public class ControllerHub {
         AlarmController.initialize();
 
         UserController = new UserController();
+
+        FleetController = new FleetController();
     }
 
 }

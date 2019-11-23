@@ -10,6 +10,7 @@ package repositories;
 import controllers.ControllerHub;
 import enums.AlarmType;
 import enums.BusRunStatus;
+import enums.FleetFilterButtonAction;
 import models.Alarm;
 import models.Bus;
 import models.BusRun;
@@ -21,6 +22,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BusStatusRepository {
@@ -46,12 +48,29 @@ public class BusStatusRepository {
     private String subStatusLabel;
 
     /**
+     * Filter related flags list
+     */
+    private Map<FleetFilterButtonAction, Boolean> filterFlags;
+
+
+    /**
      * Constructor
      *
      * @param code
      */
     public BusStatusRepository(String code){
         this.code = code;
+        filterFlags = new HashMap<>();
+        initFilterFlags();
+    }
+
+    /**
+     * Initialize filter flags
+     */
+    private void initFilterFlags(){
+        filterFlags.put(FleetFilterButtonAction.ACTIVE, false);
+        filterFlags.put(FleetFilterButtonAction.ZAYI, false);
+        filterFlags.put(FleetFilterButtonAction.PLATE, false);
     }
 
     /**
@@ -60,6 +79,12 @@ public class BusStatusRepository {
      * @param bus
      */
     public void processRunData(Bus bus, Map<String, Integer> runStatusSummary, int activeRunIndex ){
+
+        initFilterFlags();
+
+        if( !bus.getActivePlate().equals(bus.getOfficialPlate()) ){
+            filterFlags.put(FleetFilterButtonAction.PLATE, true);
+        }
 
         if( runStatusSummary.get(BusRunStatus.B).equals(runStatusSummary.get("TOTAL"))){
             // all waiting
@@ -79,12 +104,14 @@ public class BusStatusRepository {
                 subStatusLabel = "Durum Kodu: " + bus.getRunData().get(0).getStatusCode();
                 status = BusRunStatus.I;
                 addAlarm(new Alarm(AlarmType.RED, code, "Sefer iptalleri var!"));
+                filterFlags.put(FleetFilterButtonAction.ZAYI, true);
             } else {
                 // finished the day but there are zayi runs
                 statusLabel = "Günü tamamladı.";
                 subStatusLabel = "Sefer yüzdesi: " + ( runStatusSummary.get(BusRunStatus.T) / runStatusSummary.get("TOTAL") ) * 100;
                 status = BusRunStatus.T;
                 addAlarm(new Alarm(AlarmType.RED, code, "Sefer iptalleri var!"));
+                filterFlags.put(FleetFilterButtonAction.ZAYI, true);
             }
         } else {
             // we'll loop through runs
@@ -103,6 +130,7 @@ public class BusStatusRepository {
                         statusLabel = "Aktif sefer ( "+runData.get(a).getORER()+" )";
                         subStatusLabel = Common.fetchStopName(runData.get(a).getCurrentStop());
                         status = BusRunStatus.A;
+                        filterFlags.put(FleetFilterButtonAction.ACTIVE, true);
                     } else {
                         // waiting
                         statusLabel = "Seferini bekliyor.";
@@ -143,10 +171,12 @@ public class BusStatusRepository {
 
                 if( runData.get(a).getStatus().equals(BusRunStatus.I)  ){
                     addAlarm(new Alarm(AlarmType.RED, code, "Sefer iptalleri var!"));
+                    filterFlags.put(FleetFilterButtonAction.ZAYI, true);
                 }
 
                 if( runData.get(a).getStatus().equals(BusRunStatus.Y)  ){
                     addAlarm(new Alarm(AlarmType.RED, code, "Yarım kalan seferler var!"));
+                    filterFlags.put(FleetFilterButtonAction.ZAYI, true);
                 }
             }
         }
@@ -188,5 +218,14 @@ public class BusStatusRepository {
      */
     public String getSubStatusLabel() {
         return subStatusLabel;
+    }
+
+    /**
+     * Getter for filterFlags
+     *
+     * @return
+     */
+    public Map<FleetFilterButtonAction, Boolean> getFilterFlags() {
+        return filterFlags;
     }
 }

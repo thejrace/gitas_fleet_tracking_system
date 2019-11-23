@@ -8,8 +8,8 @@
 package controllers;
 
 import models.Bus;
-import repositories.BusRepository;
-import ui.page.FleetPageController;
+import repositories.FleetRepository;
+import ui.page.FleetPage;
 
 import java.util.ArrayList;
 
@@ -26,39 +26,40 @@ public class FleetController {
     private int indexCounter = 0;
 
     /**
-     * BusRepository instance
+     * FleetRepository instance
      */
-    private BusRepository busRepository;
+    private FleetRepository fleetRepository;
 
     /**
-     * UI page controller
+     * UI page
      */
-    private FleetPageController fleetPageController;
+    private FleetPage fleetPage;
 
     /**
      * Empty constructor
      */
     public FleetController(){
         buses = new ArrayList<>();
-        busRepository = new BusRepository();
+        fleetRepository = new FleetRepository();
     }
 
     /**
-     * Loop through buses and apply filters
+     * Notify FleetPage to apply filters.
      */
     public void applyFilters(){
-        fleetPageController.applyFilters();
+        fleetPage.applyFilters();
     }
 
     /**
      * Loop through buses and apply new style choice
      */
     public void applyStyles(){
-        fleetPageController.applyStyles();
+        fleetPage.applyStyles();
     }
 
     /**
      * Add new bus to the fleet
+     *
      * @param bus
      */
     private void addBus(Bus bus){
@@ -68,25 +69,35 @@ public class FleetController {
     }
 
     /**
+     * Replace updated model with old one
+     *
+     * @param bus
+     */
+    public void updateBus(Bus bus) {
+        buses.set(bus.getIndex(), bus);
+        System.out.println(buses);
+    }
+
+    /**
      * Download the user's buses
      */
     public void downloadBuses(){
         // get buses
-        busRepository.fetchBuses();
+        fleetRepository.fetchBuses();
 
         // create bus instances
-        for( int k = 0; k < busRepository.getData().length(); k++ ){
-            addBus(new Bus(busRepository.getData().getJSONObject(k)));
+        for( int k = 0; k < fleetRepository.getData().length(); k++ ){
+            addBus(new Bus(fleetRepository.getData().getJSONObject(k)));
         }
     }
 
     /**
-     * Inject the UI page controller for notifying actions
+     * Get fleetPage instance
      *
-     * @param fleetPageController
+     * @param fleetPage
      */
-    public void passPageController(FleetPageController fleetPageController){
-        this.fleetPageController = fleetPageController;
+    public void passFleetPage(FleetPage fleetPage){
+        this.fleetPage = fleetPage;
     }
 
     /**

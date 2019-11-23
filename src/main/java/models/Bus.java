@@ -7,11 +7,13 @@
  */
 package models;
 
+import enums.FleetFilterButtonAction;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ui.component.BusBox;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Bus {
 
@@ -44,6 +46,11 @@ public class Bus {
      * Active run data
      */
     private ArrayList<BusRun> runData;
+
+    /**
+     * Filter related flags list
+     */
+    private Map<FleetFilterButtonAction, Boolean> filterFlags;
 
     /**
      * UI Component
@@ -191,5 +198,23 @@ public class Bus {
      */
     public void setRouteCode(String routeCode) {
         this.routeCode = routeCode;
+    }
+
+    /**
+     * Getter for filterFlags
+     *
+     * @return
+     */
+    public Map<FleetFilterButtonAction, Boolean> getFilterFlags() {
+        return filterFlags;
+    }
+
+    /**
+     * Setter for filterFlags
+     *
+     * @param filterFlags
+     */
+    public void setFilterFlags(Map<FleetFilterButtonAction, Boolean> filterFlags) {
+        this.filterFlags = filterFlags;
     }
 }

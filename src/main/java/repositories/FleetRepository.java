@@ -12,11 +12,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import utils.APIRequest;
 
-public class BusRepository {
+public class FleetRepository {
 
     private JSONArray data = new JSONArray();
 
-    public BusRepository(){
+    public FleetRepository(){
 
     }
 

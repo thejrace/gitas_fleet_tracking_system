@@ -50,6 +50,7 @@ public class BusController {
 
     /**
      * Downloads fleet data and process' it for alarms and status updates
+     *
      * @param listener
      */
     public void downloadAndProcessFleetData( BusFleetDataDownloadListener listener ){
@@ -61,6 +62,12 @@ public class BusController {
 
             // get status and alarms
             statusRepository.processRunData(bus, fleetDataDownloader.getRunStatusSummary(), fleetDataDownloader.getActiveRunIndex());
+
+            // update filter flags
+            bus.setFilterFlags(statusRepository.getFilterFlags());
+
+            // update bus model in the fleet
+            ControllerHub.FleetController.updateBus(bus);
 
             // notify busbox
             listener.onFinish(bus, fleetDataDownloader, statusRepository);

@@ -16,7 +16,6 @@ import repositories.BusStatusRepository;
 import ui.UIComponent;
 import utils.ThreadHelper;
 
-import java.util.HashMap;
 
 public class BusBox extends UIComponent {
 
@@ -75,8 +74,12 @@ public class BusBox extends UIComponent {
 
                 // update box
                 ThreadHelper.runOnUIThread(() -> {
-                    ((BusBoxController)getController()).setData(bus, busFleetDataDownloader.getRunStatusSummary());
-                    ((BusBoxController)getController()).setStatusData(busStatusRepository.getStatus(), busStatusRepository.getStatusLabel(), busStatusRepository.getSubStatusLabel());
+                    ((BusBoxController)getController()).setData(bus);
+                    ((BusBoxController)getController()).setStatusData(
+                            busStatusRepository.getStatus(),
+                            busStatusRepository.getStatusLabel(),
+                            busStatusRepository.getSubStatusLabel(),
+                            busFleetDataDownloader.getRunStatusSummary());
                 });
             }
             @Override
@@ -119,7 +122,7 @@ public class BusBox extends UIComponent {
 
     public void initUI(){
         loadFXML("bus_box_default");
-        ((BusBoxController)getController()).setData(bus, new HashMap<>());
+        ((BusBoxController)getController()).setData(bus);
         ((BusBoxController)getController()).subscribeEvents(new MultipleActionCallback() {
             @Override
             public void onAction(int type) {

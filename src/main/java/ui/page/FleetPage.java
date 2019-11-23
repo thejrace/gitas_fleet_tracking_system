@@ -8,21 +8,13 @@
 package ui.page;
 
 import controllers.ControllerHub;
-import controllers.FleetController;
 import controllers.FleetFilterController;
 import cookie_agent.CookieAgent;
-import enums.AlarmType;
-import models.Alarm;
 import ui.block.FleetFilterBar;
 import ui.popup.Popup;
 import utils.ThreadHelper;
 
 public class FleetPage extends UIPage{
-
-    /**
-     * FleetController instance
-     */
-    public static FleetController FleetController;
 
     /**
      * FleetFilterController instance
@@ -34,17 +26,19 @@ public class FleetPage extends UIPage{
      */
     public FleetPage(){
         loadFXML("fleet_page");
+
+        ControllerHub.FleetController.passFleetPage(this);
+
         getController().setTitle("Filo Takip");
 
         initialize();
+
     }
 
     /**
      * Initialize the page
      */
     private void initialize(){
-        FleetController = new FleetController();
-        FleetController.passPageController(getController());
         FleetFilterController = new FleetFilterController();
 
         FleetFilterBar fleetFilterBar = new FleetFilterBar();
@@ -65,7 +59,7 @@ public class FleetPage extends UIPage{
             Popup.showMessage(Popup.DEFAULT, "Fetcing buses!");
         });
 
-        FleetController.downloadBuses();
+        ControllerHub.FleetController.downloadBuses();
 
         // feed bus data to controllers
         ThreadHelper.runOnUIThread(() -> {
@@ -74,6 +68,20 @@ public class FleetPage extends UIPage{
 
             ControllerHub.AlarmController.start();
         });
+    }
+
+    /**
+     * Notify UI controller to apply filters
+     */
+    public void applyFilters(){
+        getController().applyFilters();
+    }
+
+    /**
+     * Notify UI controller to apply styles
+     */
+    public void applyStyles(){
+        getController().applyStyles();
     }
 
     @Override

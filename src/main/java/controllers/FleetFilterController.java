@@ -8,16 +8,16 @@
 package controllers;
 
 import enums.FleetFilterButtonAction;
-import ui.page.FleetPage;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FleetFilterController {
 
     /**
      * Active filter states
      */
-    private ArrayList<Boolean> filterStates;
+    private Map<FleetFilterButtonAction, Boolean> filterStates;
 
     /**
      * Active style choice
@@ -28,10 +28,10 @@ public class FleetFilterController {
      * Empty constructor
      */
     public FleetFilterController(){
-        filterStates = new ArrayList<>();
-        filterStates.add(false);
-        filterStates.add(false);
-        filterStates.add(false);
+        filterStates = new HashMap<>();
+        filterStates.put(FleetFilterButtonAction.ACTIVE, false);
+        filterStates.put(FleetFilterButtonAction.ZAYI, false);
+        filterStates.put(FleetFilterButtonAction.PLATE, false);
         styleChoice = 0;
     }
 
@@ -42,8 +42,8 @@ public class FleetFilterController {
      * @param newState
      */
     public void updateFilterStates(FleetFilterButtonAction action, boolean newState ){
-        filterStates.set(action.ordinal(), newState);
-        FleetPage.FleetController.applyFilters();
+        filterStates.put(action, newState);
+        ControllerHub.FleetController.applyFilters();
     }
 
     /**
@@ -53,7 +53,7 @@ public class FleetFilterController {
      */
     public void updateStyleChoice( int newChoice ){
         this.styleChoice = newChoice;
-        FleetPage.FleetController.applyStyles();
+        ControllerHub.FleetController.applyStyles();
     }
 
     /**
@@ -61,7 +61,7 @@ public class FleetFilterController {
      *
      * @param filterStates
      */
-    public void setFilterStates(ArrayList<Boolean> filterStates) {
+    public void setFilterStates(Map<FleetFilterButtonAction, Boolean> filterStates) {
         this.filterStates = filterStates;
     }
 
@@ -70,7 +70,7 @@ public class FleetFilterController {
      *
      * @return
      */
-    public ArrayList<Boolean> getFilterStates() {
+    public Map<FleetFilterButtonAction, Boolean> getFilterStates() {
         return filterStates;
     }
 
