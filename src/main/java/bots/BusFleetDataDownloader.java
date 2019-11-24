@@ -7,6 +7,7 @@
  */
 package bots;
 
+import controllers.ControllerHub;
 import cookie_agent.CookieAgent;
 import enums.BusRunStatus;
 import lombok.Getter;
@@ -16,25 +17,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import utils.Common;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BusFleetDataDownloader {
+public class BusFleetDataDownloader extends IETTDataDownloader {
 
     /**
      * Code of the bus
      */
     @Getter
     private String code;
-
-    /**
-     * Error flag
-     */
-    @Getter
-    private boolean errorFlag = false;
 
     /**
      * Route code of the bus
@@ -75,6 +69,8 @@ public class BusFleetDataDownloader {
     public void action(){
         errorFlag = false;
 
+        getClearance();
+
         // reset summary counters
         runStatusSummary.put(BusRunStatus.A, 0);
         runStatusSummary.put(BusRunStatus.B, 0);
@@ -91,6 +87,8 @@ public class BusFleetDataDownloader {
                     .method(org.jsoup.Connection.Method.GET)
                     .timeout(50000)
                     .execute();
+
+            release();
 
             parseFleetData(response.parse());
         } catch (IOException | NullPointerException e) {

@@ -7,18 +7,12 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-public class BusSpeedDownloader {
+public class BusSpeedDownloader extends IETTDataDownloader {
 
     private String busCode;
 
     @Getter
     private int speed;
-
-    @Getter
-    private boolean errorFlag = false;
-
-    @Getter
-    private String errorMessage;
 
     public BusSpeedDownloader(String busCode){
         this.busCode = busCode;
@@ -26,6 +20,8 @@ public class BusSpeedDownloader {
 
     public void action(){
         errorFlag = false;
+
+        getClearance();
 
         String URL_PREFIX = "https://filotakip.iett.gov.tr/_FYS/000/harita.php?konu=oto&oto="; // @todo get from settings
 
@@ -35,6 +31,8 @@ public class BusSpeedDownloader {
                     .method(org.jsoup.Connection.Method.GET)
                     .timeout(50000)
                     .execute();
+
+            release();
 
             parseData(response.parse());
         } catch (IOException | NullPointerException e) {
@@ -47,8 +45,6 @@ public class BusSpeedDownloader {
             String page = document.toString();
             String dataString = page.substring( page.indexOf("veri_ilklendir")+14, page.indexOf("veri_hatcizgi") );
             String[] exploded = dataString.split("\\|");
-            //System.out.println("SAAT:" + exploded[1]);
-            //System.out.println( oto + " HIZ:" + exploded[4]);
             try {
                 speed = Integer.valueOf(exploded[4]);
             } catch( ArrayIndexOutOfBoundsException e ){
