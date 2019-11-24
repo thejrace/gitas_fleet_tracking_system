@@ -8,18 +8,21 @@
 package ui.component;
 
 import bots.BusFleetDataDownloader;
+import com.google.common.eventbus.Subscribe;
 import controllers.BusController;
+import events.bus_box.FleetDataDownloadEvent;
+import events.bus_box.PlateUpdateEvent;
 import interfaces.BusFleetDataDownloadListener;
-import interfaces.BusPlateDataDownloadListener;
-import interfaces.MultipleActionCallback;
+import interfaces.Subscriber;
 import models.Bus;
 import org.json.JSONObject;
 import repositories.BusStatusRepository;
 import ui.UIComponent;
+import utils.GitasEventBus;
 import utils.ThreadHelper;
 
 
-public class BusBox extends UIComponent {
+public class BusBox extends UIComponent implements Subscriber {
 
     /**
      * Bus Model
@@ -43,6 +46,7 @@ public class BusBox extends UIComponent {
      */
     public BusBox(Bus bus){
         this.bus = bus;
+        GitasEventBus.register(this);
     }
 
     /**
@@ -138,22 +142,27 @@ public class BusBox extends UIComponent {
 
     }
 
+    @Subscribe
+    private void subscribePlateDataTriggerEvent(PlateUpdateEvent event) {
+        final Bus busData = event.getBusData();
+        if( busData.getCode().equals(bus.getCode()) ){
+            bus.setOfficialPlate(busData.getOfficialPlate());
+            bus.setActivePlate(busData.getActivePlate());
+            triggerPlateDataAction(true);
+        }
+    }
+
+    @Subscribe
+    private void subscribeFleetDataTriggerEvent(FleetDataDownloadEvent event){
+        final Bus busData = event.getBusData();
+        if( busData.getCode().equals(bus.getCode()) ){
+            triggerFleetDataAction(true);
+        }
+    }
+
     public void initUI(){
         loadFXML("bus_box_default");
         ((BusBoxController)getController()).setData(bus);
-        ((BusBoxController)getController()).subscribeEvents(new MultipleActionCallback() {
-            @Override
-            public void onAction(int type) {
-                switch(type){
-                    case 0: // download fleet data trigger
-                        triggerFleetDataAction(true);
-                        break;
-                    case 1: // download plate data trigger
-                        triggerPlateDataAction(true);
-                        break;
-                }
-            }
-        });
 
         startDownloaders();
     }

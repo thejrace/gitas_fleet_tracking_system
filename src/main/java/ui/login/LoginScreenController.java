@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import lombok.Setter;
 import ui.MainScreen;
 import utils.LoginAttempt;
 import utils.ThreadHelper;
@@ -43,6 +44,7 @@ public class LoginScreenController implements Initializable {
     @FXML
     private Label uiErrorNotf;
 
+    @Setter
     private Stage loginStage;
 
     @Override
@@ -94,9 +96,5 @@ public class LoginScreenController implements Initializable {
                 });
             }
         });
-    }
-
-    public void setStage( Stage loginStage ){
-        this.loginStage = loginStage;
     }
 }

@@ -72,7 +72,7 @@ public class BusController {
      */
     public void downloadAndProcessFleetData( BusFleetDataDownloadListener listener ){
         fleetDataDownloader.action();
-        if( !fleetDataDownloader.getErrorFlag() ){
+        if( !fleetDataDownloader.isErrorFlag() ){
             // update model's data
             bus.setRouteCode(fleetDataDownloader.getRouteCode());
             bus.setRunData(fleetDataDownloader.getRunData());

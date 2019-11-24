@@ -10,14 +10,18 @@ package ui.popup_pages;
 import controllers.BusController;
 import controllers.ControllerHub;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import events.bus_box.PlateUpdateEvent;
 import interfaces.ActionCallback;
 import interfaces.NoParamCallback;
+import interfaces.Subscriber;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import lombok.Setter;
 import models.Bus;
+import utils.GitasEventBus;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,12 +61,8 @@ public class BusPlateFormPopupController implements Initializable {
     /**
      * Index of the popup page
      */
+    @Setter
     private int pageIndex;
-
-    /**
-     * Listener to notify BusBox
-     */
-    private NoParamCallback listener;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -76,7 +76,9 @@ public class BusPlateFormPopupController implements Initializable {
                 @Override
                 public void onSuccess(String... params) {
                     // trigger plate fetch
-                    listener.action();
+                    //listener.action();
+                    GitasEventBus.post(new PlateUpdateEvent(bus));
+                    System.out.println("post");
                     unlockForm();
                 }
 
@@ -94,15 +96,6 @@ public class BusPlateFormPopupController implements Initializable {
     }
 
     /**
-     * Get the index of the popup page
-     *
-     * @param pageIndex
-     */
-    public void setIndex(int pageIndex){
-        this.pageIndex = pageIndex;
-    }
-
-    /**
      * Set data to the layout
      *
      * @param bus
@@ -112,15 +105,6 @@ public class BusPlateFormPopupController implements Initializable {
         uiBusCodeLabel.setText(bus.getCode());
         uiActivePlateInput.setText(bus.getActivePlate());
         uiOfficialPlateInput.setText(bus.getOfficialPlate());
-    }
-
-    /**
-     * Setter for listener to notify BusBox
-     *
-     * @param listener
-     */
-    public void setListener(NoParamCallback listener ){
-        this.listener = listener;
     }
 
     /**

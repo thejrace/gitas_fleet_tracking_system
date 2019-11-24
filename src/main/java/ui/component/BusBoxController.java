@@ -9,8 +9,9 @@ package ui.component;
 
 import enums.BusRunStatus;
 import enums.BusRunStatusStyleClass;
+import events.bus_box.FleetDataDownloadEvent;
+import events.bus_box.PlateUpdateEvent;
 import interfaces.MultipleActionCallback;
-import interfaces.NoParamCallback;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +23,7 @@ import models.Bus;
 import ui.custom_control.BusBoxButton;
 import ui.popup_pages.BusPlateFormPopup;
 import utils.Common;
+import utils.GitasEventBus;
 import utils.ThreadHelper;
 
 import java.net.URL;
@@ -121,11 +123,6 @@ public class BusBoxController implements Initializable {
     @FXML private Label uiPlateDataDownloadTimestampLabel;
 
     /**
-     * Listener to trigger data download actions in the BusBox
-     */
-    private MultipleActionCallback multipleActionCallback;
-
-    /**
      * Flag to check if BusBox is initialized with bus data
      */
     private boolean dataInitializedFlag = false;
@@ -139,11 +136,11 @@ public class BusBoxController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         uiFleetDataDownloadBtn.setOnMouseClicked( ev -> {
-            multipleActionCallback.onAction(0);
+            GitasEventBus.post(new FleetDataDownloadEvent(bus));
         });
 
         uiPlateDataDownloadBtn.setOnMouseClicked( ev -> {
-            multipleActionCallback.onAction(1);
+            GitasEventBus.post(new PlateUpdateEvent(bus));
         });
 
         uiPlateLabel.setOnMouseClicked( ev -> {
@@ -154,7 +151,6 @@ public class BusBoxController implements Initializable {
             try {
                 busPlateFormPopup.start( new Stage() );
                 busPlateFormPopup.setData(bus);
-                busPlateFormPopup.setListener(() -> { multipleActionCallback.onAction(1); });
             } catch( Exception e ){
                 e.printStackTrace();
             }
@@ -171,12 +167,12 @@ public class BusBoxController implements Initializable {
 
         if( !dataInitializedFlag ){
             // @todo FIX this
-            uiBB0.setKey(bus.getCode());
-            uiBB1.setKey(bus.getCode());
-            uiBB2.setKey(bus.getCode());
-            uiBB3.setKey(bus.getCode());
-            uiBB4.setKey(bus.getCode());
-            uiBB5.setKey(bus.getCode());
+            uiBB0.setBusCode(bus.getCode());
+            uiBB1.setBusCode(bus.getCode());
+            uiBB2.setBusCode(bus.getCode());
+            uiBB3.setBusCode(bus.getCode());
+            uiBB4.setBusCode(bus.getCode());
+            uiBB5.setBusCode(bus.getCode());
 
             // set ID for UI manipulation
             uiBusBoxWrapper.setId(bus.getCode());
@@ -214,7 +210,9 @@ public class BusBoxController implements Initializable {
 
     public void checkPlateClass(){
         if( !bus.getActivePlate().equals(bus.getOfficialPlate()) ){
-            uiPlateLabel.getStyleClass().add("warning");
+            if( uiPlateLabel.getStyleClass().size() < 3 ){
+                uiPlateLabel.getStyleClass().add("warning");
+            }
         } else {
             try {
                 uiPlateLabel.getStyleClass().remove(2);
@@ -234,15 +232,6 @@ public class BusBoxController implements Initializable {
         uiRouteLabel.setText(bus.getRouteCode());
         uiPlateLabel.setText(bus.getActivePlate());
         checkPlateClass();
-    }
-
-    /**
-     * Connect datacontrol buttons to the BusBox to trigger BusController
-     *
-     * @param multipleActionCallback
-     */
-    public void subscribeEvents(MultipleActionCallback multipleActionCallback){
-        this.multipleActionCallback = multipleActionCallback;
     }
 
     /**

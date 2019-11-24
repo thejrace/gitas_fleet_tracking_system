@@ -9,6 +9,7 @@ package bots;
 
 import cookie_agent.CookieAgent;
 import enums.BusRunStatus;
+import lombok.Getter;
 import models.BusRun;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,31 +27,37 @@ public class BusFleetDataDownloader {
     /**
      * Code of the bus
      */
+    @Getter
     private String code;
 
     /**
      * Error flag
      */
+    @Getter
     private boolean errorFlag = false;
 
     /**
      * Route code of the bus
      */
+    @Getter
     private String routeCode;
 
     /**
      * Active run index counter
      */
+    @Getter
     private int activeRunIndex = -1;
 
     /**
      * All run data
      */
+    @Getter
     private ArrayList<BusRun> runData = new ArrayList<>();
 
     /**
      * Status summary
      */
+    @Getter
     private Map<String, Integer> runStatusSummary = new HashMap<>();
 
     /**
@@ -208,50 +215,5 @@ public class BusFleetDataDownloader {
             System.out.println( code + " ORER sefer veri ayıklama hatası. Tekrar deneniyor.");
             errorFlag = true;
         }
-    }
-
-    /**
-     * Getter for runData
-     *
-     * @return
-     */
-    public ArrayList<BusRun> getRunData() {
-        return runData;
-    }
-
-    /**
-     * Getter for runStatusSummary
-     *
-     * @return
-     */
-    public Map<String, Integer> getRunStatusSummary(){
-        return runStatusSummary;
-    }
-
-    /**
-     * Getter for activeRunIndex
-     *
-     * @return
-     */
-    public int getActiveRunIndex(){
-        return activeRunIndex;
-    }
-
-    /**
-     * Getter for routeCode
-     *
-     * @return
-     */
-    public String getRouteCode(){
-        return routeCode;
-    }
-
-    /**
-     * Getter for errorFlag
-     *
-     * @return
-     */
-    public boolean getErrorFlag(){
-        return errorFlag;
     }
 }

@@ -11,6 +11,7 @@ import controllers.ControllerHub;
 import enums.AlarmType;
 import enums.BusRunStatus;
 import enums.FleetFilterButtonAction;
+import lombok.Getter;
 import models.Alarm;
 import models.Bus;
 import models.BusRun;
@@ -35,21 +36,25 @@ public class BusStatusRepository {
     /**
      * Status output of the bus
      */
+    @Getter
     private String status;
 
     /**
      * Status in details
      */
+    @Getter
     private String statusLabel;
 
     /**
      * Additional status data line
      */
+    @Getter
     private String subStatusLabel;
 
     /**
      * Filter related flags list
      */
+    @Getter
     private Map<FleetFilterButtonAction, Boolean> filterFlags;
 
 
@@ -199,41 +204,5 @@ public class BusStatusRepository {
         ThreadHelper.runOnUIThread(() -> {
             ControllerHub.AlarmController.addAlarm(alarmItem);
         });
-    }
-
-    /**
-     * Getter for status
-     *
-     * @return
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * Getter for statusLabel
-     *
-     * @return
-     */
-    public String getStatusLabel() {
-        return statusLabel;
-    }
-
-    /**
-     * Getter for subStatusLabel
-     *
-     * @return
-     */
-    public String getSubStatusLabel() {
-        return subStatusLabel;
-    }
-
-    /**
-     * Getter for filterFlags
-     *
-     * @return
-     */
-    public Map<FleetFilterButtonAction, Boolean> getFilterFlags() {
-        return filterFlags;
     }
 }

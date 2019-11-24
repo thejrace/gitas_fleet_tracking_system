@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import lombok.Setter;
 
 import java.io.IOException;
 
@@ -22,6 +23,7 @@ public class BusBoxButton extends Button {
     @FXML
     private FontAwesomeIconView icon;
 
+    @Setter
     private String busCode;
 
     /**
@@ -57,10 +59,6 @@ public class BusBoxButton extends Button {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void setKey( String key ){
-        busCode = key;
     }
 
 }
