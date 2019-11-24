@@ -65,8 +65,6 @@ public class BusBox extends UIComponent implements Subscriber {
 
         ThreadHelper.func( () -> {
             while( fleetDataDownloadFlag ){
-                System.out.println(bus.getCode() + " --- Fleet Data download");
-
                 downloadFleetData(false);
 
                 ThreadHelper.delay(50000); // @todo get from settings
@@ -186,6 +184,21 @@ public class BusBox extends UIComponent implements Subscriber {
         }
     }
 
+
+    /**
+     * Subscribe the bus speed download event. Triggered from BusController.downloadSpeedData().
+     *
+     * @param event
+     */
+    @Subscribe
+    private void subscribeSpeedDownloadFinishedEvent(BusSpeedDownloadFinishedEvent event){
+        if( event.getBusCode().equals(bus.getCode())){
+            ThreadHelper.runOnUIThread(() -> {
+                ((BusBoxController)getController()).setSpeedData(event.getSpeed());
+            });
+        }
+    }
+
     /**
      * Subscribe the BusPlanPopup opener event. Triggered from BusBoxButton click event.
      *
@@ -212,6 +225,9 @@ public class BusBox extends UIComponent implements Subscriber {
         }
     }
 
+    /**
+     * Initialize FXML and controller
+     */
     public void initUI(){
         loadFXML("bus_box_default");
         ((BusBoxController)getController()).setData(bus);

@@ -31,7 +31,7 @@ public class DownloaderController {
      *
      * @return
      */
-    public boolean request(){
+    public synchronized boolean request(){
         if( getConcurrentDownloadLimit > concurrentDownloadCounter ){
             incCounter();
             return true;
@@ -42,7 +42,7 @@ public class DownloaderController {
     /**
      * Give back the clearance
      */
-    public void release(){
+    public synchronized void release(){
         decCounter();
     }
 

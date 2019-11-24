@@ -5,17 +5,16 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package events.bus_box;
+package events;
 
 import interfaces.Postable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import models.Bus;
 
 @AllArgsConstructor
-public class PlateUpdateEvent implements Postable {
+public class RunSuggestionStatusUpdateEvent implements Postable {
 
     @Getter
-    private Bus busData;
+    private String activeStatus;
 
 }

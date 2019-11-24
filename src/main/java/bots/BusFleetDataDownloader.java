@@ -7,7 +7,6 @@
  */
 package bots;
 
-import controllers.ControllerHub;
 import cookie_agent.CookieAgent;
 import enums.BusRunStatus;
 import lombok.Getter;
@@ -70,6 +69,9 @@ public class BusFleetDataDownloader extends IETTDataDownloader {
         errorFlag = false;
 
         getClearance();
+
+        // clear list
+        runData = new ArrayList<>();
 
         // reset summary counters
         runStatusSummary.put(BusRunStatus.A, 0);

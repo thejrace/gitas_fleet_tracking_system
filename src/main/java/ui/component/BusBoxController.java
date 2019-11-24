@@ -7,15 +7,10 @@
  */
 package ui.component;
 
-import com.google.common.eventbus.Subscribe;
 import enums.BusRunStatus;
 import enums.BusRunStatusStyleClass;
-import events.bus_box.BusSpeedDownloadFinishedEvent;
 import events.bus_box.FleetDataDownloadEvent;
-import events.bus_box.FleetDataDownloadFinishedEvent;
 import events.bus_box.PlateUpdateEvent;
-import interfaces.MultipleActionCallback;
-import interfaces.Subscriber;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -34,7 +29,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class BusBoxController implements Initializable, Subscriber {
+public class BusBoxController implements Initializable {
 
     /**
      * Bus model
@@ -270,6 +265,15 @@ public class BusBoxController implements Initializable, Subscriber {
     }
 
     /**
+     * Update speed label
+     *
+     * @param newSpeed
+     */
+    public void setSpeedData(int newSpeed){
+        uiSpeedLabel.setText(newSpeed + " km/s");
+    }
+
+    /**
      * Hides the given block of the BusBox
      *
      * @param block
@@ -292,19 +296,4 @@ public class BusBoxController implements Initializable, Subscriber {
         block.setMinHeight(Region.USE_PREF_SIZE);
         block.setMaxHeight(Region.USE_PREF_SIZE);
     }
-
-
-
-    /**
-     * Subscribe the bus speed download event. Triggered from BusController.downloadSpeedData().
-     *
-     * @param event
-     */
-    @Subscribe
-    private void subscribeSpeedDownloadFinishedEvent(BusSpeedDownloadFinishedEvent event){
-        if( event.getBusCode().equals(bus.getCode())){
-            uiSpeedLabel.setText(event.getSpeed() + "km/s");
-        }
-    }
-
 }

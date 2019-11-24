@@ -14,8 +14,6 @@ import events.bus_box.BusPlateDataDownloadFinishedEvent;
 import events.bus_box.BusSpeedDownloadFinishedEvent;
 import events.bus_box.FleetDataDownloadFinishedEvent;
 import interfaces.ActionCallback;
-import interfaces.BusFleetDataDownloadListener;
-import interfaces.BusPlateDataDownloadListener;
 import models.Bus;
 import org.json.JSONException;
 import org.json.JSONObject;

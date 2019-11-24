@@ -5,17 +5,18 @@
  *      - Ahmet Ziya Kanbur
  *
  */
-package events.bus_box;
+package events;
 
-import interfaces.Postable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import models.Bus;
+import models.RunSuggestion;
+
+import java.util.ArrayList;
 
 @AllArgsConstructor
-public class PlateUpdateEvent implements Postable {
+public class RunSuggestionsProcessFinishedEvent {
 
     @Getter
-    private Bus busData;
+    private ArrayList<RunSuggestion> suggestions;
 
 }
