@@ -81,7 +81,7 @@ public class BusFleetDataDownloader {
         try {
             org.jsoup.Connection.Response response = Jsoup.connect(URL_PREFIX + code)
                     .cookie("PHPSESSID", CookieAgent.FILO5_COOKIE )
-                    .method(org.jsoup.Connection.Method.POST)
+                    .method(org.jsoup.Connection.Method.GET)
                     .timeout(50000)
                     .execute();
 

@@ -86,6 +86,13 @@ public class BusStatusRepository {
             filterFlags.put(FleetFilterButtonAction.PLATE, true);
         }
 
+        if( runStatusSummary.get("TOTAL") == 0 ){
+            statusLabel = "Sefer bilgisi yok.";
+            subStatusLabel = "Filo verisi yok.";
+            status = BusRunStatus.UNDEF;
+            return;
+        }
+
         if( runStatusSummary.get(BusRunStatus.B).equals(runStatusSummary.get("TOTAL"))){
             // all waiting
             statusLabel = "Seferini bekliyor.";
@@ -108,7 +115,8 @@ public class BusStatusRepository {
             } else {
                 // finished the day but there are zayi runs
                 statusLabel = "Günü tamamladı.";
-                subStatusLabel = "Sefer yüzdesi: " + ( runStatusSummary.get(BusRunStatus.T) / runStatusSummary.get("TOTAL") ) * 100;
+                double percentage = Double.valueOf(runStatusSummary.get(BusRunStatus.T)) / Double.valueOf(runStatusSummary.get("TOTAL")) * 100;
+                subStatusLabel = "Sefer yüzdesi: %" + percentage;
                 status = BusRunStatus.T;
                 addAlarm(new Alarm(AlarmType.RED, code, "Sefer iptalleri var!"));
                 filterFlags.put(FleetFilterButtonAction.ZAYI, true);
