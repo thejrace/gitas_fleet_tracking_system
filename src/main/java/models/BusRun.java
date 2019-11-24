@@ -8,6 +8,10 @@
 package models;
 
 import lombok.Data;
+import org.omg.SendingContext.RunTime;
+import utils.RunTimeDiff;
+
+import java.util.ArrayList;
 
 @Data
 public class BusRun {
@@ -126,5 +130,23 @@ public class BusRun {
         this.routeDetails = routeDetails;
         this.status = status;
         this.statusCode = statusCode;
+    }
+
+    public ArrayList<String> getAsArrayList(){
+        ArrayList<String> output = new ArrayList<>();
+        output.add(String.valueOf(departureNo));
+        output.add(routeDetails);
+        output.add(driverCode); // @todo process it
+        output.add(arrivalTime);
+        output.add(ORER);
+        output.add(String.valueOf(RunTimeDiff.calculate(arrivalTime, ORER)));
+        output.add(alternativeORER);
+        output.add(departureTime);
+        output.add(estimatedEndTime);
+        output.add(endTime);
+        output.add(statusCode);
+        output.add(String.valueOf(RunTimeDiff.calculate(departureTime, endTime)));
+        output.add("100");
+        return output;
     }
 }

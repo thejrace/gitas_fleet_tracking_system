@@ -32,6 +32,12 @@ public class BusBoxPopupPageController {
     protected Bus bus;
 
     /**
+     * For cases where we dont want to pass full Bus model object
+     */
+    @Setter
+    protected String busCode;
+
+    /**
      * Close button
      */
     @FXML

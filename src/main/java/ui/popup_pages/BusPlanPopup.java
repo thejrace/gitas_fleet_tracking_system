@@ -40,7 +40,7 @@ public class BusPlanPopup extends Application {
                 e.printStackTrace();
             }
 
-            primaryStage.setScene(new Scene(content, 450, 222 ));
+            primaryStage.setScene(new Scene(content, 850, 600 ));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             //stage.getIcons().add(new Image(getClass().getResource("/gpts/res/img/gpts_ico.png").toExternalForm()));
 
