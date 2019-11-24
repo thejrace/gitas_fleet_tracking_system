@@ -9,6 +9,10 @@ package controllers;
 
 import bots.BusFleetDataDownloader;
 import bots.BusPlateDataDownloader;
+import bots.BusSpeedDownloader;
+import events.bus_box.BusPlateDataDownloadFinishedEvent;
+import events.bus_box.BusSpeedDownloadFinishedEvent;
+import events.bus_box.FleetDataDownloadFinishedEvent;
 import interfaces.ActionCallback;
 import interfaces.BusFleetDataDownloadListener;
 import interfaces.BusPlateDataDownloadListener;
@@ -17,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import repositories.BusStatusRepository;
 import utils.APIRequest;
+import utils.GitasEventBus;
 import utils.ThreadHelper;
 
 import java.util.HashMap;
@@ -38,6 +43,11 @@ public class BusController {
      * BusPlateDataDownloader instance
      */
     private BusPlateDataDownloader plateDataDownloader;
+
+    /**
+     * BusSpeedDownloader instance
+     */
+    private BusSpeedDownloader busSpeedDownloader;
 
     /**
      * BusStatusRepository instance
@@ -63,14 +73,14 @@ public class BusController {
         statusRepository = new BusStatusRepository(bus.getCode());
         // init plate download
         plateDataDownloader = new BusPlateDataDownloader(bus.getID());
+        // init speed downloader
+        busSpeedDownloader = new BusSpeedDownloader(bus.getCode());
     }
 
     /**
-     * Downloads fleet data and process' it for alarms and status updates
-     *
-     * @param listener
+     * Downloads and process the fleet data and emits event
      */
-    public void downloadAndProcessFleetData( BusFleetDataDownloadListener listener ){
+    public void downloadFleetData(){
         fleetDataDownloader.action();
         if( !fleetDataDownloader.isErrorFlag() ){
             // update model's data
@@ -86,16 +96,26 @@ public class BusController {
             // update bus model in the fleet
             ControllerHub.FleetController.updateBus(bus);
 
-            // notify busbox
-            listener.onFinish(bus, fleetDataDownloader, statusRepository);
-        } else {
-            listener.onError("Error!");
+            GitasEventBus.post(new FleetDataDownloadFinishedEvent(bus, statusRepository, fleetDataDownloader));
         }
     }
 
-    public void downloadPlateData(BusPlateDataDownloadListener listener){
+    /**
+     * Download plate data and emit event
+     */
+    public void downloadPlateData(){
         plateDataDownloader.action();
-        listener.onFinish(plateDataDownloader.getData());
+        GitasEventBus.post(new BusPlateDataDownloadFinishedEvent(bus.getCode(), plateDataDownloader.getData()));
+    }
+
+    /**
+     * Download speed data and emit event
+     */
+    public void downloadSpeedData(){
+        busSpeedDownloader.action();
+        if( !busSpeedDownloader.isErrorFlag() ){
+            GitasEventBus.post(new BusSpeedDownloadFinishedEvent(bus.getCode(), busSpeedDownloader.getSpeed()));
+        }
     }
 
     /**

@@ -7,11 +7,15 @@
  */
 package ui.component;
 
+import com.google.common.eventbus.Subscribe;
 import enums.BusRunStatus;
 import enums.BusRunStatusStyleClass;
+import events.bus_box.BusSpeedDownloadFinishedEvent;
 import events.bus_box.FleetDataDownloadEvent;
+import events.bus_box.FleetDataDownloadFinishedEvent;
 import events.bus_box.PlateUpdateEvent;
 import interfaces.MultipleActionCallback;
+import interfaces.Subscriber;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -30,7 +34,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class BusBoxController implements Initializable {
+public class BusBoxController implements Initializable, Subscriber {
 
     /**
      * Bus model
@@ -121,6 +125,11 @@ public class BusBoxController implements Initializable {
      * Last plate data download timestamp label
      */
     @FXML private Label uiPlateDataDownloadTimestampLabel;
+
+    /**
+     * Speed indicator label
+     */
+    @FXML private Label uiSpeedLabel;
 
     /**
      * Flag to check if BusBox is initialized with bus data
@@ -234,6 +243,7 @@ public class BusBoxController implements Initializable {
         checkPlateClass();
     }
 
+
     /**
      * Change the style of the busbox @todo try it with css style class
      *
@@ -281,6 +291,20 @@ public class BusBoxController implements Initializable {
         block.setPrefHeight(Region.USE_COMPUTED_SIZE);
         block.setMinHeight(Region.USE_PREF_SIZE);
         block.setMaxHeight(Region.USE_PREF_SIZE);
+    }
+
+
+
+    /**
+     * Subscribe the bus speed download event. Triggered from BusController.downloadSpeedData().
+     *
+     * @param event
+     */
+    @Subscribe
+    private void subscribeSpeedDownloadFinishedEvent(BusSpeedDownloadFinishedEvent event){
+        if( event.getBusCode().equals(bus.getCode())){
+            uiSpeedLabel.setText(event.getSpeed() + "km/s");
+        }
     }
 
 }

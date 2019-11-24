@@ -7,23 +7,16 @@
  */
 package ui.component;
 
-import bots.BusFleetDataDownloader;
 import com.google.common.eventbus.Subscribe;
 import controllers.BusController;
-import events.bus_box.FleetDataDownloadEvent;
-import events.bus_box.PlanPopupOpenEvent;
-import events.bus_box.PlateUpdateEvent;
-import interfaces.BusFleetDataDownloadListener;
+import events.bus_box.*;
 import interfaces.Subscriber;
 import javafx.stage.Stage;
 import models.Bus;
-import org.json.JSONObject;
-import repositories.BusStatusRepository;
 import ui.UIComponent;
 import ui.popup_pages.BusPlanPopup;
 import utils.GitasEventBus;
 import utils.ThreadHelper;
-
 
 public class BusBox extends UIComponent implements Subscriber {
 
@@ -33,15 +26,23 @@ public class BusBox extends UIComponent implements Subscriber {
     private Bus bus;
 
     /**
-     * Data download thread guard
+     * Fleet data download thread guard
      */
-    private boolean activeFlag = true;
+    private boolean fleetDataDownloadFlag = true;
+
+    /**
+     * Speed data download thread guard
+     */
+    private boolean speedDataDownloadFlag = true;
 
     /**
      * BusController instance
      */
     private BusController busController;
 
+    /**
+     * BusPlanPopup instance
+     */
     private BusPlanPopup busPlanPopup;
 
     /**
@@ -63,39 +64,19 @@ public class BusBox extends UIComponent implements Subscriber {
         busController.initialize();
 
         ThreadHelper.func( () -> {
-            while( activeFlag ){
+            while( fleetDataDownloadFlag ){
+                System.out.println(bus.getCode() + " --- Fleet Data download");
 
-                triggerFleetDataAction(false);
+                downloadFleetData(false);
 
                 ThreadHelper.delay(50000); // @todo get from settings
             }
         });
 
-    }
-
-    /**
-     * Download and process the fleet data
-     */
-    private void downloadAndProcessFleetData(){
-        busController.downloadAndProcessFleetData(new BusFleetDataDownloadListener() {
-            @Override
-            public void onFinish(Bus updatedBus, BusFleetDataDownloader busFleetDataDownloader, BusStatusRepository busStatusRepository) {
-                // update model
-                bus = updatedBus;
-
-                // update box
-                ThreadHelper.runOnUIThread(() -> {
-                    ((BusBoxController)getController()).setData(bus);
-                    ((BusBoxController)getController()).setStatusData(
-                            busStatusRepository.getStatus(),
-                            busStatusRepository.getStatusLabel(),
-                            busStatusRepository.getSubStatusLabel(),
-                            busFleetDataDownloader.getRunStatusSummary());
-                });
-            }
-            @Override
-            public void onError(String error) {
-                System.out.println(bus.getCode() + " --> " + error);
+        ThreadHelper.func(() -> {
+            while( speedDataDownloadFlag ){
+                downloadSpeedData(false);
+                ThreadHelper.delay(50000); // @todo get from settings
             }
         });
     }
@@ -105,66 +86,111 @@ public class BusBox extends UIComponent implements Subscriber {
      *
      * @param async flag to determine the action will be handled in a thread
      */
-    public void triggerFleetDataAction( boolean async ){
+    public void downloadFleetData( boolean async ){
         if( async ){
             ThreadHelper.func(() -> {
-                downloadAndProcessFleetData();
+                busController.downloadFleetData();
             });
         } else {
-            downloadAndProcessFleetData();
+            busController.downloadFleetData();
         }
     }
 
-    private void downloadPlateData(){
-        busController.downloadPlateData((JSONObject data) -> {
-            bus.updatePlates(data);
+    /**
+     * Downloads plate data
+     */
+    private void downloadPlateData(boolean async){
+        if( async ){
+            ThreadHelper.func(() -> {
+                busController.downloadPlateData();
+            });
+        } else {
+            busController.downloadPlateData();
+        }
+    }
+
+    /**
+     * Downloads speed data
+     */
+    private void downloadSpeedData(boolean async){
+        if( async ){
+            ThreadHelper.func(() -> {
+                busController.downloadSpeedData();
+            });
+        } else {
+            busController.downloadSpeedData();
+        }
+    }
+
+    /**
+     * Subscribe the fleet data download trigger event. Triggered from BusBoxController.
+     *
+     * @param event
+     */
+    @Subscribe
+    private void subscribeFleetDataTriggerEvent(FleetDataDownloadEvent event){
+        final Bus busData = event.getBusData();
+        if( busData.getCode().equals(bus.getCode()) ){
+            downloadFleetData(true);
+        }
+    }
+
+    /**
+     * Subscribe fleet data download finished event. Triggered from BusController.downloadFleetData().
+     *
+     * @param event
+     */
+    @Subscribe
+    private void subscribeFleetDataDownloadFinishedEvent(FleetDataDownloadFinishedEvent event){
+        if( bus.getCode().equals(event.getBus().getCode())){
+            bus = event.getBus();
+            ThreadHelper.runOnUIThread( () -> {
+                ((BusBoxController)getController()).setData(bus);
+                ((BusBoxController)getController()).setStatusData(
+                        event.getBusStatusRepository().getStatus(),
+                        event.getBusStatusRepository().getStatusLabel(),
+                        event.getBusStatusRepository().getSubStatusLabel(),
+                        event.getBusFleetDataDownloader().getRunStatusSummary());
+            });
+        }
+    }
+
+    /**
+     * Subscribe plate data download finished event. Triggered from BusController.downloadPlateData().
+     *
+     * @param event
+     */
+    @Subscribe
+    private void subscribePlateDataDownloadFinishedFlag(BusPlateDataDownloadFinishedEvent event){
+        if( bus.getCode().equals(event.getBusCode())){
+            bus.updatePlates(event.getNewData());
             ThreadHelper.runOnUIThread(() -> {
                 ((BusBoxController)getController()).setData(bus);
                 ((BusBoxController) getController()).updatePlateDownloadTimestamp();
             });
-        });
-    }
-
-    public void triggerPlateDataAction( boolean async ){
-        if( async ){
-            ThreadHelper.func(() -> {
-                downloadPlateData();
-            });
-        } else {
-            downloadPlateData();
         }
     }
 
-    public void downloadSpeedData(){
-
-    }
-
-    public void downloadMessageData(){
-
-    }
-
-    public void downloadIYSData(){
-
-    }
-
+    /**
+     * Subscribe the plate data update event. Triggered from BusPlateFormPopupController
+     *
+     * @param event
+     */
     @Subscribe
     private void subscribePlateDataTriggerEvent(PlateUpdateEvent event) {
         final Bus busData = event.getBusData();
         if( busData.getCode().equals(bus.getCode()) ){
             bus.setOfficialPlate(busData.getOfficialPlate());
             bus.setActivePlate(busData.getActivePlate());
-            triggerPlateDataAction(true);
+            downloadPlateData(true);
         }
     }
 
-    @Subscribe
-    private void subscribeFleetDataTriggerEvent(FleetDataDownloadEvent event){
-        final Bus busData = event.getBusData();
-        if( busData.getCode().equals(bus.getCode()) ){
-            triggerFleetDataAction(true);
-        }
-    }
-
+    /**
+     * Subscribe the BusPlanPopup opener event. Triggered from BusBoxButton click event.
+     *
+     * @param event
+     */
     @Subscribe
     private void subscribePlanPopupOpenEvent(PlanPopupOpenEvent event){
         final Bus busData = event.getBusData();
