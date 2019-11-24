@@ -166,14 +166,6 @@ public class BusBoxController implements Initializable {
         this.bus = bus;
 
         if( !dataInitializedFlag ){
-            // @todo FIX this
-            uiBB0.setBusCode(bus.getCode());
-            uiBB1.setBusCode(bus.getCode());
-            uiBB2.setBusCode(bus.getCode());
-            uiBB3.setBusCode(bus.getCode());
-            uiBB4.setBusCode(bus.getCode());
-            uiBB5.setBusCode(bus.getCode());
-
             // set ID for UI manipulation
             uiBusBoxWrapper.setId(bus.getCode());
 
@@ -181,6 +173,14 @@ public class BusBoxController implements Initializable {
 
             dataInitializedFlag = true;
         }
+
+        // @todo FIX this
+        uiBB0.setBus(this.bus); // we pass the updated model to the navigation buttons
+        uiBB1.setBus(this.bus);
+        uiBB2.setBus(this.bus);
+        uiBB3.setBus(this.bus);
+        uiBB4.setBus(this.bus);
+        uiBB5.setBus(this.bus);
 
         updateBaseData();
     }

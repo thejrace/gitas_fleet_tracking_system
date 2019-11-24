@@ -1,3 +1,10 @@
+/*
+ *  Gitas Fleet Tracking System 2019
+ *
+ *  Contributors:
+ *      - Ahmet Ziya Kanbur
+ *
+ */
 package ui.popup_pages;
 
 import controllers.ControllerHub;
@@ -11,9 +18,9 @@ import javafx.stage.StageStyle;
 import models.Bus;
 import utils.Common;
 
-public class BusPlateFormPopup extends Application {
+public class BusPlanPopup extends Application {
 
-    private BusPlateFormPopupController controller;
+    private BusPlanPopupController controller;
 
     // @todo SAVE UI Parent?
 
@@ -21,9 +28,9 @@ public class BusPlateFormPopup extends Application {
     public void start(Stage primaryStage) throws Exception{
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/plate_update_form_popup.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/bus_plan_popup.fxml"));
             Parent content = loader.load();
-            primaryStage.setTitle("Otobüs Plan");
+            primaryStage.setTitle("Otobüs Plaka Güncelleme Formu");
 
             try {
                 Font.loadFont(getClass().getResource("/font/montserratbold.otf").toExternalForm().replace("%20", " "), 10);
@@ -58,5 +65,4 @@ public class BusPlateFormPopup extends Application {
         controller.setBus(bus);
         controller.updateUI();
     }
-
 }

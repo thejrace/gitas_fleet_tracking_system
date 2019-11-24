@@ -11,13 +11,16 @@ import bots.BusFleetDataDownloader;
 import com.google.common.eventbus.Subscribe;
 import controllers.BusController;
 import events.bus_box.FleetDataDownloadEvent;
+import events.bus_box.PlanPopupOpenEvent;
 import events.bus_box.PlateUpdateEvent;
 import interfaces.BusFleetDataDownloadListener;
 import interfaces.Subscriber;
+import javafx.stage.Stage;
 import models.Bus;
 import org.json.JSONObject;
 import repositories.BusStatusRepository;
 import ui.UIComponent;
+import ui.popup_pages.BusPlanPopup;
 import utils.GitasEventBus;
 import utils.ThreadHelper;
 
@@ -38,6 +41,8 @@ public class BusBox extends UIComponent implements Subscriber {
      * BusController instance
      */
     private BusController busController;
+
+    private BusPlanPopup busPlanPopup;
 
     /**
      * Constructor
@@ -157,6 +162,27 @@ public class BusBox extends UIComponent implements Subscriber {
         final Bus busData = event.getBusData();
         if( busData.getCode().equals(bus.getCode()) ){
             triggerFleetDataAction(true);
+        }
+    }
+
+    @Subscribe
+    private void subscribePlanPopupOpenEvent(PlanPopupOpenEvent event){
+        final Bus busData = event.getBusData();
+        if( busData.getCode().equals(bus.getCode()) ){
+            try {
+                // @todo check if opened before
+                if( busPlanPopup == null ){
+                    busPlanPopup = new BusPlanPopup();
+                }
+                try {
+                    busPlanPopup.start( new Stage() );
+                    busPlanPopup.setData(bus);
+                } catch( Exception e ){
+                    e.printStackTrace();
+                }
+            } catch ( Exception e ){
+                e.printStackTrace();
+            }
         }
     }
 

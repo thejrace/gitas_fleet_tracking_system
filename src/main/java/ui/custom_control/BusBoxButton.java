@@ -9,12 +9,15 @@ package ui.custom_control;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import enums.BusBoxButtonAction;
+import events.bus_box.PlanPopupOpenEvent;
 import javafx.beans.NamedArg;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import lombok.Setter;
+import models.Bus;
+import utils.GitasEventBus;
 
 import java.io.IOException;
 
@@ -24,7 +27,7 @@ public class BusBoxButton extends Button {
     private FontAwesomeIconView icon;
 
     @Setter
-    private String busCode;
+    private Bus bus;
 
     /**
      * Constructor
@@ -50,9 +53,9 @@ public class BusBoxButton extends Button {
             // click action
             setOnAction( ev -> {
 
-                // @todo, static bus list e ulaşıp, tetik vericez
-
-                System.out.println(BusBoxButtonAction.values()[action] + " ---  " + busCode );
+                if( BusBoxButtonAction.values()[action] == BusBoxButtonAction.PLAN ){
+                    GitasEventBus.post(new PlanPopupOpenEvent(bus));
+                }
 
             });
 

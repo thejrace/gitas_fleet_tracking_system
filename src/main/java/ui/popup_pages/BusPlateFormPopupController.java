@@ -12,31 +12,16 @@ import controllers.ControllerHub;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import events.bus_box.PlateUpdateEvent;
 import interfaces.ActionCallback;
-import interfaces.NoParamCallback;
-import interfaces.Subscriber;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import lombok.Setter;
-import models.Bus;
 import utils.GitasEventBus;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BusPlateFormPopupController implements Initializable {
-
-    /**
-     * Bus model
-     */
-    private Bus bus;
-
-    /**
-     * Bus code label in the title
-     */
-    @FXML private Label uiBusCodeLabel;
+public class BusPlateFormPopupController extends BusBoxPopupPageController implements Initializable {
 
     /**
      * Active plate input field
@@ -52,17 +37,6 @@ public class BusPlateFormPopupController implements Initializable {
      * Submit button
      */
     @FXML private Button uiActionBtn;
-
-    /**
-     * Close button
-     */
-    @FXML private FontAwesomeIconView uiCloseBtn;
-
-    /**
-     * Index of the popup page
-     */
-    @Setter
-    private int pageIndex;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,20 +63,14 @@ public class BusPlateFormPopupController implements Initializable {
             });
         });
 
-        uiCloseBtn.setOnMouseClicked( ev -> {
-            ControllerHub.PopupPageController.closePage(pageIndex);
-        });
-
     }
 
     /**
      * Set data to the layout
-     *
-     * @param bus
      */
-    public void setData(Bus bus){
-        this.bus = bus;
-        uiBusCodeLabel.setText(bus.getCode());
+    public void updateUI(){
+        initCommonEvents();
+
         uiActivePlateInput.setText(bus.getActivePlate());
         uiOfficialPlateInput.setText(bus.getOfficialPlate());
     }
