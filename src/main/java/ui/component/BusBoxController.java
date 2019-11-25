@@ -200,7 +200,7 @@ public class BusBoxController implements Initializable {
         ThreadHelper.runOnUIThread( () -> {
             uiNotfLabel.setText(statusLabel);
             uiSubNotfLabel.setText(subStatusLabel);
-            uiLed.getStyleClass().add(1, BusRunStatusStyleClass.get(status));
+            uiLed.getStyleClass().set(1, BusRunStatusStyleClass.get(status));
 
             uiSummary0.setText(String.valueOf(runStatusSummary.get(BusRunStatus.T)));
             uiSummary1.setText(String.valueOf(runStatusSummary.get(BusRunStatus.B)));

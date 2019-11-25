@@ -19,7 +19,11 @@
    <children>
       <AnchorPane prefHeight="200.0" styleClass="bus-box-default-header">
          <children>
-            <Circle fx:id="uiLed" styleClass="status-led" radius="11.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0">
+            <Circle fx:id="uiLed" radius="11.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0">
+               <styleClass>
+                  <String fx:value="status-led" />
+                  <String fx:value="default" />
+               </styleClass>
             </Circle>
             <Label fx:id="uiBusCodeLabel" styleClass="bus-box-header-label" text="A-1636" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="5.0" />
             <Label fx:id="uiPlateLabel" styleClass="box-header-plate" text="34 AG 3882" AnchorPane.leftAnchor="95.0" AnchorPane.topAnchor="5.0" />
