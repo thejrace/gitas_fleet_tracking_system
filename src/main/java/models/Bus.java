@@ -95,4 +95,13 @@ public class Bus {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Returns the last ORER of the bus. Used in RunSuggestions
+     *
+     * @return
+     */
+    public String getLastORER(){
+        return getRunData().get(runData.size()-1).getORER();
+    }
 }

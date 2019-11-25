@@ -14,6 +14,7 @@ import events.RunSuggestionsTriggerEvent;
 import interfaces.Subscriber;
 import repositories.RunSuggestionsRepository;
 import utils.GitasEventBus;
+import utils.ThreadHelper;
 
 public class RunSuggestionsController implements Subscriber {
 
@@ -46,19 +47,20 @@ public class RunSuggestionsController implements Subscriber {
      * Download and process suggestions
      */
     public void downloadSuggestions(){
-        // first download route list
-        routeDataDownloader.action();
-        /*fleetRunSuggestionsDataDownloader.setRoutes(routeDataDownloader.getData());
-        // download suggestions
-        fleetRunSuggestionsDataDownloader.action();
-        if( fleetRunSuggestionsDataDownloader.isErrorFlag() ){
-            // process data
-            runSuggestionsRepository.processData(fleetRunSuggestionsDataDownloader.getData());
+        ThreadHelper.func(() -> {
+            // first download route list
+            routeDataDownloader.action();
+            fleetRunSuggestionsDataDownloader.setRoutes(routeDataDownloader.getData());
+            // download suggestions
+            fleetRunSuggestionsDataDownloader.action();
+            if( fleetRunSuggestionsDataDownloader.isErrorFlag() ){
+                // process data
+                runSuggestionsRepository.processData(fleetRunSuggestionsDataDownloader.getData());
 
-            // post event to the bus
+                // post event to the bus
 
-        }*/
-
+            }
+        });
     }
 
     @Subscribe

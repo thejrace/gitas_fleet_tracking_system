@@ -7,16 +7,13 @@
  */
 package bots;
 
-import cookie_agent.CookieAgent;
 import enums.BusRunStatus;
 import lombok.Getter;
 import models.BusRun;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import utils.Common;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,10 +62,9 @@ public class BusFleetDataDownloader extends IETTDataDownloader {
     /**
      * Download action
      */
+    @Override
     public void action(){
-        errorFlag = false;
-
-        getClearance();
+        super.action();
 
         // clear list
         runData = new ArrayList<>();
@@ -83,19 +79,7 @@ public class BusFleetDataDownloader extends IETTDataDownloader {
 
         String URL_PREFIX = "https://filotakip.iett.gov.tr/_FYS/000/sorgu.php?konum=ana&konu=sefer&otobus="; // @todo get from settings
 
-        try {
-            org.jsoup.Connection.Response response = Jsoup.connect(URL_PREFIX + code)
-                    .cookie("PHPSESSID", CookieAgent.FILO5_COOKIE )
-                    .method(org.jsoup.Connection.Method.GET)
-                    .timeout(50000)
-                    .execute();
-
-            release();
-
-            parseFleetData(response.parse());
-        } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-        }
+        request(URL_PREFIX + code, org.jsoup.Connection.Method.GET, 50000 );
     }
 
     /**
@@ -103,7 +87,8 @@ public class BusFleetDataDownloader extends IETTDataDownloader {
      *
      * @param document
      */
-    private void parseFleetData( Document document ){
+    @Override
+    protected void parseData( Document document ){
 
         Elements table;
         Elements rows;

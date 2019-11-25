@@ -20,6 +20,7 @@ import utils.RunTimeDiff;
 import utils.ThreadHelper;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -120,8 +121,9 @@ public class BusStatusRepository {
             } else {
                 // finished the day but there are zayi runs
                 statusLabel = "Günü tamamladı.";
+                DecimalFormat df = new DecimalFormat("#.##");
                 double percentage = Double.valueOf(runStatusSummary.get(BusRunStatus.T)) / Double.valueOf(runStatusSummary.get("TOTAL")) * 100;
-                subStatusLabel = "Sefer yüzdesi: %" + percentage;
+                subStatusLabel = "Sefer yüzdesi: %" + df.format(percentage);
                 status = BusRunStatus.T;
                 addAlarm(new Alarm(AlarmType.RED, code, "Sefer iptalleri var!"));
                 filterFlags.put(FleetFilterButtonAction.ZAYI, true);

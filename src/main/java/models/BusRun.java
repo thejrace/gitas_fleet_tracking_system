@@ -132,6 +132,23 @@ public class BusRun {
         this.statusCode = statusCode;
     }
 
+    /**
+     * Shorter constructor, used in RunSuggestions
+     *
+     * @param busCode
+     * @param routeDetails
+     * @param ORER
+     * @param status
+     * @param statusCode
+     */
+    public BusRun( String busCode, String routeDetails, String ORER, String status, String statusCode ){
+        this.busCode = busCode;
+        this.ORER = ORER;
+        this.routeDetails = routeDetails;
+        this.status = status;
+        this.statusCode = statusCode;
+    }
+
     public ArrayList<String> getAsArrayList(){
         ArrayList<String> output = new ArrayList<>();
         output.add(String.valueOf(departureNo));

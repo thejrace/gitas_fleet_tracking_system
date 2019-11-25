@@ -8,8 +8,13 @@
 package bots;
 
 import controllers.ControllerHub;
+import cookie_agent.CookieAgent;
 import lombok.Getter;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import utils.ThreadHelper;
+
+import java.io.IOException;
 
 public class IETTDataDownloader {
 
@@ -26,13 +31,47 @@ public class IETTDataDownloader {
     protected String errorMessage;
 
     /**
-     *  Wait until we get clearance from fleet request limiter
+     * Download action. it's overridden in each child class
      */
-    protected void getClearance(){
-        //
-        while(!ControllerHub.DownloaderController.request()){
-            ThreadHelper.delay(100);
+    public void action(){
+        errorFlag = false;
+        errorMessage = "";
+
+        getClearance();
+    }
+
+    /**
+     * Requester method
+     *
+     * @param url
+     * @param method
+     * @param timeout
+     *
+     * @return
+     */
+    protected void request(String url, org.jsoup.Connection.Method method, int timeout){
+        try {
+            org.jsoup.Connection.Response response = Jsoup.connect(url)
+                    .cookie("PHPSESSID", CookieAgent.FILO5_COOKIE )
+                    .method(method)
+                    .timeout(timeout)
+                    .execute();
+
+            release();
+
+            parseData(response.parse());
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * Data parser method, it's overridden in each child class
+     *
+     * @param document
+     */
+    protected void parseData( Document document ){
+
     }
 
     /**
@@ -42,4 +81,12 @@ public class IETTDataDownloader {
         ControllerHub.DownloaderController.release();
     }
 
+    /**
+     *  Wait until we get clearance from fleet request limiter
+     */
+    protected void getClearance(){
+        while(!ControllerHub.DownloaderController.request()){
+            ThreadHelper.delay(10);
+        }
+    }
 }

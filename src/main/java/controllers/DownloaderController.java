@@ -49,7 +49,7 @@ public class DownloaderController {
     /**
      * Increment active counter
      */
-    private void incCounter(){
+    private synchronized void incCounter(){
         concurrentDownloadCounter++;
         System.out.println(concurrentDownloadCounter + " active IETT downloaders");
     }
@@ -57,7 +57,7 @@ public class DownloaderController {
     /**
      * Decrement active counter
      */
-    private void decCounter(){
+    private synchronized void decCounter(){
         concurrentDownloadCounter--;
     }
 
