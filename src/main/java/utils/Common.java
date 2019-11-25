@@ -129,6 +129,16 @@ public class Common {
         return "N/A";
     }
 
+    public static String convertToSafeLink( String code ){
+        if( code.indexOf("Ç") > 0 ) code = code.replace("Ç", "C.");
+        if( code.indexOf("Ş") > 0 ) code = code.replace("Ş", "S.");
+        if( code.indexOf("Ü") > 0 ) code = code.replace("Ü", "U.");
+        if( code.indexOf("Ö") > 0 ) code = code.replace("Ö", "O.");
+        if( code.indexOf("İ") > 0 ) code = code.replace("İ", "I.");
+        return code;
+
+    }
+
     static class Delta { double x, y; }
 
     public static void makeDraggable(Node node) {

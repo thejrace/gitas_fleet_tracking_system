@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public class RunSuggestionStatusUpdateEvent implements Postable {
+public class RunSuggestionsStatusUpdateEvent implements Postable {
 
     @Getter
     private String activeStatus;

@@ -149,6 +149,11 @@ public class BusRun {
         this.statusCode = statusCode;
     }
 
+    /**
+     * Get as arraylist to fill fleet table without explicitly change the labels.
+     *
+     * @return
+     */
     public ArrayList<String> getAsArrayList(){
         ArrayList<String> output = new ArrayList<>();
         output.add(String.valueOf(departureNo));
@@ -166,4 +171,20 @@ public class BusRun {
         output.add("100");
         return output;
     }
+
+    /**
+     * Get as arraylist for RunSuggestionItem.
+     *
+     * @return
+     */
+    public ArrayList<String> getAsArrayListRunSuggestions(){
+        ArrayList<String> output = new ArrayList<>();
+        output.add(busCode);
+        output.add(routeDetails);
+        output.add(ORER);
+        output.add(status);
+        output.add(statusCode);
+        return output;
+    }
+
 }

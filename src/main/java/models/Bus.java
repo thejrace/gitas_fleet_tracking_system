@@ -102,6 +102,21 @@ public class Bus {
      * @return
      */
     public String getLastORER(){
-        return getRunData().get(runData.size()-1).getORER();
+        try {
+            return getRunData().get(runData.size()-1).getORER();
+        } catch( ArrayIndexOutOfBoundsException e ){}
+        return "";
+    }
+
+    /**
+     * Returns the last RouteDetails string of the bus. Used in RunSuggestions
+     *
+     * @return
+     */
+    public String getLastRouteDetails() {
+        try {
+            return getRunData().get(runData.size()-1).getRouteDetails();
+        } catch( ArrayIndexOutOfBoundsException e ){}
+        return "";
     }
 }

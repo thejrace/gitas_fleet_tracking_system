@@ -10,13 +10,10 @@ package models;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.ArrayList;
+
 @AllArgsConstructor
 public class RunSuggestion {
-
-    /**
-     * Code of the bus we'll replace
-     */
-    private String actualBusCode;
 
     /**
      * Code of the suggested bus
@@ -31,27 +28,16 @@ public class RunSuggestion {
     private String ORER;
 
     /**
-     * Last ORER data of our bus
-     */
-    @Getter
-    private String lastORER;
-
-    /**
      * Route details of the run
      */
     @Getter
     private String routeDetails;
 
-    /**
-     * Status of the run
-     */
-    @Getter
-    private String status;
-
-    /**
-     * Status code of the run
-     */
-    @Getter
-    private String statusCode;
-
+    public ArrayList<String> getAsArray() {
+        ArrayList<String> output = new ArrayList<>();
+        output.add(busCode);
+        output.add(ORER);
+        output.add(routeDetails);
+        return output;
+    }
 }

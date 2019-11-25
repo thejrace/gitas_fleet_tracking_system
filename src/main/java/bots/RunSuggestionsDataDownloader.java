@@ -8,8 +8,9 @@
 package bots;
 
 import enums.BusRunStatus;
+import events.RunSuggestionsStatusUpdateEvent;
+import interfaces.Subscriber;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import models.BusRun;
 import models.Route;
@@ -17,19 +18,26 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import utils.Common;
+import utils.GitasEventBus;
 import utils.RunTimeDiff;
 import utils.ThreadHelper;
 
 import java.util.ArrayList;
 
-@NoArgsConstructor
-public class RunSuggestionsDataDownloader extends IETTDataDownloader {
+public class RunSuggestionsDataDownloader extends IETTDataDownloader implements Subscriber {
 
     @Getter
     private ArrayList<BusRun> data;
 
     @Setter
     private ArrayList<Route> routes;
+
+    @Getter
+    private int runnerThreadCounter = 0;
+
+    public RunSuggestionsDataDownloader(){
+        GitasEventBus.register(this);
+    }
 
     /**
      * Download action
@@ -38,10 +46,16 @@ public class RunSuggestionsDataDownloader extends IETTDataDownloader {
     public void action(){
         super.action();
 
+        runnerThreadCounter = 0;
+
         // clear list
         data = new ArrayList<>();
 
         String URL_PREFIX = "https://filotakip.iett.gov.tr/_FYS/000/sorgu.php?konum=ana&konu=sefer&hat=";
+
+        GitasEventBus.post(new RunSuggestionsStatusUpdateEvent("Hatlar taranıyor.."));
+
+        int size = routes.size();
 
         for( int k = 0; k < routes.size(); k++ ){
             Route route = routes.get(k);
@@ -51,9 +65,10 @@ public class RunSuggestionsDataDownloader extends IETTDataDownloader {
                 getClearance();
                 System.out.println(route.getCode() +" run suggestion scan!");
                 request(URL_PREFIX + route.getUrlSafeCode(), org.jsoup.Connection.Method.GET, 50000);
+                System.out.println(route.getCode() +" run suggestion scan FINISHED!");
+                runnerThreadCounter++;
+                GitasEventBus.post(new RunSuggestionsStatusUpdateEvent("Hatlar taranıyor.( " + runnerThreadCounter + "/"+size + " tamamlandı. )" ));
             });
-
-
         }
     }
 
@@ -101,5 +116,14 @@ public class RunSuggestionsDataDownloader extends IETTDataDownloader {
         } catch( Exception e ){
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Determine if all runner threads are finished downloading.
+     *
+     * @return
+     */
+    public boolean ready() {
+        return runnerThreadCounter == routes.size();
     }
 }

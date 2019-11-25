@@ -9,35 +9,67 @@ package bots;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import models.Route;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import utils.APIRequest;
+import utils.Common;
 
 import java.util.ArrayList;
 
 @NoArgsConstructor
 public class RouteDataDownloader extends IETTDataDownloader {
 
+    /**
+     * Output data
+     */
     @Getter
     private ArrayList<Route> data;
+
+    /**
+     * Flag to decide which data source will be used
+     */
+    @Setter
+    private boolean apiFlag = true;
 
     /**
      * Download action
      */
     public void action(){
-        super.action();
-
         // clear list
         data = new ArrayList<>();
 
-        String URL = "https://filotakip.iett.gov.tr/_FYS.php";
+        if( apiFlag ){
+            try{
+                JSONArray response = new JSONObject(APIRequest.GET(APIRequest.API_URL+"routes/filo5")).getJSONArray("routes");
+                for( int k = 0; k < response.length(); k++ ){
+                    String code = response.getString(k);
+                    data.add(new Route(
+                            code,
+                            null,
+                            Common.convertToSafeLink(code)
+                    ));
+                }
+            } catch( JSONException e ){
+                e.printStackTrace();
+            }
 
-        request(URL, org.jsoup.Connection.Method.GET, 50000);
+        } else {
+            super.action();
+
+            String URL = "https://filotakip.iett.gov.tr/_FYS.php";
+
+            request(URL, org.jsoup.Connection.Method.GET, 50000);
+        }
     }
 
     /**
-     * Parse the data
+     * Parse the data. Used if datasource is not API.
      *
      * @param document
      */

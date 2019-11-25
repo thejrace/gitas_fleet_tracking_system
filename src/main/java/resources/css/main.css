@@ -43,7 +43,7 @@
 
 
 .lbl-bold{
-    -fx-font-weight:bold;
+    -fx-font-family:"Montserrat Bold";
 }
 .lbl-h1 {
     -fx-font-size:26;
@@ -557,6 +557,26 @@
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #ffa5a5;
 }
+.bus-plan-tr-yellow {
+    -fx-background-color: #aba766;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #c3bf73;
+}
+
+.bus-plan-tr-yellow .text{
+    -fx-font-family:"Montserrat SemiBold";
+    -fx-font-size:12;
+}
+
+.bus-plan-tr-transparent{
+    -fx-background-color: #2c2c2c;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #4d4d4d;
+}
+.bus-plan-tr-transparent .text{
+    -fx-fill: #909090;
+}
+
 .bus-plan-header{
     -fx-padding: 10 0 10 10;
     -fx-font-weight: bold;
@@ -571,6 +591,7 @@
     -fx-pref-height:50;
     -fx-padding-top:20;
 }
+
 .bus-plan-bottom-nav {
     -fx-cursor:hand;
 }

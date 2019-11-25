@@ -7,16 +7,19 @@
  */
 package events;
 
+import interfaces.Postable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import models.BusRun;
 import models.RunSuggestion;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @AllArgsConstructor
-public class RunSuggestionsProcessFinishedEvent {
+public class RunSuggestionsProcessFinishedEvent implements Postable {
 
     @Getter
-    private ArrayList<RunSuggestion> suggestions;
+    private Map<BusRun, ArrayList<RunSuggestion>> suggestions;
 
 }

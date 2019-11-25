@@ -53,13 +53,18 @@ public class RunSuggestionsController implements Subscriber {
             fleetRunSuggestionsDataDownloader.setRoutes(routeDataDownloader.getData());
             // download suggestions
             fleetRunSuggestionsDataDownloader.action();
-            if( fleetRunSuggestionsDataDownloader.isErrorFlag() ){
-                // process data
-                runSuggestionsRepository.processData(fleetRunSuggestionsDataDownloader.getData());
 
-                // post event to the bus
-
+            // wait all downloaders to finish
+            while( !fleetRunSuggestionsDataDownloader.ready() ){
+                ThreadHelper.delay(100);
             }
+
+            // process data
+            runSuggestionsRepository.processData(fleetRunSuggestionsDataDownloader.getData());
+
+            // post event to the bus
+
+
         });
     }
 
