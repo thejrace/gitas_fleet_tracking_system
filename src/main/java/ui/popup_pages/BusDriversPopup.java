@@ -18,9 +18,9 @@ import javafx.stage.StageStyle;
 import models.Bus;
 import utils.Common;
 
-public class BusPlanPopup extends Application {
+public class BusDriversPopup  extends Application {
 
-    private BusPlanPopupController controller;
+    private BusDriversPopupController controller;
 
     // @todo SAVE UI Parent?
 
@@ -28,9 +28,9 @@ public class BusPlanPopup extends Application {
     public void start(Stage primaryStage) throws Exception{
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/bus_plan_popup.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/bus_drivers_popup.fxml"));
             Parent content = loader.load();
-            primaryStage.setTitle("Otobüs Plan");
+            primaryStage.setTitle("Otobüs Sürücü Detayları");
 
             try {
                 Font.loadFont(getClass().getResource("/font/montserratbold.otf").toExternalForm().replace("%20", " "), 10);
@@ -65,4 +65,5 @@ public class BusPlanPopup extends Application {
         controller.setBus(bus);
         controller.updateUI();
     }
+
 }

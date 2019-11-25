@@ -9,6 +9,7 @@ package ui.custom_control;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import enums.BusBoxButtonAction;
+import events.bus_box.BusDriversPopupOpenedEvent;
 import events.bus_box.PlanPopupOpenEvent;
 import javafx.beans.NamedArg;
 import javafx.fxml.FXML;
@@ -55,6 +56,8 @@ public class BusBoxButton extends Button {
 
                 if( BusBoxButtonAction.values()[action] == BusBoxButtonAction.PLAN ){
                     GitasEventBus.post(new PlanPopupOpenEvent(bus));
+                } else if( BusBoxButtonAction.values()[action] == BusBoxButtonAction.DRIVER_INFO ){
+                    GitasEventBus.post(new BusDriversPopupOpenedEvent(bus));
                 }
 
             });

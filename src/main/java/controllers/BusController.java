@@ -7,14 +7,8 @@
  */
 package controllers;
 
-import bots.BusFleetDataDownloader;
-import bots.BusPlateDataDownloader;
-import bots.BusSpeedDownloader;
-import bots.PDKSDataDownloader;
-import events.bus_box.BusPlateDataDownloadFinishedEvent;
-import events.bus_box.BusSpeedDownloadFinishedEvent;
-import events.bus_box.FleetDataDownloadFinishedEvent;
-import events.bus_box.PDKSDataDownloadFinishedEvent;
+import bots.*;
+import events.bus_box.*;
 import interfaces.ActionCallback;
 import models.Bus;
 import org.json.JSONException;
@@ -55,6 +49,11 @@ public class BusController {
     private PDKSDataDownloader pdksDataDownloader;
 
     /**
+     * DriverInfoDownload instance
+     */
+    private DriverInfoDownloader driverInfoDownloader;
+
+    /**
      * BusStatusRepository instance
      */
     private BusStatusRepository statusRepository;
@@ -82,6 +81,8 @@ public class BusController {
         busSpeedDownloader = new BusSpeedDownloader(bus.getCode());
         // pdks downloader
         pdksDataDownloader = new PDKSDataDownloader(bus.getCode());
+        // driver info download
+        driverInfoDownloader = new DriverInfoDownloader();
     }
 
     /**
@@ -143,6 +144,26 @@ public class BusController {
         }
     }
 
+
+    /**
+     * Download the details of the drivers
+     */
+    public void downloadDriversData() {
+        driverInfoDownloader.setPdksRecords(bus.getPdksRecords());
+        driverInfoDownloader.action();
+        if( !driverInfoDownloader.isErrorFlag() ){
+
+            // wait all downloaders to finish
+            while( !driverInfoDownloader.ready() ){
+                ThreadHelper.delay(100);
+            }
+
+            GitasEventBus.post(new BusDriversDataDownloadFinishedEvent(bus, driverInfoDownloader.getData()));
+        } else {
+            GitasEventBus.post(new BusDriversDataDownloadFailedEvent(bus));
+        }
+    }
+
     /**
      * Send request to API to change plate data of the given bus
      *
@@ -166,4 +187,5 @@ public class BusController {
         });
 
     }
+
 }

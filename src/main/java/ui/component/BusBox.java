@@ -14,6 +14,7 @@ import interfaces.Subscriber;
 import javafx.stage.Stage;
 import models.Bus;
 import ui.UIComponent;
+import ui.popup_pages.BusDriversPopup;
 import ui.popup_pages.BusPlanPopup;
 import utils.GitasEventBus;
 import utils.ThreadHelper;
@@ -49,6 +50,11 @@ public class BusBox extends UIComponent implements Subscriber {
      * BusPlanPopup instance
      */
     private BusPlanPopup busPlanPopup;
+
+    /**
+     * BusDriversPopup instance
+     */
+    private BusDriversPopup busDriversPopup;
 
     /**
      * Constructor
@@ -247,6 +253,35 @@ public class BusBox extends UIComponent implements Subscriber {
                 try {
                     busPlanPopup.start( new Stage() );
                     busPlanPopup.setData(bus);
+                } catch( Exception e ){
+                    e.printStackTrace();
+                }
+            } catch ( Exception e ){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Subscribe the BusDriverPopupOpened event. Triggered from BusBoxButton click event.
+     */
+    @Subscribe
+    private void subscribeBusDriverPopupOpenedEvent(BusDriversPopupOpenedEvent event){
+        final Bus busData = event.getBusData();
+        if( busData.getCode().equals(bus.getCode()) ){
+            try {
+                // @todo check if opened before
+                if( busDriversPopup == null ){
+                    busDriversPopup = new BusDriversPopup();
+                }
+                try {
+                    busDriversPopup.start( new Stage() );
+                    busDriversPopup.setData(bus);
+
+                    ThreadHelper.func(() -> {
+                        // download data
+                        busController.downloadDriversData();
+                    });
                 } catch( Exception e ){
                     e.printStackTrace();
                 }

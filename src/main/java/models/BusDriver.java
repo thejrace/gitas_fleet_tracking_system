@@ -19,10 +19,6 @@ public class BusDriver {
      */
     private String code;
 
-    /**
-     * Phone number
-     */
-    private String phone;
 
     /**
      * Name of the driver
@@ -30,8 +26,18 @@ public class BusDriver {
     private String name;
 
     /**
+     * Phone number
+     */
+    private String phone;
+
+    /**
      * TC No of the driver
      */
     private String tcNo;
+
+    /**
+     * IMG URL of the driver
+     */
+    private String imgURL;
 
 }

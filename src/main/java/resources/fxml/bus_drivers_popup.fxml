@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="593.0" spacing="25.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.popup_pages.BusDriversPopupController">
+   <children>
+      <AnchorPane styleClass="page-popup-header">
+         <children>
+            <HBox alignment="CENTER" spacing="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="uiBusCodeLabel">
+                     <styleClass>
+                        <String fx:value="lbl-h4" />
+                        <String fx:value="lbl-gray1" />
+                     </styleClass>
+                  </Label>
+                  <Label layoutX="269.0" layoutY="10.0" text="Sürücüler">
+                     <styleClass>
+                        <String fx:value="lbl-gitas" />
+                        <String fx:value="lbl-h5" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <FontAwesomeIconView fx:id="uiCloseBtn" glyphName="CLOSE" size="18" styleClass="page-popup-header-close-btn" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0" />
+         </children>
+      </AnchorPane>
+      <VBox fx:id="uiContainer" alignment="CENTER">
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+         <children>
+            <Label fx:id="uiNotfLabel" styleClass="lbl-gitas" text="Veri Alınıyor..." />
+            <ImageView fx:id="uiLoader" fitHeight="57.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/loader.gif" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</VBox>
