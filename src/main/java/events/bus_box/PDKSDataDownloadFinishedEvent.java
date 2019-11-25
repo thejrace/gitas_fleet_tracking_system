@@ -9,15 +9,13 @@ package events.bus_box;
 
 import interfaces.Postable;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import models.PDKSRecord;
+
+import java.util.ArrayList;
 
 @AllArgsConstructor
-public class BusSpeedDownloadFinishedEvent implements Postable {
+public class PDKSDataDownloadFinishedEvent implements Postable {
 
-    @Getter
-    private String busCode;
-
-    @Getter
-    private int speed;
+    private ArrayList<PDKSRecord> data;
 
 }

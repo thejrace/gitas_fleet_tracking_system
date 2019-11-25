@@ -36,6 +36,11 @@ public class BusBox extends UIComponent implements Subscriber {
     private boolean speedDataDownloadFlag = true;
 
     /**
+     * PDKS data download thread guard
+     */
+    private boolean pdksDataDownloadFlag = true;
+
+    /**
      * BusController instance
      */
     private BusController busController;
@@ -66,7 +71,6 @@ public class BusBox extends UIComponent implements Subscriber {
         ThreadHelper.func( () -> {
             while( fleetDataDownloadFlag ){
                 downloadFleetData(false);
-
                 ThreadHelper.delay(50000); // @todo get from settings
             }
         });
@@ -77,6 +81,18 @@ public class BusBox extends UIComponent implements Subscriber {
                 ThreadHelper.delay(50000); // @todo get from settings
             }
         });
+
+        ThreadHelper.func(() -> {
+            // for PDKS download, we wait for a while to FleetDataDownload action to finish
+            // we need rundata to inject driver names
+            ThreadHelper.delay(10000); // @todo get from settings
+
+            while( pdksDataDownloadFlag ){
+                downloadPDKSData(false);
+                ThreadHelper.delay(15 * 60000 ); // @todo get from settings
+            }
+        });
+
     }
 
     /**
@@ -117,6 +133,21 @@ public class BusBox extends UIComponent implements Subscriber {
             });
         } else {
             busController.downloadSpeedData();
+        }
+    }
+
+    /**
+     * Trigger method to execute downloadPDKSData
+     *
+     * @param async flag to determine the action will be handled in a thread
+     */
+    public void downloadPDKSData( boolean async ){
+        if( async ){
+            ThreadHelper.func(() -> {
+                busController.downloadPDKSData();
+            });
+        } else {
+            busController.downloadPDKSData();
         }
     }
 

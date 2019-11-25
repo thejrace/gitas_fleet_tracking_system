@@ -10,19 +10,20 @@ package ui.page;
 import controllers.RunSuggestionsController;
 
 public class RunSuggestionsPage extends UIPage{
-
+    
+    /**
+     * RunSuggestionsController instance
+     */
     public static RunSuggestionsController RunSuggestionController;
 
+    /**
+     * Constructor
+     */
     public RunSuggestionsPage(){
         loadFXML("run_suggestions_page");
         getController().setTitle("Ek Sefer Önerileri");
 
-        initialize();
-    }
-
-    private void initialize() {
         RunSuggestionController = new RunSuggestionsController();
-
     }
 
     @Override

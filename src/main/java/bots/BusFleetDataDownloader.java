@@ -60,7 +60,7 @@ public class BusFleetDataDownloader extends IETTDataDownloader {
     }
 
     /**
-     * Download action
+     * {@inheritDoc}
      */
     @Override
     public void action(){
@@ -83,9 +83,7 @@ public class BusFleetDataDownloader extends IETTDataDownloader {
     }
 
     /**
-     * Parse the document of the fleet
-     *
-     * @param document
+     * {@inheritDoc}
      */
     @Override
     protected void parseData( Document document ){

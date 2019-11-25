@@ -38,7 +38,7 @@ public class RouteDataDownloader extends IETTDataDownloader {
     private boolean apiFlag = true;
 
     /**
-     * Download action
+     * {@inheritDoc}
      */
     public void action(){
         // clear list
@@ -69,9 +69,7 @@ public class RouteDataDownloader extends IETTDataDownloader {
     }
 
     /**
-     * Parse the data. Used if datasource is not API.
-     *
-     * @param document
+     * {@inheritDoc}
      */
     @Override
     protected void parseData(Document document) {

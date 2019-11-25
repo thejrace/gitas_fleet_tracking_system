@@ -1,3 +1,10 @@
+/*
+ *  Gitas Fleet Tracking System 2019
+ *
+ *  Contributors:
+ *      - Ahmet Ziya Kanbur
+ *
+ */
 package bots;
 
 import lombok.Getter;
@@ -6,17 +13,28 @@ import org.jsoup.nodes.Document;
 
 public class BusSpeedDownloader extends IETTDataDownloader {
 
+    /**
+     * Code of the bus
+     */
     private String busCode;
 
+    /**
+     * Downloaded speed
+     */
     @Getter
     private int speed;
 
+    /**
+     * Constructor
+     *
+     * @param busCode
+     */
     public BusSpeedDownloader(String busCode){
         this.busCode = busCode;
     }
 
     /**
-     * Download action
+     * {@inheritDoc}
      */
     @Override
     public void action(){
@@ -27,6 +45,9 @@ public class BusSpeedDownloader extends IETTDataDownloader {
         request(URL_PREFIX + busCode, org.jsoup.Connection.Method.GET, 50000);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void parseData( Document document ){
         try {

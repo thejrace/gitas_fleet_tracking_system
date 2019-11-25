@@ -82,7 +82,7 @@ public class BusRun {
     private String statusCode;
 
     /**
-     * Driver ID
+     * BusDriver ID
      */
     private String driverCode;
 

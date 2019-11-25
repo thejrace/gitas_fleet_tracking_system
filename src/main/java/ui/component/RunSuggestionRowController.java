@@ -1,3 +1,10 @@
+/*
+ *  Gitas Fleet Tracking System 2019
+ *
+ *  Contributors:
+ *      - Ahmet Ziya Kanbur
+ *
+ */
 package ui.component;
 
 import javafx.fxml.FXML;
@@ -20,6 +27,11 @@ public class RunSuggestionRowController implements Initializable {
 
     }
 
+    /**
+     * Setter for data
+     *
+     * @param runSuggestion
+     */
     public void setData(RunSuggestion runSuggestion){
         ArrayList<String> suggestionArray = runSuggestion.getAsArray();
         try{

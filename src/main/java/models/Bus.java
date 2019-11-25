@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import ui.component.BusBox;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @Data
@@ -63,6 +64,17 @@ public class Bus {
      * UI Component
      */
     private BusBox uiComponent;
+
+    /**
+     * PDKS records of the bus
+     */
+    private ArrayList<PDKSRecord> pdksRecords;
+
+    /**
+     * Driver name list to inject after each FleetDataDownload action.
+     * We collect them in array not to loop through PDKS records each time run data is updated.
+     */
+    private Map<String, String> driverNameList = new HashMap<>();
 
     /**
      * JSON constructor
@@ -118,5 +130,16 @@ public class Bus {
             return getRunData().get(runData.size()-1).getRouteDetails();
         } catch( ArrayIndexOutOfBoundsException e ){}
         return "";
+    }
+
+    /**
+     * Replace driver codes in the runs with PDKS records
+     */
+    public void cacheDriverNames() {
+        if( driverNameList.isEmpty() ){
+            for( PDKSRecord pdksRecord : pdksRecords ){
+                driverNameList.put(pdksRecord.getSource(), pdksRecord.getDriverName());
+            }
+        }
     }
 }

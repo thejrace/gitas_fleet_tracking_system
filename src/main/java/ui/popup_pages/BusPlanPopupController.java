@@ -27,6 +27,9 @@ public class BusPlanPopupController extends BusBoxPopupPageController implements
 
     }
 
+    /**
+     * Update UI
+     */
     public void updateUI(){
         initCommonEvents();
 
@@ -35,7 +38,7 @@ public class BusPlanPopupController extends BusBoxPopupPageController implements
         for( BusRun busRun : planData ){
             BusPlanTableRunRow row = new BusPlanTableRunRow();
             row.initUI();
-            row.getController().setData(busRun);
+            row.getController().setData(busRun, bus.getDriverNameList());
             uiContainer.getChildren().add(row.getUI());
         }
     }

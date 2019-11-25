@@ -26,21 +26,33 @@ import java.util.ArrayList;
 
 public class RunSuggestionsDataDownloader extends IETTDataDownloader implements Subscriber {
 
+    /**
+     * Output data
+     */
     @Getter
     private ArrayList<BusRun> data;
 
+    /**
+     * Routes to be scanned
+     */
     @Setter
     private ArrayList<Route> routes;
 
+    /**
+     * Counter for the worker threads
+     */
     @Getter
     private int runnerThreadCounter = 0;
 
+    /**
+     * Constructor
+     */
     public RunSuggestionsDataDownloader(){
         GitasEventBus.register(this);
     }
 
     /**
-     * Download action
+     * {@inheritDoc}
      */
     @Override
     public void action(){
@@ -72,6 +84,9 @@ public class RunSuggestionsDataDownloader extends IETTDataDownloader implements 
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void parseData(Document document){
         Elements table = null;

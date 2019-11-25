@@ -10,9 +10,11 @@ package controllers;
 import bots.BusFleetDataDownloader;
 import bots.BusPlateDataDownloader;
 import bots.BusSpeedDownloader;
+import bots.PDKSDataDownloader;
 import events.bus_box.BusPlateDataDownloadFinishedEvent;
 import events.bus_box.BusSpeedDownloadFinishedEvent;
 import events.bus_box.FleetDataDownloadFinishedEvent;
+import events.bus_box.PDKSDataDownloadFinishedEvent;
 import interfaces.ActionCallback;
 import models.Bus;
 import org.json.JSONException;
@@ -48,6 +50,11 @@ public class BusController {
     private BusSpeedDownloader busSpeedDownloader;
 
     /**
+     * PDKSDataDownloader instance
+     */
+    private PDKSDataDownloader pdksDataDownloader;
+
+    /**
      * BusStatusRepository instance
      */
     private BusStatusRepository statusRepository;
@@ -73,6 +80,8 @@ public class BusController {
         plateDataDownloader = new BusPlateDataDownloader(bus.getID());
         // init speed downloader
         busSpeedDownloader = new BusSpeedDownloader(bus.getCode());
+        // pdks downloader
+        pdksDataDownloader = new PDKSDataDownloader(bus.getCode());
     }
 
     /**
@@ -95,6 +104,24 @@ public class BusController {
             ControllerHub.FleetController.updateBus(bus);
 
             GitasEventBus.post(new FleetDataDownloadFinishedEvent(bus, statusRepository, fleetDataDownloader));
+        }
+    }
+
+    /**
+     * Download pdks data and emit event
+     */
+    public void downloadPDKSData(){
+        pdksDataDownloader.action();
+        if( !pdksDataDownloader.isErrorFlag() ){
+
+            bus.setPdksRecords(pdksDataDownloader.getOutput());
+
+            bus.cacheDriverNames();
+
+            // update bus model in the fleet
+            ControllerHub.FleetController.updateBus(bus);
+
+            GitasEventBus.post(new PDKSDataDownloadFinishedEvent(pdksDataDownloader.getOutput()));
         }
     }
 
