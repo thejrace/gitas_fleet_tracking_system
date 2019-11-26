@@ -9,13 +9,13 @@ package ui.settings;
 
 import ui.UIComponent;
 
-public class DataDownloadSettings extends UIComponent {
+public class FrequencySettings extends UIComponent {
 
-    public DataDownloadSettings(){
+    public FrequencySettings(){
 
     }
 
     public void initUI(){
-        loadFXML("data_download_settings");
+        loadFXML("frequency_settings");
     }
 }

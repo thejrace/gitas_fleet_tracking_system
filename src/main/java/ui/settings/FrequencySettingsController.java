@@ -15,22 +15,19 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DataDownloadSettingsController implements Initializable {
+public class FrequencySettingsController implements Initializable {
 
     @FXML
-    private TextField uiFleetURLInput;
+    private TextField uiPlanFreqInput;
 
     @FXML
-    private Button uiEnableFleetBtn;
+    private TextField uiPDKSFreqInput;
 
     @FXML
-    private Button uiEnterCaptchaBtn;
+    private TextField uiSpeedFreqInput;
 
     @FXML
-    private TextField uiAPIUrlInput;
-
-    @FXML
-    private Button uiEnableAPIBtn;
+    private TextField uiPlateFreqInput;
 
     @FXML
     private Button uiSaveBtn;
@@ -39,5 +36,4 @@ public class DataDownloadSettingsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
 }

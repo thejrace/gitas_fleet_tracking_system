@@ -15,22 +15,28 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DataDownloadSettingsController implements Initializable {
+public class FleetSettingsController implements Initializable {
 
     @FXML
-    private TextField uiFleetURLInput;
+    private TextField uiPlanUrlInput;
 
     @FXML
-    private Button uiEnableFleetBtn;
+    private TextField uiPDKSInput;
 
     @FXML
-    private Button uiEnterCaptchaBtn;
+    private TextField uiSpeedUrlInput;
 
     @FXML
-    private TextField uiAPIUrlInput;
+    private TextField uiMessageOutInput;
 
     @FXML
-    private Button uiEnableAPIBtn;
+    private TextField uiMessageInInput;
+
+    @FXML
+    private TextField uiDriverDetailsUrlInput;
+
+    @FXML
+    private TextField uiDownloadLimitInput;
 
     @FXML
     private Button uiSaveBtn;

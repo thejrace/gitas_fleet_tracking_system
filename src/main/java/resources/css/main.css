@@ -40,6 +40,9 @@
     -fx-box-border: transparent;
 }
 
+.overlay-loader {
+    -fx-background-color:rgba(0, 0,0,0.2);
+}
 
 /* HBox input container */
 .input-control {

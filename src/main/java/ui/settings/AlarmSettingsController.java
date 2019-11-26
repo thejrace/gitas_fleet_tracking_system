@@ -10,27 +10,28 @@ package ui.settings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DataDownloadSettingsController implements Initializable {
+public class AlarmSettingsController implements Initializable {
 
     @FXML
-    private TextField uiFleetURLInput;
+    private TextField uiAlarmFreqInput;
 
     @FXML
-    private Button uiEnableFleetBtn;
+    private TextField uiAlarmVisibleFreqInput;
 
     @FXML
-    private Button uiEnterCaptchaBtn;
+    private CheckBox uiAlarmTypeZayiCB;
 
     @FXML
-    private TextField uiAPIUrlInput;
+    private CheckBox uiAlarmTypeLateCB;
 
     @FXML
-    private Button uiEnableAPIBtn;
+    private CheckBox uiAlarmTypeFixedCB;
 
     @FXML
     private Button uiSaveBtn;
@@ -39,5 +40,6 @@ public class DataDownloadSettingsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
 
 }
