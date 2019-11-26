@@ -9,13 +9,13 @@ package ui.settings;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import utils.SharedConfig;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FrequencySettingsController implements Initializable {
+public class FrequencySettingsController extends SettingsTabController implements Initializable {
 
     @FXML
     private TextField uiPlanFreqInput;
@@ -29,11 +29,19 @@ public class FrequencySettingsController implements Initializable {
     @FXML
     private TextField uiPlateFreqInput;
 
-    @FXML
-    private Button uiSaveBtn;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void fillForms() {
+        uiPlanFreqInput.setText(String.valueOf(SharedConfig.SETTINGS.getInt("plan_download_freq")));
+        uiPDKSFreqInput.setText(String.valueOf(SharedConfig.SETTINGS.getInt("pdks_download_freq")));
+        uiSpeedFreqInput.setText(String.valueOf(SharedConfig.SETTINGS.getInt("speed_download_freq")));
+        uiPlateFreqInput.setText(String.valueOf(SharedConfig.SETTINGS.getInt("plate_download_freq")));
     }
 }

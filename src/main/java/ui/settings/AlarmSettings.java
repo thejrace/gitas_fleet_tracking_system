@@ -7,15 +7,25 @@
  */
 package ui.settings;
 
+import lombok.NoArgsConstructor;
 import ui.UIComponent;
 
-public class AlarmSettings extends UIComponent {
+@NoArgsConstructor
+public class AlarmSettings extends UIComponent implements SettingsTab {
 
-    public AlarmSettings(){
-
-    }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void initUI(){
         loadFXML("alarm_settings");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void fillForms() {
+        ((AlarmSettingsController)controller).fillForms();
     }
 }

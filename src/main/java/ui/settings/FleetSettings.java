@@ -7,15 +7,26 @@
  */
 package ui.settings;
 
+import lombok.NoArgsConstructor;
 import ui.UIComponent;
 
-public class FleetSettings extends UIComponent {
+@NoArgsConstructor
+public class FleetSettings extends UIComponent implements SettingsTab{
 
-    public FleetSettings(){
-
-    }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void initUI(){
         loadFXML("fleet_settings");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void fillForms() {
+        ((FleetSettingsController)controller).fillForms();
+    }
+
 }

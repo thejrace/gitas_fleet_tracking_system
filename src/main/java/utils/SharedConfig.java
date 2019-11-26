@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 public class SharedConfig { // @todo Hash the static config files
 
     /**
@@ -63,6 +65,41 @@ public class SharedConfig { // @todo Hash the static config files
             oldData.put("api_key", apiToken);
             Common.writeStaticData(setupFolderTemp + "app_config.json", oldData.toString());
         }
+    }
+
+    /**
+     * Get static config structure from API and update local config files and than read it.
+     */
+    public static boolean readAndUpdateStaticConfigStructure(){
+        if( Common.checkFile( setupFolderTemp + "app_config.json" ) && Common.checkFile(setupFolderTemp + "settings.json") ){
+            try {
+                // @todo data contains base api urls, so how to validate it's structure?
+                DATA = new JSONObject( Common.readJSONFile(setupFolderTemp+"app_config.json") );
+                APIRequest.API_URL = DATA.getJSONArray("base_api").getString(0);
+
+                JSONObject settingsData = new JSONObject( Common.readJSONFile(setupFolderTemp+"settings.json") );
+                JSONObject updatedSettingsData = new JSONObject(APIRequest.GET(APIRequest.API_URL+"fts/setup")).getJSONObject("settings");
+
+                // compare settings.json
+                Iterator<String> keys = updatedSettingsData.keys();
+                while(keys.hasNext()) {
+                    String key = keys.next();
+                    if( !settingsData.has(key) ){
+                        settingsData.put(key, updatedSettingsData.get(key));
+                    }
+                }
+                // update static file
+                Common.writeStaticData(setupFolderTemp + "settings.json", settingsData.toString());
+                // cache new file
+                SETTINGS = settingsData;
+
+                System.out.println(SharedConfig.SETTINGS);
+            } catch( JSONException e ) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

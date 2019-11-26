@@ -50,6 +50,7 @@ public class SettingsPageController extends UIPageController implements Initiali
 
             ThreadHelper.runOnUIThread( () -> {
                 uiAlarmSettingsTab.getChildren().add(alarmSettings.getUI());
+                alarmSettings.fillForms();
             });
 
             FleetSettings fleetSettings = new FleetSettings();
@@ -57,6 +58,7 @@ public class SettingsPageController extends UIPageController implements Initiali
 
             ThreadHelper.runOnUIThread( () -> {
                 uiFleetSettingsTab.getChildren().add(fleetSettings.getUI());
+                fleetSettings.fillForms();
             });
 
             DataDownloadSettings dataDownloadSettings = new DataDownloadSettings();
@@ -64,6 +66,7 @@ public class SettingsPageController extends UIPageController implements Initiali
 
             ThreadHelper.runOnUIThread( () -> {
                 uiDataSourceSettingsTab.getChildren().add(dataDownloadSettings.getUI());
+                dataDownloadSettings.fillForms();
             });
 
             FrequencySettings frequencySettings = new FrequencySettings();
@@ -71,6 +74,7 @@ public class SettingsPageController extends UIPageController implements Initiali
 
             ThreadHelper.runOnUIThread( () -> {
                 uiFreqSettingsTab.getChildren().add(frequencySettings.getUI());
+                frequencySettings.fillForms();
                 uiWrapper.getChildren().remove(uiLoader);
             });
         });

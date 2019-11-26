@@ -7,15 +7,26 @@
  */
 package ui.settings;
 
+import lombok.NoArgsConstructor;
 import ui.UIComponent;
 
-public class DataDownloadSettings extends UIComponent {
+@NoArgsConstructor
+public class DataDownloadSettings extends UIComponent implements SettingsTab{
 
-    public DataDownloadSettings(){
-
-    }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void initUI(){
         loadFXML("data_download_settings");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void fillForms() {
+        ((DataDownloadSettingsController)controller).fillForms();
+    }
+
 }

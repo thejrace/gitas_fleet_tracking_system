@@ -14,7 +14,7 @@
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label styleClass="lbl-gray1" text="Plan" />
-            <TextField fx:id="uiPlanUrlInput" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="uiPlanUrlInput" prefHeight="25.0" prefWidth="550.0" />
          </children>
          <styleClass>
             <String fx:value="input-control" />
@@ -24,7 +24,7 @@
       <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="84.0">
          <children>
             <Label styleClass="lbl-gray1" text="PDKS" />
-            <TextField fx:id="uiPDKSInput" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="uiPDKSInput" prefHeight="25.0" prefWidth="550.0" />
          </children>
          <styleClass>
             <String fx:value="input-control" />
@@ -34,7 +34,7 @@
       <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="124.0">
          <children>
             <Label styleClass="lbl-gray1" text="Hız" />
-            <TextField fx:id="uiSpeedUrlInput" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="uiSpeedUrlInput" prefHeight="25.0" prefWidth="550.0" />
          </children>
          <styleClass>
             <String fx:value="input-control" />
@@ -44,7 +44,7 @@
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label styleClass="lbl-gray1" text="Mesaj Giden" />
-            <TextField fx:id="uiMessageOutInput" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="uiMessageOutInput" prefHeight="25.0" prefWidth="550.0" />
          </children>
          <styleClass>
             <String fx:value="input-control" />
@@ -54,7 +54,7 @@
       <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="164.0">
          <children>
             <Label styleClass="lbl-gray1" text="Mesaj Gelen" />
-            <TextField fx:id="uiMessageInInput" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="uiMessageInInput" prefHeight="25.0" prefWidth="550.0" />
          </children>
          <styleClass>
             <String fx:value="input-control" />
@@ -64,7 +64,7 @@
       <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="204.0">
          <children>
             <Label styleClass="lbl-gray1" text="Sürücü Detay" />
-            <TextField fx:id="uiDriverDetailsUrlInput" prefHeight="25.0" prefWidth="289.0" />
+            <TextField fx:id="uiDriverDetailsUrlInput" prefHeight="25.0" prefWidth="550.0" />
          </children>
          <styleClass>
             <String fx:value="input-control" />

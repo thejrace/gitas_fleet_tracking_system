@@ -7,15 +7,26 @@
  */
 package ui.settings;
 
+import lombok.NoArgsConstructor;
 import ui.UIComponent;
 
-public class FrequencySettings extends UIComponent {
+@NoArgsConstructor
+public class FrequencySettings extends UIComponent implements SettingsTab {
 
-    public FrequencySettings(){
-
-    }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void initUI(){
         loadFXML("frequency_settings");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void fillForms() {
+        ((FrequencySettingsController)controller).fillForms();
+    }
+
 }
