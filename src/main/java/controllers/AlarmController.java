@@ -91,7 +91,7 @@ public class AlarmController {
      */
     public void markAllAsSeen(){
         for( Alarm alarm : alarms ){
-            if( alarm.getSeen() ) continue;
+            if( alarm.isSeen() ) continue;
             alarm.setSeen(true);
             alarmPopup.removeAlarm(alarm.getID());
         }
@@ -102,7 +102,7 @@ public class AlarmController {
      */
     public void markAllAsNotSeen(){
         for( Alarm alarm : alarms ){
-            if( !alarm.getSeen() ) continue;
+            if( !alarm.isSeen() ) continue;
             alarm.setSeen(false);
             alarmPopup.addAlarm(alarm);
         }

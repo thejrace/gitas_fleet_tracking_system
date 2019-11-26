@@ -7,6 +7,13 @@
  */
 package models;
 
+import lombok.Data;
+import org.omg.SendingContext.RunTime;
+import utils.RunTimeDiff;
+
+import java.util.ArrayList;
+
+@Data
 public class BusRun {
 
     /**
@@ -75,7 +82,7 @@ public class BusRun {
     private String statusCode;
 
     /**
-     * Driver ID
+     * BusDriver ID
      */
     private String driverCode;
 
@@ -126,289 +133,58 @@ public class BusRun {
     }
 
     /**
-     * Getter for ORER
+     * Shorter constructor, used in RunSuggestions
      *
-     * @return
-     */
-    public String getORER() {
-        return ORER;
-    }
-
-    /**
-     * Setter for ORER
-     *
+     * @param busCode
+     * @param routeDetails
      * @param ORER
-     */
-    public void setORER(String ORER) {
-        this.ORER = ORER;
-    }
-
-    /**
-     * Getter for arrivalTime
-     *
-     * @return
-     */
-    public String getArrivalTime() {
-        return arrivalTime;
-    }
-
-    /**
-     * Setter for arrivalTime
-     * @param arrivalTime
-     */
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
-
-    /**
-     * Getter for estimatedEndTime
-     *
-     * @return
-     */
-    public String getEstimatedEndTime() {
-        return estimatedEndTime;
-    }
-
-    /**
-     * Setter estimatedEndTime
-     *
-     * @param estimatedEndTime
-     */
-    public void setEstimatedEndTime(String estimatedEndTime) {
-        this.estimatedEndTime = estimatedEndTime;
-    }
-
-    /**
-     * Getter for endTime
-     *
-     * @return
-     */
-    public String getEndTime() {
-        return endTime;
-    }
-
-    /**
-     * Setter for endTime
-     *
-     * @param endTime
-     */
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-    /**
-     * Getter for direction
-     *
-     * @return
-     */
-    public int getDirection() {
-        return direction;
-    }
-
-    /**
-     * Setter for direction
-     *
-     * @param direction new direction
-     */
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-
-    /**
-     * Getter for departureNo
-     *
-     * @return
-     */
-    public int getDepartureNo() {
-        return departureNo;
-    }
-
-    /**
-     * Setter for departureNo
-     *
-     * @param departureNo new data
-     */
-    public void setDepartureNo(int departureNo) {
-        this.departureNo = departureNo;
-    }
-
-    /**
-     * Getter for status
-     *
-     * @return
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * Setter for status
-     *
      * @param status
+     * @param statusCode
      */
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    /**
-     * Getter for busCode
-     *
-     * @return
-     */
-    public String getBusCode() {
-        return busCode;
-    }
-
-    /**
-     * Setter for busCode
-     *
-     * @param busCode new data
-     */
-    public void setBusCode(String busCode) {
+    public BusRun( String busCode, String routeDetails, String ORER, String status, String statusCode ){
         this.busCode = busCode;
-    }
-
-    /**
-     * Getter for currentStop
-     *
-     * @return
-     */
-    public String getCurrentStop() {
-        return currentStop;
-    }
-
-    /**
-     * Setter for currentStop
-     *
-     * @param currentStop new data
-     */
-    public void setCurrentStop(String currentStop) {
-        this.currentStop = currentStop;
-    }
-
-    /**
-     * Getter for departureTime
-     *
-     * @return
-     */
-    public String getDepartureTime() {
-        return departureTime;
-    }
-
-    /**
-     * Setter for departureTime
-     *
-     * @param departureTime new data
-     */
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    /**
-     * Getter for routeDetails
-     *
-     * @return
-     */
-    public String getRouteDetails() {
-        return routeDetails;
-    }
-
-    /**
-     * Setter for routeDetails
-     *
-     * @param routeDetails new data
-     */
-    public void setRouteDetails(String routeDetails) {
+        this.ORER = ORER;
         this.routeDetails = routeDetails;
-    }
-
-    /**
-     * Getter for statusCode
-     *
-     * @return
-     */
-    public String getStatusCode() {
-        return statusCode;
-    }
-
-    /**
-     * Setter for statusCode
-     *
-     * @param statusCode new data
-     */
-    public void setStatusCode(String statusCode) {
+        this.status = status;
         this.statusCode = statusCode;
     }
 
     /**
-     * Getter for route
+     * Get as arraylist to fill fleet table without explicitly change the labels.
      *
      * @return
      */
-    public String getRoute() {
-        return route;
+    public ArrayList<String> getAsArrayList(){
+        ArrayList<String> output = new ArrayList<>();
+        output.add(String.valueOf(departureNo));
+        output.add(routeDetails);
+        output.add(driverCode); // @todo process it
+        output.add(arrivalTime);
+        output.add(ORER);
+        output.add(String.valueOf(RunTimeDiff.calculate(arrivalTime, ORER)));
+        output.add(alternativeORER);
+        output.add(departureTime);
+        output.add(estimatedEndTime);
+        output.add(endTime);
+        output.add(statusCode);
+        output.add(String.valueOf(RunTimeDiff.calculate(departureTime, endTime)));
+        output.add("100");
+        return output;
     }
 
     /**
-     * Setter for route
-     *
-     * @param route new data
-     */
-    public void setRoute(String route) {
-        this.route = route;
-    }
-
-    /**
-     * Getter for service code
-     *
-     * @return
-     */
-    public String getServiceCode() {
-        return serviceCode;
-    }
-
-    /**
-     * Setter for service code
-     *
-     * @param serviceCode
-     */
-    public void setServiceCode(String serviceCode) {
-        this.serviceCode = serviceCode;
-    }
-
-    /**
-     * Getter for alternativeOrer
+     * Get as arraylist for RunSuggestionItem.
      *
      * @return
      */
-    public String getAlternativeORER() {
-        return alternativeORER;
+    public ArrayList<String> getAsArrayListRunSuggestions(){
+        ArrayList<String> output = new ArrayList<>();
+        output.add(busCode);
+        output.add(routeDetails);
+        output.add(ORER);
+        output.add(status);
+        output.add(statusCode);
+        return output;
     }
 
-    /**
-     * Setter for alternativeOrer
-     *
-     * @return
-     */
-    public void setAlternativeORER(String alternativeORER) {
-        this.alternativeORER = alternativeORER;
-    }
-
-    /**
-     * Getter for driverCode
-     *
-     * @return
-     */
-    public String getDriverCode() {
-        return driverCode;
-    }
-
-    /**
-     * Setter for driverCode
-     *
-     * @param driverCode
-     */
-    public void setDriverCode(String driverCode) {
-        this.driverCode = driverCode;
-    }
 }

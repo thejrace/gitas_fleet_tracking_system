@@ -1,7 +1,6 @@
 package ui.popup_pages;
 
 import controllers.ControllerHub;
-import interfaces.NoParamCallback;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +23,7 @@ public class BusPlateFormPopup extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/plate_update_form_popup.fxml"));
             Parent content = loader.load();
-            primaryStage.setTitle("Otobüs Plaka Güncelleme Formu");
+            primaryStage.setTitle("Otobüs Plan");
 
             try {
                 Font.loadFont(getClass().getResource("/font/montserratbold.otf").toExternalForm().replace("%20", " "), 10);
@@ -49,17 +48,15 @@ public class BusPlateFormPopup extends Application {
             ControllerHub.PopupPageController.addPage(primaryStage);
 
             controller = loader.getController();
-            controller.setIndex(ControllerHub.PopupPageController.getLastInsertedIndex());
+            controller.setPageIndex(ControllerHub.PopupPageController.getLastInsertedIndex());
         } catch( Exception e ){
             e.printStackTrace();
         }
     }
 
     public void setData(Bus bus){
-        controller.setData(bus);
+        controller.setBus(bus);
+        controller.updateUI();
     }
 
-    public void setListener(NoParamCallback cb ){ // @todo i used to observer pattern to trigger downloadPlate data, it's not IDEAL!
-        controller.setListener(cb);
-    }
 }

@@ -7,9 +7,11 @@
  */
 package models;
 
+import lombok.Data;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@Data
 public class User {
 
     /**
@@ -86,76 +88,5 @@ public class User {
         } catch( JSONException e ){
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Getter for ID
-     *
-     * @return
-     */
-    public int getID() {
-        return ID;
-    }
-
-    /**
-     * Setter for ID
-     *
-     * @param ID
-     */
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    /**
-     * Getter for API Token
-     *
-     * @return
-     */
-    public String getApiToken() {
-        return apiToken;
-    }
-
-    /**
-     * Setter for API token
-     *
-     * @param apiToken
-     */
-    public void setApiToken(String apiToken) {
-        this.apiToken = apiToken;
-    }
-
-    /**
-     * Getter for email
-     *
-     * @return
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Setter for email
-     *
-     * @param email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * Getter for name
-     *
-     * @return
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Setter for name
-     * @param name
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 }

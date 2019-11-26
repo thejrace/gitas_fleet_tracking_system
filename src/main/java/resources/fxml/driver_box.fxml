@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox alignment="CENTER" spacing="25.0" styleClass="driver-box" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.component.DriverBoxController">
+   <children>
+      <ImageView fx:id="uiPicture" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logo.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" spacing="5.0">
+         <children>
+            <Label fx:id="uiNameLabel" styleClass="lbl-gray1" text="Ahmet Ziya Kanbur">
+               <graphic>
+                  <FontAwesomeIconView fill="RED" glyphName="USER" styleClass="driver-box-icon" />
+               </graphic>
+            </Label>
+            <Label fx:id="uiCodeLabel" layoutX="10.0" layoutY="10.0" styleClass="lbl-gray1" text="-">
+               <graphic>
+                  <FontAwesomeIconView fill="#eb2a2a" glyphName="INFO" styleClass="driver-box-icon" />
+               </graphic>
+            </Label>
+            <Label fx:id="uiPhoneLabel" layoutX="10.0" layoutY="27.0" styleClass="lbl-gray1" text="-">
+               <graphic>
+                  <FontAwesomeIconView fill="#d40000" glyphName="PHONE" styleClass="driver-box-icon" />
+               </graphic>
+            </Label>
+            <Label fx:id="uiTcLabel" layoutX="10.0" layoutY="44.0" styleClass="lbl-gray1" text="-">
+               <graphic>
+                  <FontAwesomeIconView styleClass="driver-box-icon" />
+               </graphic>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</HBox>

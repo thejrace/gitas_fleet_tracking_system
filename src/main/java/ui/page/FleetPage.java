@@ -27,7 +27,7 @@ public class FleetPage extends UIPage{
     public FleetPage(){
         loadFXML("fleet_page");
 
-        ControllerHub.FleetController.passFleetPage(this);
+        ControllerHub.FleetController.setFleetPage(this);
 
         getController().setTitle("Filo Takip");
 

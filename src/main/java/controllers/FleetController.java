@@ -7,6 +7,8 @@
  */
 package controllers;
 
+import lombok.Getter;
+import lombok.Setter;
 import models.Bus;
 import repositories.FleetRepository;
 import ui.page.FleetPage;
@@ -18,6 +20,7 @@ public class FleetController {
     /**
      * List of buses
      */
+    @Getter
     private ArrayList<Bus> buses;
 
     /**
@@ -33,6 +36,7 @@ public class FleetController {
     /**
      * UI page
      */
+    @Setter
     private FleetPage fleetPage;
 
     /**
@@ -89,23 +93,4 @@ public class FleetController {
             addBus(new Bus(fleetRepository.getData().getJSONObject(k)));
         }
     }
-
-    /**
-     * Get fleetPage instance
-     *
-     * @param fleetPage
-     */
-    public void passFleetPage(FleetPage fleetPage){
-        this.fleetPage = fleetPage;
-    }
-
-    /**
-     * Return the fleet data
-     *
-     * @return
-     */
-    public ArrayList<Bus> getBuses(){
-        return buses;
-    }
-
 }

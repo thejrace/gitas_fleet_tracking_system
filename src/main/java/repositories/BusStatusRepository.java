@@ -11,6 +11,7 @@ import controllers.ControllerHub;
 import enums.AlarmType;
 import enums.BusRunStatus;
 import enums.FleetFilterButtonAction;
+import lombok.Getter;
 import models.Alarm;
 import models.Bus;
 import models.BusRun;
@@ -19,6 +20,7 @@ import utils.RunTimeDiff;
 import utils.ThreadHelper;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,21 +37,25 @@ public class BusStatusRepository {
     /**
      * Status output of the bus
      */
+    @Getter
     private String status;
 
     /**
      * Status in details
      */
+    @Getter
     private String statusLabel;
 
     /**
      * Additional status data line
      */
+    @Getter
     private String subStatusLabel;
 
     /**
      * Filter related flags list
      */
+    @Getter
     private Map<FleetFilterButtonAction, Boolean> filterFlags;
 
 
@@ -115,8 +121,9 @@ public class BusStatusRepository {
             } else {
                 // finished the day but there are zayi runs
                 statusLabel = "Günü tamamladı.";
+                DecimalFormat df = new DecimalFormat("#.##");
                 double percentage = Double.valueOf(runStatusSummary.get(BusRunStatus.T)) / Double.valueOf(runStatusSummary.get("TOTAL")) * 100;
-                subStatusLabel = "Sefer yüzdesi: %" + percentage;
+                subStatusLabel = "Sefer yüzdesi: %" + df.format(percentage);
                 status = BusRunStatus.T;
                 addAlarm(new Alarm(AlarmType.RED, code, "Sefer iptalleri var!"));
                 filterFlags.put(FleetFilterButtonAction.ZAYI, true);
@@ -199,41 +206,5 @@ public class BusStatusRepository {
         ThreadHelper.runOnUIThread(() -> {
             ControllerHub.AlarmController.addAlarm(alarmItem);
         });
-    }
-
-    /**
-     * Getter for status
-     *
-     * @return
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * Getter for statusLabel
-     *
-     * @return
-     */
-    public String getStatusLabel() {
-        return statusLabel;
-    }
-
-    /**
-     * Getter for subStatusLabel
-     *
-     * @return
-     */
-    public String getSubStatusLabel() {
-        return subStatusLabel;
-    }
-
-    /**
-     * Getter for filterFlags
-     *
-     * @return
-     */
-    public Map<FleetFilterButtonAction, Boolean> getFilterFlags() {
-        return filterFlags;
     }
 }

@@ -7,50 +7,47 @@
  */
 package bots;
 
-import cookie_agent.CookieAgent;
 import enums.BusRunStatus;
+import lombok.Getter;
 import models.BusRun;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import utils.Common;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BusFleetDataDownloader {
+public class BusFleetDataDownloader extends IETTDataDownloader {
 
     /**
      * Code of the bus
      */
+    @Getter
     private String code;
-
-    /**
-     * Error flag
-     */
-    private boolean errorFlag = false;
 
     /**
      * Route code of the bus
      */
+    @Getter
     private String routeCode;
 
     /**
      * Active run index counter
      */
+    @Getter
     private int activeRunIndex = -1;
 
     /**
      * All run data
      */
+    @Getter
     private ArrayList<BusRun> runData = new ArrayList<>();
 
     /**
      * Status summary
      */
+    @Getter
     private Map<String, Integer> runStatusSummary = new HashMap<>();
 
     /**
@@ -63,10 +60,14 @@ public class BusFleetDataDownloader {
     }
 
     /**
-     * Download action
+     * {@inheritDoc}
      */
+    @Override
     public void action(){
-        errorFlag = false;
+        super.action();
+
+        // clear list
+        runData = new ArrayList<>();
 
         // reset summary counters
         runStatusSummary.put(BusRunStatus.A, 0);
@@ -78,25 +79,14 @@ public class BusFleetDataDownloader {
 
         String URL_PREFIX = "https://filotakip.iett.gov.tr/_FYS/000/sorgu.php?konum=ana&konu=sefer&otobus="; // @todo get from settings
 
-        try {
-            org.jsoup.Connection.Response response = Jsoup.connect(URL_PREFIX + code)
-                    .cookie("PHPSESSID", CookieAgent.FILO5_COOKIE )
-                    .method(org.jsoup.Connection.Method.GET)
-                    .timeout(50000)
-                    .execute();
-
-            parseFleetData(response.parse());
-        } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-        }
+        request(URL_PREFIX + code, org.jsoup.Connection.Method.GET, 50000 );
     }
 
     /**
-     * Parse the document of the fleet
-     *
-     * @param document
+     * {@inheritDoc}
      */
-    private void parseFleetData( Document document ){
+    @Override
+    protected void parseData( Document document ){
 
         Elements table;
         Elements rows;
@@ -208,50 +198,5 @@ public class BusFleetDataDownloader {
             System.out.println( code + " ORER sefer veri ayıklama hatası. Tekrar deneniyor.");
             errorFlag = true;
         }
-    }
-
-    /**
-     * Getter for runData
-     *
-     * @return
-     */
-    public ArrayList<BusRun> getRunData() {
-        return runData;
-    }
-
-    /**
-     * Getter for runStatusSummary
-     *
-     * @return
-     */
-    public Map<String, Integer> getRunStatusSummary(){
-        return runStatusSummary;
-    }
-
-    /**
-     * Getter for activeRunIndex
-     *
-     * @return
-     */
-    public int getActiveRunIndex(){
-        return activeRunIndex;
-    }
-
-    /**
-     * Getter for routeCode
-     *
-     * @return
-     */
-    public String getRouteCode(){
-        return routeCode;
-    }
-
-    /**
-     * Getter for errorFlag
-     *
-     * @return
-     */
-    public boolean getErrorFlag(){
-        return errorFlag;
     }
 }

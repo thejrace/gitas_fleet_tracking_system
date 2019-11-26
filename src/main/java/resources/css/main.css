@@ -5,6 +5,7 @@
     -fx-padding:0;
     -fx-text-fill:#272727;
     -fx-background-color:#302e2e;
+
 }
 .scroll-pane  {
     -fx-focus-color: transparent;
@@ -29,9 +30,21 @@
 .label {
     -fx-font-smoothing-type: gray;
     -fx-font-weight:bold;
+    -fx-font-family:"Montserrat Light";
+}
+
+.date-picker {
+    -fx-border-color:#d3d3d3;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-box-border: transparent;
 }
 
 
+
+.lbl-bold{
+    -fx-font-family:"Montserrat Bold";
+}
 .lbl-h1 {
     -fx-font-size:26;
 }
@@ -405,6 +418,8 @@
     -fx-fill: #5383ff;
 }
 
+/** FLEET FILTER STYLES **/
+
 .fleet-filter-container {
 
 }
@@ -472,6 +487,9 @@
     -fx-border-color:#9268a0;
 }
 
+
+/** PAGE POPUP STYLES **/
+
 .page-popup-header {
     -fx-background-color: #272727;
     -fx-border-width:0 0 2 0;
@@ -484,4 +502,200 @@
 }
 .page-popup-header-close-btn:hover {
     -fx-fill: #d60000;
+}
+
+/** PLAN TABLE STYLES **/
+
+.bus-plan-thead {
+    -fx-text-align:center;
+    -fx-font-size: 11;
+    -fx-font-weight: bold;
+    -fx-padding:5 0 5 0;
+    -fx-text-fill: #7b7b7b;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: #d3d3d3;
+    -fx-font-family:"Montserrat SemiBold";
+    -fx-background-color:transparent;
+}
+.bus-plan-tbody-main {
+    -fx-text-align: center;
+    -fx-padding:5 0 5 0;
+    -fx-font-size: 11;
+    -fx-font-family:"Montserrat Light";
+}
+.bus-plan-item {
+    -fx-pref-width:800;
+    -fx-max-width:800;
+    -fx-padding:10;
+}
+
+.bus-plan-tr {
+    -fx-padding:5 0;
+}
+.bus-plan-tr-gray{
+    -fx-background-color: #e6e6e6;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #a0a0a0;
+}
+.bus-plan-tr-white {
+    -fx-background-color: #fff;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #b1b1b1;
+}
+.bus-plan-tr-green{
+    -fx-background-color: #caeaae;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #98aa89;
+}
+.bus-plan-tr-red {
+    -fx-background-color: #f4bcbc;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #b28d8d;
+}
+.bus-plan-tr-pink {
+    -fx-background-color: #ffe8e8;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #ffa5a5;
+}
+.bus-plan-tr-yellow {
+    -fx-background-color: #aba766;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #c3bf73;
+}
+
+.bus-plan-tr-yellow .text{
+    -fx-font-family:"Montserrat SemiBold";
+    -fx-font-size:12;
+}
+
+.bus-plan-tr-transparent{
+    -fx-background-color: #2c2c2c;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #4d4d4d;
+}
+.bus-plan-tr-transparent .text{
+    -fx-fill: #909090;
+}
+
+.bus-plan-header{
+    -fx-padding: 10 0 10 10;
+    -fx-font-weight: bold;
+    -fx-background-color:#ffffff;
+    -fx-border-width: 2 0 0 0;
+    -fx-border-color: #c35757;
+}
+.bus-plan-details {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #c35757;
+    -fx-background-color:#fff;
+    -fx-pref-height:50;
+    -fx-padding-top:20;
+}
+
+.bus-plan-bottom-nav {
+    -fx-cursor:hand;
+}
+
+.bus-plan-tr-eksefer {
+    -fx-background-color: #f2e5b7;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #a69660;
+}
+
+.eksefer-oneri-table {
+    -fx-background-color:#fdfdfd;
+}
+
+.bus-plan-height-cont {
+    -fx-background-color:#fff;
+}
+
+.otobus-data-header {
+    -fx-font-size: 16px;
+    -fx-text-fill: #c35757;
+}
+
+.bus-plan-td-80 {
+    -fx-pref-width:80;
+    -fx-max-width:80;
+}
+.bus-plan-td-64 {
+    -fx-pref-width:64;
+    -fx-max-width:64;
+}
+.bus-plan-td-78 {
+    -fx-pref-width:78;
+    -fx-max-width:78;
+}
+.bus-plan-td-37 {
+    -fx-pref-width:37;
+    -fx-max-width:37;
+}
+
+.bus-plan-td-60 {
+    -fx-pref-width:60;
+    -fx-max-width:60;
+}
+.bus-plan-td-150 {
+    -fx-pref-width:150;
+    -fx-max-width:150;
+}
+
+.filo-table-row-button {
+    -fx-font-size:10;
+}
+
+/* POPUP PAGE COMMON STYLES */
+
+.popup-page-wrapper{
+    -fx-border-width:2;
+    -fx-border-color: #3b3b3b;
+}
+
+/* DRIVER BOX STYLES */
+
+.driver-box {
+    -fx-border-width:0 0 1 0;
+    -fx-padding: 15 0 15 0;
+    -fx-background-color: #2c2c2c;
+    -fx-border-color: #444444;
+}
+
+.driver-box-icon {
+    -fx-fill:#a754bb;
+}
+
+/* MESSAGE POPUP STYLES */
+
+.message-balloon .content {
+    -fx-background-color:#d3d3d3;
+    -fx-border-width:0 0 3 0;
+    -fx-border-color: #8a8a8a;
+    -fx-border-radius:0 0 7 7;
+}
+
+.message-balloon .content.left {
+    -fx-background-radius:0 7 7 7;
+}
+.message-balloon .content.right {
+    -fx-background-radius:7 0 7 7;
+}
+
+.message-balloon .content.left:hover {
+    -fx-border-color: #458a4d;
+}
+.message-balloon .content.right:hover {
+    -fx-border-color: #344c8a;
+}
+
+.message-balloon .content .source {
+    -fx-font-size:14;
+}
+
+.message-balloon .content .message {
+    -fx-font-size:12;
+}
+
+.message-balloon .content .timestamp {
+    -fx-font-size:9;
 }

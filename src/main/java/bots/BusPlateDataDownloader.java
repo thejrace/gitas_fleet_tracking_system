@@ -7,6 +7,7 @@
  */
 package bots;
 
+import lombok.Getter;
 import org.json.JSONException;
 import org.json.JSONObject;
 import utils.APIRequest;
@@ -21,6 +22,7 @@ public class BusPlateDataDownloader {
     /**
      * Output data
      */
+    @Getter
     private JSONObject data;
 
     /**
@@ -42,14 +44,5 @@ public class BusPlateDataDownloader {
         } catch( JSONException e ){
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Getter for the data
-     *
-     * @return
-     */
-    public JSONObject getData(){
-        return data;
     }
 }

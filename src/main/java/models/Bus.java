@@ -8,13 +8,16 @@
 package models;
 
 import enums.FleetFilterButtonAction;
+import lombok.Data;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ui.component.BusBox;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
+@Data
 public class Bus {
 
     /**
@@ -63,6 +66,17 @@ public class Bus {
     private BusBox uiComponent;
 
     /**
+     * PDKS records of the bus
+     */
+    private ArrayList<PDKSRecord> pdksRecords;
+
+    /**
+     * Driver name list to inject after each FleetDataDownload action.
+     * We collect them in array not to loop through PDKS records each time run data is updated.
+     */
+    private Map<String, String> driverNameList = new HashMap<>();
+
+    /**
      * JSON constructor
      *
      * @param data
@@ -95,164 +109,37 @@ public class Bus {
     }
 
     /**
-     * Getter for the code
+     * Returns the last ORER of the bus. Used in RunSuggestions
      *
      * @return
      */
-    public String getCode() {
-        return code;
+    public String getLastORER(){
+        try {
+            return getRunData().get(runData.size()-1).getORER();
+        } catch( ArrayIndexOutOfBoundsException e ){}
+        return "";
     }
 
     /**
-     * Setter for the code
-     *
-     * @param code
-     */
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    /**
-     * Getter for officialPlate
+     * Returns the last RouteDetails string of the bus. Used in RunSuggestions
      *
      * @return
      */
-    public String getOfficialPlate() {
-        return officialPlate;
+    public String getLastRouteDetails() {
+        try {
+            return getRunData().get(runData.size()-1).getRouteDetails();
+        } catch( ArrayIndexOutOfBoundsException e ){}
+        return "";
     }
 
     /**
-     * Setter for officialPlate
-     *
-     * @param officialPlate
+     * Replace driver codes in the runs with PDKS records
      */
-    public void setOfficialPlate(String officialPlate) {
-        this.officialPlate = officialPlate;
-    }
-
-    /**
-     * Getter for activePlate
-     *
-     * @return
-     */
-    public String getActivePlate() {
-        return activePlate;
-    }
-
-    /**
-     * Setter for activePlate
-     *
-     * @param activePlate
-     */
-    public void setActivePlate(String activePlate) {
-        this.activePlate = activePlate;
-    }
-
-    /**
-     * Getter for index
-     *
-     * @return
-     */
-    public int getIndex() {
-        return index;
-    }
-
-    /**
-     * Setter for index
-     *
-     * @param index
-     */
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    /**
-     * Getter for runData
-     *
-     * @return
-     */
-    public ArrayList<BusRun> getRunData() {
-        return runData;
-    }
-
-    /**
-     * Setter for runData
-     *
-     * @param runData
-     */
-    public void setRunData(ArrayList<BusRun> runData) {
-        this.runData = runData;
-    }
-
-    /**
-     * Getter for UI component
-     *
-     * @return
-     */
-    public BusBox getUiComponent() {
-        return uiComponent;
-    }
-
-    /**
-     * Setter for the UI component
-     *
-     * @param uiComponent
-     */
-    public void setUiComponent(BusBox uiComponent) {
-        this.uiComponent = uiComponent;
-    }
-
-    /**
-     * Getter for routeCode
-     *
-     * @return
-     */
-    public String getRouteCode() {
-        return routeCode;
-    }
-
-    /**
-     * Setter for routeCode
-     *
-     * @param routeCode
-     */
-    public void setRouteCode(String routeCode) {
-        this.routeCode = routeCode;
-    }
-
-    /**
-     * Getter for filterFlags
-     *
-     * @return
-     */
-    public Map<FleetFilterButtonAction, Boolean> getFilterFlags() {
-        return filterFlags;
-    }
-
-    /**
-     * Setter for filterFlags
-     *
-     * @param filterFlags
-     */
-    public void setFilterFlags(Map<FleetFilterButtonAction, Boolean> filterFlags) {
-        this.filterFlags = filterFlags;
-    }
-
-    /**
-     * Getter for ID
-     *
-     * @return
-     */
-    public int getID() {
-        return ID;
-    }
-
-    /**
-     * Setter for ID
-     *
-     * @param ID
-     */
-    public void setID(int ID) {
-        this.ID = ID;
+    public void cacheDriverNames() {
+        if( driverNameList.isEmpty() ){
+            for( PDKSRecord pdksRecord : pdksRecords ){
+                driverNameList.put(pdksRecord.getSource(), pdksRecord.getDriverName());
+            }
+        }
     }
 }

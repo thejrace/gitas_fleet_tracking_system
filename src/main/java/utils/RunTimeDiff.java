@@ -62,7 +62,7 @@ public class RunTimeDiff {
     }
 
     // from to yu gecmis mi kontrol
-    public static boolean isPassed( String from, String to ){
+    public static boolean isPast( String from, String to ){
         if( from.equals("") || to.equals("") ) return false;
         String[] from_exp = from.split(":");
         String[] to_exp = to.split(":");

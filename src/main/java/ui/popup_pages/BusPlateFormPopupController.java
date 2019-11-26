@@ -10,29 +10,18 @@ package ui.popup_pages;
 import controllers.BusController;
 import controllers.ControllerHub;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import events.bus_box.PlateUpdateEvent;
 import interfaces.ActionCallback;
-import interfaces.NoParamCallback;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import models.Bus;
+import utils.GitasEventBus;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BusPlateFormPopupController implements Initializable {
-
-    /**
-     * Bus model
-     */
-    private Bus bus;
-
-    /**
-     * Bus code label in the title
-     */
-    @FXML private Label uiBusCodeLabel;
+public class BusPlateFormPopupController extends BusBoxPopupPageController implements Initializable {
 
     /**
      * Active plate input field
@@ -49,21 +38,6 @@ public class BusPlateFormPopupController implements Initializable {
      */
     @FXML private Button uiActionBtn;
 
-    /**
-     * Close button
-     */
-    @FXML private FontAwesomeIconView uiCloseBtn;
-
-    /**
-     * Index of the popup page
-     */
-    private int pageIndex;
-
-    /**
-     * Listener to notify BusBox
-     */
-    private NoParamCallback listener;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -76,7 +50,9 @@ public class BusPlateFormPopupController implements Initializable {
                 @Override
                 public void onSuccess(String... params) {
                     // trigger plate fetch
-                    listener.action();
+                    //listener.action();
+                    GitasEventBus.post(new PlateUpdateEvent(bus));
+                    System.out.println("post");
                     unlockForm();
                 }
 
@@ -87,40 +63,16 @@ public class BusPlateFormPopupController implements Initializable {
             });
         });
 
-        uiCloseBtn.setOnMouseClicked( ev -> {
-            ControllerHub.PopupPageController.closePage(pageIndex);
-        });
-
-    }
-
-    /**
-     * Get the index of the popup page
-     *
-     * @param pageIndex
-     */
-    public void setIndex(int pageIndex){
-        this.pageIndex = pageIndex;
     }
 
     /**
      * Set data to the layout
-     *
-     * @param bus
      */
-    public void setData(Bus bus){
-        this.bus = bus;
-        uiBusCodeLabel.setText(bus.getCode());
+    public void updateUI(){
+        initCommonEvents();
+
         uiActivePlateInput.setText(bus.getActivePlate());
         uiOfficialPlateInput.setText(bus.getOfficialPlate());
-    }
-
-    /**
-     * Setter for listener to notify BusBox
-     *
-     * @param listener
-     */
-    public void setListener(NoParamCallback listener ){
-        this.listener = listener;
     }
 
     /**

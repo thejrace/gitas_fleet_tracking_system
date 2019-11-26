@@ -8,12 +8,14 @@
 package repositories;
 
 import controllers.ControllerHub;
+import lombok.Getter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import utils.APIRequest;
 
 public class FleetRepository {
 
+    @Getter
     private JSONArray data = new JSONArray();
 
     public FleetRepository(){
@@ -25,10 +27,5 @@ public class FleetRepository {
         data = result.getJSONArray("data");
         System.out.println(data);
     }
-
-    public JSONArray getData(){
-        return data;
-    }
-
 }
 

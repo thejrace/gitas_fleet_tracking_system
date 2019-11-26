@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="uiWrapper" minWidth="200.0" styleClass="message-balloon" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.component.MessageBalloonController">
+   <children>
+      <VBox fx:id="uiLeftTick">
+         <styleClass>
+            <String fx:value="message-tick" />
+            <String fx:value="left" />
+         </styleClass>
+         <children>
+            <ImageView fitHeight="13.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/message-tick.png" />
+               </image>
+               <VBox.margin>
+                  <Insets right="-1.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+      <HBox fx:id="uiContent" maxWidth="400.0" minWidth="200.0" styleClass="content">
+         <children>
+            <VBox spacing="5.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label fx:id="uiSource" text="AMIRTEL ">
+                           <styleClass>
+                              <String fx:value="source" />
+                              <String fx:value="lbl-bold" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="uiTimestamp" styleClass="timestamp" text="15:33" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="uiMessage" styleClass="message" text="Sayın sürücü! Yağışlı hava sebebiyle takip mesafenizi koruyup duraklara nizami yanaşınız, yolcu iniş-binişlerine dikkat ediniz. F/MB.Yönetim Müdürlüğü " wrapText="true" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox styleClass="timestamp" />
+         </children>
+      </HBox>
+      <VBox fx:id="uiRightTick">
+         <styleClass>
+            <String fx:value="message-tick" />
+            <String fx:value="right" />
+         </styleClass>
+         <children>
+            <ImageView fitHeight="13.0" fitWidth="16.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/message-tick.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</HBox>

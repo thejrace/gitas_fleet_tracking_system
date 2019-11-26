@@ -7,16 +7,15 @@
  */
 package controllers;
 
-import bots.BusFleetDataDownloader;
-import bots.BusPlateDataDownloader;
+import bots.*;
+import events.bus_box.*;
 import interfaces.ActionCallback;
-import interfaces.BusFleetDataDownloadListener;
-import interfaces.BusPlateDataDownloadListener;
 import models.Bus;
 import org.json.JSONException;
 import org.json.JSONObject;
 import repositories.BusStatusRepository;
 import utils.APIRequest;
+import utils.GitasEventBus;
 import utils.ThreadHelper;
 
 import java.util.HashMap;
@@ -38,6 +37,26 @@ public class BusController {
      * BusPlateDataDownloader instance
      */
     private BusPlateDataDownloader plateDataDownloader;
+
+    /**
+     * BusSpeedDownloader instance
+     */
+    private BusSpeedDownloader busSpeedDownloader;
+
+    /**
+     * PDKSDataDownloader instance
+     */
+    private PDKSDataDownloader pdksDataDownloader;
+
+    /**
+     * DriverInfoDownload instance
+     */
+    private DriverInfoDownloader driverInfoDownloader;
+
+    /**
+     * BusMessagesDownloader instance
+     */
+    private BusMessagesDownloader busMessagesDownloader;
 
     /**
      * BusStatusRepository instance
@@ -63,16 +82,22 @@ public class BusController {
         statusRepository = new BusStatusRepository(bus.getCode());
         // init plate download
         plateDataDownloader = new BusPlateDataDownloader(bus.getID());
+        // init speed downloader
+        busSpeedDownloader = new BusSpeedDownloader(bus.getCode());
+        // pdks downloader
+        pdksDataDownloader = new PDKSDataDownloader(bus.getCode());
+        // driver info downloader
+        driverInfoDownloader = new DriverInfoDownloader();
+        // messages downloader
+        busMessagesDownloader = new BusMessagesDownloader(bus.getCode());
     }
 
     /**
-     * Downloads fleet data and process' it for alarms and status updates
-     *
-     * @param listener
+     * Downloads and process the fleet data and emits event
      */
-    public void downloadAndProcessFleetData( BusFleetDataDownloadListener listener ){
+    public void downloadFleetData(){
         fleetDataDownloader.action();
-        if( !fleetDataDownloader.getErrorFlag() ){
+        if( !fleetDataDownloader.isErrorFlag() ){
             // update model's data
             bus.setRouteCode(fleetDataDownloader.getRouteCode());
             bus.setRunData(fleetDataDownloader.getRunData());
@@ -86,16 +111,75 @@ public class BusController {
             // update bus model in the fleet
             ControllerHub.FleetController.updateBus(bus);
 
-            // notify busbox
-            listener.onFinish(bus, fleetDataDownloader, statusRepository);
-        } else {
-            listener.onError("Error!");
+            GitasEventBus.post(new FleetDataDownloadFinishedEvent(bus, statusRepository, fleetDataDownloader));
         }
     }
 
-    public void downloadPlateData(BusPlateDataDownloadListener listener){
+    /**
+     * Download plate data and emit event
+     */
+    public void downloadPlateData(){
         plateDataDownloader.action();
-        listener.onFinish(plateDataDownloader.getData());
+        GitasEventBus.post(new BusPlateDataDownloadFinishedEvent(bus.getCode(), plateDataDownloader.getData()));
+    }
+
+    /**
+     * Download speed data and emit event
+     */
+    public void downloadSpeedData(){
+        busSpeedDownloader.action();
+        if( !busSpeedDownloader.isErrorFlag() ){
+            GitasEventBus.post(new BusSpeedDownloadFinishedEvent(bus.getCode(), busSpeedDownloader.getSpeed()));
+        }
+    }
+
+    /**
+     * Download pdks data and emit event
+     */
+    public void downloadPDKSData(){
+        pdksDataDownloader.action();
+        if( !pdksDataDownloader.isErrorFlag() ){
+
+            bus.setPdksRecords(pdksDataDownloader.getOutput());
+
+            bus.cacheDriverNames();
+
+            // update bus model in the fleet
+            ControllerHub.FleetController.updateBus(bus);
+
+            GitasEventBus.post(new PDKSDataDownloadFinishedEvent(pdksDataDownloader.getOutput()));
+        }
+    }
+
+    /**
+     * Download the details of the drivers
+     */
+    public void downloadDriversData() {
+        driverInfoDownloader.setPdksRecords(bus.getPdksRecords());
+        driverInfoDownloader.action();
+        if( !driverInfoDownloader.isErrorFlag() ){
+
+            // wait all downloaders to finish
+            while( !driverInfoDownloader.ready() ){
+                ThreadHelper.delay(100);
+            }
+
+            GitasEventBus.post(new BusDriversDataDownloadFinishedEvent(bus, driverInfoDownloader.getData()));
+        } else {
+            GitasEventBus.post(new BusDriversDataDownloadFailedEvent(bus));
+        }
+    }
+
+    /**
+     * Download the messages of the bus
+     */
+    public void downloadMessagesData(){
+        busMessagesDownloader.action();
+        if( !busMessagesDownloader.isErrorFlag() ){
+            GitasEventBus.post(new BusMessagesDataDownloadFinishedEvent(bus, busMessagesDownloader.getData()));
+        } else {
+            GitasEventBus.post(new BusMessagesDataDownloadFailedEvent(bus));
+        }
     }
 
     /**
@@ -119,34 +203,6 @@ public class BusController {
                 e.printStackTrace();
             }
         });
-
-    }
-
-    public void downloadMessages(String busCode){
-
-    }
-
-    public void downloadIYSRecords(String busCode){
-
-    }
-
-    public void downloadNotes(String busCode){
-
-    }
-
-    public void downloadReports(String busCode){
-
-    }
-
-    public void downloadDriverData(String busCode){
-
-    }
-
-    public void downloadSpeedRecords(String busCode){
-
-    }
-
-    public void updatePlateData(String busCode){
 
     }
 

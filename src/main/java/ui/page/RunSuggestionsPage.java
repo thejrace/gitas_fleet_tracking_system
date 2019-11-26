@@ -7,11 +7,23 @@
  */
 package ui.page;
 
-public class RunSuggestionsPage extends UIPage{
+import controllers.RunSuggestionsController;
 
+public class RunSuggestionsPage extends UIPage{
+    
+    /**
+     * RunSuggestionsController instance
+     */
+    public static RunSuggestionsController RunSuggestionController;
+
+    /**
+     * Constructor
+     */
     public RunSuggestionsPage(){
         loadFXML("run_suggestions_page");
         getController().setTitle("Ek Sefer Önerileri");
+
+        RunSuggestionController = new RunSuggestionsController();
     }
 
     @Override

@@ -29,6 +29,7 @@ public class ControllerHub {
      */
     public static PopupPageController PopupPageController;
 
+    public static DownloaderController DownloaderController;
 
     /**
      * Initialize static controllers
@@ -43,6 +44,8 @@ public class ControllerHub {
         UserController = new UserController();
 
         FleetController = new FleetController();
+
+        DownloaderController = new DownloaderController();
     }
 
 }
