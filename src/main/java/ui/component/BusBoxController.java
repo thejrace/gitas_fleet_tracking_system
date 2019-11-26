@@ -175,14 +175,19 @@ public class BusBoxController implements Initializable {
 
             updatePlateDownloadTimestamp();
 
+            // temp removal
+            uiNavBlock.getChildren().remove(uiBB3);
+            uiNavBlock.getChildren().remove(uiBB4);
+            uiNavBlock.getChildren().remove(uiBB5);
+
             dataInitializedFlag = true;
         }
 
         // @todo FIX this
         uiBB0.setBus(this.bus); // we pass the updated model to the navigation buttons
-        uiBB1.setBus(this.bus);
         uiBB2.setBus(this.bus);
         uiBB3.setBus(this.bus);
+        uiBB1.setBus(this.bus);
         uiBB4.setBus(this.bus);
         uiBB5.setBus(this.bus);
 
