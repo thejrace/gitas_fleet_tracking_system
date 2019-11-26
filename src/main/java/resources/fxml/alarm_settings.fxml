@@ -11,6 +11,13 @@
 <VBox styleClass="settings-tab-content" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.settings.AlarmSettingsController">
    <children>
       <Label styleClass="lbl-gray1" text="Alarm ekranı ayarlarını buradan düzenleyebilirsiniz." />
+      <Label layoutX="10.0" layoutY="10.0" text="Alarm Frekans Ayarları">
+         <styleClass>
+            <String fx:value="lbl-yellow" />
+            <String fx:value="lbl-h4" />
+            <String fx:value="lbl-bold" />
+         </styleClass>
+      </Label>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label styleClass="lbl-gray1" text="Alarm Frekans (sn)" />
@@ -31,7 +38,13 @@
             <String fx:value="align-label" />
          </styleClass>
       </HBox>
-      <Label styleClass="lbl-gray1" text="Gösterilecek alarm ayarları." />
+      <Label layoutX="10.0" layoutY="27.0" text="Gösterilecek alarm ayarları.">
+         <styleClass>
+            <String fx:value="lbl-yellow" />
+            <String fx:value="lbl-h4" />
+            <String fx:value="lbl-bold" />
+         </styleClass>
+      </Label>
       <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="92.0">
          <children>
             <CheckBox fx:id="uiAlarmTypeZayiCB" mnemonicParsing="false" styleClass="lbl-gray1" text="Zayi Seferler" />

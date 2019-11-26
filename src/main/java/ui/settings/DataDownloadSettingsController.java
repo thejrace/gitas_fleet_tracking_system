@@ -7,6 +7,7 @@
  */
 package ui.settings;
 
+import enums.DataSourceSettings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,17 +22,12 @@ public class DataDownloadSettingsController extends SettingsTabController implem
     @FXML
     private TextField uiFleetURLInput;
 
-    @FXML
-    private Button uiEnableFleetBtn;
-
-    @FXML
-    private Button uiEnterCaptchaBtn;
 
     @FXML
     private TextField uiAPIUrlInput;
 
     @FXML
-    private Button uiEnableAPIBtn;
+    private Button uiDataSourceBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,6 +41,13 @@ public class DataDownloadSettingsController extends SettingsTabController implem
     public void fillForms() {
         uiFleetURLInput.setText(SharedConfig.SETTINGS.getString("fleet_cookie_url"));
         uiAPIUrlInput.setText(SharedConfig.SETTINGS.getString("server_cookie_url"));
+
+        int dataSourceSetting = SharedConfig.SETTINGS.getInt("data_source");
+        if( dataSourceSetting == DataSourceSettings.FLEET.ordinal() ){
+            uiDataSourceBtn.setText("Aktif Kaynak: Filo5");
+        } else {
+            uiDataSourceBtn.setText("Aktif Kaynak: Sunucu");
+        }
     }
 
 }

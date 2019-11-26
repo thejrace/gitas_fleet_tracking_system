@@ -10,6 +10,13 @@
 <VBox styleClass="settings-tab-content" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.settings.FrequencySettingsController">
    <children>
       <Label styleClass="lbl-gray1" text="Otobüslerin veri güncelleme frekanslarını buradan düzenleyebilirsiniz." />
+      <Label layoutX="10.0" layoutY="10.0" text="Frekans Ayarları">
+         <styleClass>
+            <String fx:value="lbl-yellow" />
+            <String fx:value="lbl-h4" />
+            <String fx:value="lbl-bold" />
+         </styleClass>
+      </Label>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label styleClass="lbl-gray1" text="Plan İndirme (sn)" />

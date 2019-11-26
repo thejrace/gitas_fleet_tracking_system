@@ -10,6 +10,13 @@
 <VBox styleClass="settings-tab-content" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.settings.FleetSettingsController">
    <children>
       <Label styleClass="lbl-gray1" text="Filodan veri alınan adresleri buradan düzenleyebilirsiniz." />
+      <Label layoutX="10.0" layoutY="10.0" text="URL Ayarları">
+         <styleClass>
+            <String fx:value="lbl-yellow" />
+            <String fx:value="lbl-h4" />
+            <String fx:value="lbl-bold" />
+         </styleClass>
+      </Label>
       <Label layoutX="20.0" layoutY="20.0" styleClass="lbl-gray1" text="\%%VAR%% adresteki değişken kısmı temsil etmektedir." />
       <HBox alignment="CENTER_LEFT">
          <children>
@@ -71,7 +78,14 @@
             <String fx:value="align-label" />
          </styleClass>
       </HBox>
-      <Label layoutX="20.0" layoutY="52.0" styleClass="lbl-gray1" text="Paralel İndirme Limiti; aynı anda filoya yapılacak azami istek sayısını temsil etmektedir." />
+      <Label layoutX="10.0" layoutY="27.0" text="Paralel İndirme Limit Ayarları">
+         <styleClass>
+            <String fx:value="lbl-yellow" />
+            <String fx:value="lbl-h4" />
+            <String fx:value="lbl-bold" />
+         </styleClass>
+      </Label>
+      <Label layoutX="20.0" layoutY="52.0" styleClass="lbl-gray1" text="Paralel İndirme Limiti; filoya aynı anda yapılabilecek azami istek sayısını temsil etmektedir." />
       <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="284.0">
          <children>
             <Label styleClass="lbl-gray1" text="Limit" />
