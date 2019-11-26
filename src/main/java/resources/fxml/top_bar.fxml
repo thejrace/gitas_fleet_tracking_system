@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="106.0" prefHeight="21.0" prefWidth="1024.0" styleClass="top-bar" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.block.TopBarController">
+<?import ui.custom_control.TopNavButton?>
+<AnchorPane maxHeight="106.0" prefHeight="19.0" prefWidth="1024.0" styleClass="top-bar" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.block.TopBarController">
    <children>
-      <MenuBar layoutY="2.0" prefHeight="35.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button fx:id="uiDashboardBtn" mnemonicParsing="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <graphic>
+            <FontAwesomeIconView glyphName="DASHBOARD" size="20" />
+         </graphic>
+      </Button>
+      <MenuBar fx:id="uiMenuBar" layoutY="2.0" prefHeight="35.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Alarmlar">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Tümünü Görüldü Yap" />
-                  <MenuItem mnemonicParsing="false" text="Tümünü Göster" />
-                  <MenuItem mnemonicParsing="false" text="Alarm Ayarlarına Git" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Filo">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Filo Ayarlarına Git" />
-            </items>
-          </Menu>
             <Menu mnemonicParsing="false" text="Raporlar">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Ek Sefer Önerileri" />
-                  <MenuItem mnemonicParsing="false" text="Filo Raporları" />
+                  <TopNavButton page="RunSuggestionsPage" fill="#3778b5" iconName="HISTORY" text="Ek Sefer Önerileri" />
+                  <TopNavButton page="ReportsPage" fill="#19a8a8" iconName="CLIPBOARD" text="Filo Raporları" />
                </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Kullanıcı">
+          <Menu mnemonicParsing="false" text="Kullanıcı" >
             <items>
-              <MenuItem mnemonicParsing="false" text="Ayarlar" />
-                  <MenuItem mnemonicParsing="false" text="Çıkış Yap" />
+              <MenuItem mnemonicParsing="false" text="Çıkış Yap" fx:id="uiLogoutButton">
+                 <graphic>
+                    <FontAwesomeIconView fill="#575a5c" glyphName="SIGN_OUT" size="14.0" />
+                 </graphic>
+              </MenuItem>
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Ayarlar">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Genel" />
-                  <MenuItem mnemonicParsing="false" text="Arayüz" />
+                   <TopNavButton page="SettingsPage" fill="#3778b5" iconName="GEAR" text="Program Ayarları" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Hakkında">
                <items>
                   <MenuItem mnemonicParsing="false" text="Program Hakkında" />
-                  <MenuItem mnemonicParsing="false" text="Geribildirim" />
+                  <MenuItem mnemonicParsing="false" text="Geribildirim">
+                     <graphic>
+                        <FontAwesomeIconView fill="#d03a34" glyphName="BUG" size="14.0" />
+                     </graphic>
+                  </MenuItem>
                </items>
             </Menu>
         </menus>

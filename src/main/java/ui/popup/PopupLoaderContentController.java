@@ -17,7 +17,7 @@ public class PopupLoaderContentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb ){
 
-        uiMessageLabel.setText("Please wait.."); // @todo language
+        uiMessageLabel.setText("Lütfen bekleyin.."); // @todo language
 
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), uiMessageLabel);
         fadeTransition.setFromValue(1.0);

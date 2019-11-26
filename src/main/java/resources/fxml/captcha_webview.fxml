@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="491.0" spacing="20" styleClass="tab-gri-bg" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.block.CaptchaWebviewController">
+   <stylesheets>
+      <URL value="@../css/main.css" />
+   </stylesheets>
+   <children>
+      <Label text="Filo Giriş Beta">
+         <styleClass>
+            <String fx:value="lbl-yellow" />
+            <String fx:value="lbl-h4" />
+         </styleClass>
+      </Label>
+      <Label prefHeight="20" prefWidth="400" text="Resimdeki kodu, beyaz kutucuğa girdikten sonra Giriş butonuna basın." wrapText="true">
+         <styleClass>
+            <String fx:value="lbl-gitas" />
+            <String fx:value="lbl-h6" />
+         </styleClass>
+      </Label>
+      <Label fx:id="uiNotfLabel" layoutX="56.0" layoutY="124.0" prefHeight="20" prefWidth="400" wrapText="true">
+         <styleClass>
+            <String fx:value="lbl-danger" />
+            <String fx:value="lbl-h6" />
+         </styleClass>
+      </Label>
+      <HBox fx:id="uiWebviewContainer" alignment="CENTER" prefHeight="110.0" prefWidth="200.0" spacing="10" styleClass="cookie-login-bg" />
+   </children>
+</VBox>

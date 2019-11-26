@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.page.SettingsPageController">
+   <children>
+      <Label fx:id="uiTitle">
+         <styleClass>
+            <String fx:value="title" />
+            <String fx:value="lbl-white" />
+            <String fx:value="lbl-h4" />
+         </styleClass>
+         <VBox.margin>
+            <Insets bottom="25.0" />
+         </VBox.margin>
+      </Label>
+      <TabPane prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Alarmlar">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BELL" styleClass="icon" />
+               </graphic>
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="settings-tab-content">
+                     <children>
+                        <Label styleClass="lbl-gray1" text="Alarm ekranı ayarlarını buradan düzenleyebilirsiniz." />
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Alarm Frekans (sn)" />
+                              <TextField prefHeight="25.0" prefWidth="90.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="84.0">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Alarm Gözükme (sn)" />
+                              <TextField prefHeight="25.0" prefWidth="90.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <Label styleClass="lbl-gray1" text="Gösterilecek alarm ayarları." />
+                        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="92.0">
+                           <children>
+                              <CheckBox mnemonicParsing="false" styleClass="lbl-gray1" text="Zayi Seferler" />
+                              <CheckBox layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="lbl-gray1" text="Geç Kalma" />
+                              <CheckBox layoutX="107.0" layoutY="10.0" mnemonicParsing="false" styleClass="lbl-gray1" text="Seferler Düzeltildi" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <Button mnemonicParsing="false" text="Kaydet">
+                           <styleClass>
+                              <String fx:value="content-btn" />
+                              <String fx:value="content-btn-warning" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Veri">
+               <graphic>
+                  <FontAwesomeIconView glyphName="DOWNLOAD" styleClass="icon" />
+               </graphic>
+               <content>
+                  <VBox spacing="15.0" styleClass="settings-tab-content">
+                     <children>
+                        <Label styleClass="lbl-gray1" text="Sefer veri kaynağı ayarlarını buradan yapabilirsiniz." />
+                        <VBox spacing="15.0">
+                           <children>
+                              <Label text="Filo Ayarları">
+                                 <styleClass>
+                                    <String fx:value="lbl-h4" />
+                                    <String fx:value="lbl-gray1" />
+                                 </styleClass>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                 <children>
+                                    <Label styleClass="lbl-gray1" text="URL" />
+                                    <TextField prefHeight="25.0" prefWidth="289.0" />
+                                 </children>
+                              </HBox>
+                              <HBox spacing="15.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Aktif Kaynak">
+                                       <styleClass>
+                                          <String fx:value="content-btn" />
+                                          <String fx:value="content-btn-success" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Captcha Gir">
+                                       <styleClass>
+                                          <String fx:value="content-btn" />
+                                          <String fx:value="content-btn-default" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </VBox>
+                        <VBox layoutX="20.0" layoutY="52.0" spacing="15.0">
+                           <children>
+                              <Label text="Sunucu Ayarları">
+                                 <styleClass>
+                                    <String fx:value="lbl-h4" />
+                                    <String fx:value="lbl-gray1" />
+                                 </styleClass>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" styleClass="input-control">
+                                 <children>
+                                    <Label styleClass="lbl-gray1" text="URL" />
+                                    <TextField prefHeight="25.0" prefWidth="289.0" />
+                                 </children>
+                              </HBox>
+                              <HBox spacing="15.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Aktif Kaynak Yap">
+                                       <styleClass>
+                                          <String fx:value="content-btn" />
+                                          <String fx:value="content-btn-warning" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Filo Ayarları">
+               <graphic>
+                  <FontAwesomeIconView glyphName="GEAR" styleClass="icon" />
+               </graphic>
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="settings-tab-content">
+                     <children>
+                        <Label styleClass="lbl-gray1" text="Filodan veri alınan adresleri buradan düzenleyebilirsiniz." />
+                        <Label layoutX="20.0" layoutY="20.0" styleClass="lbl-gray1" text="\%%VAR%% adresteki değişken kısmı temsil etmektedir." />
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Plan" />
+                              <TextField prefHeight="25.0" prefWidth="289.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="84.0">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="PDKS" />
+                              <TextField prefHeight="25.0" prefWidth="289.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="124.0">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Hız" />
+                              <TextField prefHeight="25.0" prefWidth="289.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Mesaj Giden" />
+                              <TextField prefHeight="25.0" prefWidth="289.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="164.0">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Mesaj Gelen" />
+                              <TextField prefHeight="25.0" prefWidth="289.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="204.0">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Sürücü Detay" />
+                              <TextField prefHeight="25.0" prefWidth="289.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <Label layoutX="20.0" layoutY="52.0" styleClass="lbl-gray1" text="Paralel İndirme Limiti; aynı anda filoya yapılacak azami istek sayısını temsil etmektedir." />
+                        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="284.0">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Limit" />
+                              <TextField prefHeight="25.0" prefWidth="90.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <Button mnemonicParsing="false" text="Kaydet">
+                           <styleClass>
+                              <String fx:value="content-btn" />
+                              <String fx:value="content-btn-warning" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Frekanslar">
+               <graphic>
+                  <FontAwesomeIconView glyphName="REFRESH" styleClass="icon" />
+               </graphic>
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="settings-tab-content">
+                     <children>
+                        <Label styleClass="lbl-gray1" text="Otobüslerin veri güncelleme frekanslarını buradan düzenleyebilirsiniz." />
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Plan İndirme (sn)" />
+                              <TextField prefHeight="25.0" prefWidth="90.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="84.0">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="PDKS İndirme (sn)" />
+                              <TextField prefHeight="25.0" prefWidth="90.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="124.0">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Hız İndirme (sn)" />
+                              <TextField prefHeight="25.0" prefWidth="90.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label styleClass="lbl-gray1" text="Plaka İndirme (sn)" />
+                              <TextField prefHeight="25.0" prefWidth="90.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="input-control" />
+                              <String fx:value="align-label" />
+                           </styleClass>
+                        </HBox>
+                        <Button mnemonicParsing="false" text="Kaydet">
+                           <styleClass>
+                              <String fx:value="content-btn" />
+                              <String fx:value="content-btn-warning" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>

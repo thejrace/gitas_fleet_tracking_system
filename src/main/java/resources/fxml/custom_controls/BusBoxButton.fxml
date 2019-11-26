@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<fx:root type="javafx.scene.control.Button" xmlns:fx="http://javafx.com/fxml" mnemonicParsing="false" text="Text" styleClass="box-nav-btn">
+    <graphic>
+        <FontAwesomeIconView size="14.0" fx:id="icon" styleClass="icon" />
+    </graphic>
+</fx:root>

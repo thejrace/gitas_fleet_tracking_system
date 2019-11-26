@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.MenuItem?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<fx:root type="javafx.scene.control.MenuItem" xmlns:fx="http://javafx.com/fxml" mnemonicParsing="false" text="Text">
+    <graphic>
+        <FontAwesomeIconView size="14.0" fx:id="icon" />
+    </graphic>
+</fx:root>
