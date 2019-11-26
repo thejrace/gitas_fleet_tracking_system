@@ -54,6 +54,11 @@ public class BusController {
     private DriverInfoDownloader driverInfoDownloader;
 
     /**
+     * BusMessagesDownloader instance
+     */
+    private BusMessagesDownloader busMessagesDownloader;
+
+    /**
      * BusStatusRepository instance
      */
     private BusStatusRepository statusRepository;
@@ -81,8 +86,10 @@ public class BusController {
         busSpeedDownloader = new BusSpeedDownloader(bus.getCode());
         // pdks downloader
         pdksDataDownloader = new PDKSDataDownloader(bus.getCode());
-        // driver info download
+        // driver info downloader
         driverInfoDownloader = new DriverInfoDownloader();
+        // messages downloader
+        busMessagesDownloader = new BusMessagesDownloader(bus.getCode());
     }
 
     /**
@@ -109,6 +116,24 @@ public class BusController {
     }
 
     /**
+     * Download plate data and emit event
+     */
+    public void downloadPlateData(){
+        plateDataDownloader.action();
+        GitasEventBus.post(new BusPlateDataDownloadFinishedEvent(bus.getCode(), plateDataDownloader.getData()));
+    }
+
+    /**
+     * Download speed data and emit event
+     */
+    public void downloadSpeedData(){
+        busSpeedDownloader.action();
+        if( !busSpeedDownloader.isErrorFlag() ){
+            GitasEventBus.post(new BusSpeedDownloadFinishedEvent(bus.getCode(), busSpeedDownloader.getSpeed()));
+        }
+    }
+
+    /**
      * Download pdks data and emit event
      */
     public void downloadPDKSData(){
@@ -127,25 +152,6 @@ public class BusController {
     }
 
     /**
-     * Download plate data and emit event
-     */
-    public void downloadPlateData(){
-        plateDataDownloader.action();
-        GitasEventBus.post(new BusPlateDataDownloadFinishedEvent(bus.getCode(), plateDataDownloader.getData()));
-    }
-
-    /**
-     * Download speed data and emit event
-     */
-    public void downloadSpeedData(){
-        busSpeedDownloader.action();
-        if( !busSpeedDownloader.isErrorFlag() ){
-            GitasEventBus.post(new BusSpeedDownloadFinishedEvent(bus.getCode(), busSpeedDownloader.getSpeed()));
-        }
-    }
-
-
-    /**
      * Download the details of the drivers
      */
     public void downloadDriversData() {
@@ -161,6 +167,18 @@ public class BusController {
             GitasEventBus.post(new BusDriversDataDownloadFinishedEvent(bus, driverInfoDownloader.getData()));
         } else {
             GitasEventBus.post(new BusDriversDataDownloadFailedEvent(bus));
+        }
+    }
+
+    /**
+     * Download the messages of the bus
+     */
+    public void downloadMessagesData(){
+        busMessagesDownloader.action();
+        if( !busMessagesDownloader.isErrorFlag() ){
+            GitasEventBus.post(new BusMessagesDataDownloadFinishedEvent(bus, busMessagesDownloader.getData()));
+        } else {
+            GitasEventBus.post(new BusMessagesDataDownloadFailedEvent(bus));
         }
     }
 

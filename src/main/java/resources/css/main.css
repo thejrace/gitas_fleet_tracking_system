@@ -645,6 +645,15 @@
     -fx-font-size:10;
 }
 
+/* POPUP PAGE COMMON STYLES */
+
+.popup-page-wrapper{
+    -fx-border-width:2;
+    -fx-border-color: #3b3b3b;
+}
+
+/* DRIVER BOX STYLES */
+
 .driver-box {
     -fx-border-width:0 0 1 0;
     -fx-padding: 15 0 15 0;
@@ -654,4 +663,39 @@
 
 .driver-box-icon {
     -fx-fill:#a754bb;
+}
+
+/* MESSAGE POPUP STYLES */
+
+.message-balloon .content {
+    -fx-background-color:#d3d3d3;
+    -fx-border-width:0 0 3 0;
+    -fx-border-color: #8a8a8a;
+    -fx-border-radius:0 0 7 7;
+}
+
+.message-balloon .content.left {
+    -fx-background-radius:0 7 7 7;
+}
+.message-balloon .content.right {
+    -fx-background-radius:7 0 7 7;
+}
+
+.message-balloon .content.left:hover {
+    -fx-border-color: #458a4d;
+}
+.message-balloon .content.right:hover {
+    -fx-border-color: #344c8a;
+}
+
+.message-balloon .content .source {
+    -fx-font-size:14;
+}
+
+.message-balloon .content .message {
+    -fx-font-size:12;
+}
+
+.message-balloon .content .timestamp {
+    -fx-font-size:9;
 }

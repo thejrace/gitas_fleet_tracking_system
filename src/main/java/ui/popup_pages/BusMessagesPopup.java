@@ -18,9 +18,9 @@ import javafx.stage.StageStyle;
 import models.Bus;
 import utils.Common;
 
-public class BusDriversPopup  extends Application {
+public class BusMessagesPopup extends Application {
 
-    private BusDriversPopupController controller;
+    private BusMessagesPopupController controller;
 
     // @todo SAVE UI Parent?
 
@@ -28,9 +28,9 @@ public class BusDriversPopup  extends Application {
     public void start(Stage primaryStage) throws Exception{
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/bus_drivers_popup.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/bus_messages_popup.fxml"));
             Parent content = loader.load();
-            primaryStage.setTitle("Otobüs Sürücü Detayları");
+            primaryStage.setTitle("Otobüs Mesajlar");
 
             try {
                 Font.loadFont(getClass().getResource("/font/montserratbold.otf").toExternalForm().replace("%20", " "), 10);
@@ -40,7 +40,7 @@ public class BusDriversPopup  extends Application {
                 e.printStackTrace();
             }
 
-            primaryStage.setScene(new Scene(content, 550, 600 ));
+            primaryStage.setScene(new Scene(content, 600, 750 ));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             //stage.getIcons().add(new Image(getClass().getResource("/gpts/res/img/gpts_ico.png").toExternalForm()));
 
@@ -65,5 +65,4 @@ public class BusDriversPopup  extends Application {
         controller.setBus(bus);
         controller.updateUI();
     }
-
 }
