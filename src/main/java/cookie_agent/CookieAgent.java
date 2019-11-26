@@ -41,10 +41,7 @@ public class CookieAgent {
     /**
      * Cookie server urls @todo will get from shared config?
      */
-    public static String[] COOKIE_SERVER_URLS = {
-        "http://192.168.2.177/filotakip/get_cookie?key=nJAHJjksd13",
-        "http://gitsistem.com/filotakip/get_cookie?key=nJAHJjksd13"
-    };
+    public static String COOKIE_SERVER_URL;
 
     /**
      * Initialize cookie agent
@@ -101,9 +98,7 @@ public class CookieAgent {
      */
     private static void getCookieFromServer() {
         // get cookie from api
-        for( int k = 0; k < COOKIE_SERVER_URLS.length; k++ ){
-            if( requestToCookieServer(COOKIE_SERVER_URLS[k]) ) break;
-        }
+        requestToCookieServer(COOKIE_SERVER_URL);
     }
 
     /**

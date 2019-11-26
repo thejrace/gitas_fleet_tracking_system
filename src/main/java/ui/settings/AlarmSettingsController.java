@@ -35,7 +35,37 @@ public class AlarmSettingsController extends SettingsTabController implements In
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initCommonEvents();
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void submitForm() {
+        String typeValuesSerialized = "";
+        if( uiAlarmTypeZayiCB.isSelected() ){
+            typeValuesSerialized += "1";
+        } else {
+            typeValuesSerialized += "0";
+        }
+
+        if( uiAlarmTypeLateCB.isSelected() ){
+            typeValuesSerialized += "1";
+        } else {
+            typeValuesSerialized += "0";
+        }
+
+        if( uiAlarmTypeFixedCB.isSelected() ){
+            typeValuesSerialized += "1";
+        } else {
+            typeValuesSerialized += "0";
+        }
+
+        SharedConfig.SETTINGS.put("alarm_frequency", Integer.valueOf(uiAlarmFreqInput.getText()));
+        SharedConfig.SETTINGS.put("alarm_visible_delay", Integer.valueOf(uiAlarmVisibleFreqInput.getText()));
+        SharedConfig.SETTINGS.put("enabled_alarms", typeValuesSerialized);
+        SharedConfig.overwriteStaticSettings();
     }
 
     /**

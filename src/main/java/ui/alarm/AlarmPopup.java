@@ -12,6 +12,7 @@ import javafx.stage.Popup;
 import models.Alarm;
 import ui.MainScreenController;
 import ui.UIComponent;
+import utils.SharedConfig;
 import utils.ThreadHelper;
 
 public class AlarmPopup extends UIComponent {
@@ -104,14 +105,13 @@ public class AlarmPopup extends UIComponent {
             while( triggerEnabledFlag ){
                 if( !shown ) ThreadHelper.runOnUIThread(() -> show() );
 
-                ThreadHelper.delay(10000);
+                ThreadHelper.delay(SharedConfig.SETTINGS.getInt("alarm_visible_delay")*1000);
 
                 ThreadHelper.runOnUIThread(() -> hide() );
 
-                ThreadHelper.delay(10000);
+                ThreadHelper.delay(SharedConfig.SETTINGS.getInt("alarm_frequency")*1000);
             }
         });
-
     }
 
     /**

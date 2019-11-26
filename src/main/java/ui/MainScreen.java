@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -41,7 +42,8 @@ public class MainScreen extends Application {
             //Map<String, Double> resData = Common.calculateAppWindowSize();
             primaryStage.setScene(new Scene(content, 1280, 1024 )); // @todo - calculate client's width-height, give offset to that
 
-            //stage.getIcons().add(new Image(getClass().getResource("/gpts/res/img/gpts_ico.png").toExternalForm()));
+            primaryStage.getIcons().add(new Image(getClass().getResource("/img/app_ico.png").toExternalForm()));
+
             Stage = primaryStage;
             primaryStage.show();
 

@@ -31,7 +31,19 @@ public class FrequencySettingsController extends SettingsTabController implement
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initCommonEvents();
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void submitForm(){
+        SharedConfig.SETTINGS.put("plan_download_freq", Integer.valueOf(uiPlanFreqInput.getText()));
+        SharedConfig.SETTINGS.put("pdks_download_freq", Integer.valueOf(uiPDKSFreqInput.getText()));
+        SharedConfig.SETTINGS.put("speed_download_freq", Integer.valueOf(uiSpeedFreqInput.getText()));
+        SharedConfig.SETTINGS.put("plate_download_freq", Integer.valueOf(uiPlateFreqInput.getText()));
+        SharedConfig.overwriteStaticSettings();
     }
 
     /**

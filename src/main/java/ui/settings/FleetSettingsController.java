@@ -40,7 +40,22 @@ public class FleetSettingsController extends SettingsTabController implements In
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initCommonEvents();
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void submitForm() {
+        SharedConfig.SETTINGS.put("plan_download_url", uiPlanUrlInput.getText());
+        SharedConfig.SETTINGS.put("pdks_download_url", uiPDKSInput.getText());
+        SharedConfig.SETTINGS.put("speed_download_url", uiSpeedUrlInput.getText());
+        SharedConfig.SETTINGS.put("message_out_download_url", uiMessageOutInput.getText());
+        SharedConfig.SETTINGS.put("message_in_download_url", uiMessageInInput.getText());
+        SharedConfig.SETTINGS.put("driver_details_url", uiDriverDetailsUrlInput.getText());
+        SharedConfig.SETTINGS.put("paralel_downloader_limit", Integer.valueOf(uiDownloadLimitInput.getText()));
+        SharedConfig.overwriteStaticSettings();
     }
 
     /**

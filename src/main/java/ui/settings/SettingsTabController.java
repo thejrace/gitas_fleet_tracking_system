@@ -22,4 +22,21 @@ public class SettingsTabController {
 
     }
 
+    /**
+     * Init common UI events
+     */
+    protected void initCommonEvents(){
+        uiSaveBtn.setOnMouseClicked( ev -> {
+            uiSaveBtn.setDisable(true);
+            submitForm();
+            uiSaveBtn.setDisable(false);
+        });
+    }
+
+    /**
+     * Submit form
+     */
+    protected void submitForm(){
+
+    }
 }

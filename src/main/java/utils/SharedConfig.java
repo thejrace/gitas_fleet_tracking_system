@@ -7,6 +7,7 @@
  */
 package utils;
 
+import cookie_agent.CookieAgent;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,6 +78,7 @@ public class SharedConfig { // @todo Hash the static config files
                 DATA = new JSONObject( Common.readJSONFile(setupFolderTemp+"app_config.json") );
                 APIRequest.API_URL = DATA.getJSONArray("base_api").getString(0);
 
+
                 JSONObject settingsData = new JSONObject( Common.readJSONFile(setupFolderTemp+"settings.json") );
                 JSONObject updatedSettingsData = new JSONObject(APIRequest.GET(APIRequest.API_URL+"fts/setup")).getJSONObject("settings");
 
@@ -93,6 +95,8 @@ public class SharedConfig { // @todo Hash the static config files
                 // cache new file
                 SETTINGS = settingsData;
 
+                CookieAgent.COOKIE_SERVER_URL = SETTINGS.getString("server_cookie_url");
+
                 System.out.println(SharedConfig.SETTINGS);
             } catch( JSONException e ) {
                 e.printStackTrace();
@@ -100,6 +104,13 @@ public class SharedConfig { // @todo Hash the static config files
             }
         }
         return true;
+    }
+
+    /**
+     * Overwrite static settings data
+     */
+    public static void overwriteStaticSettings(){
+        Common.writeStaticData(setupFolderTemp + "settings.json", SETTINGS.toString());
     }
 
     /**

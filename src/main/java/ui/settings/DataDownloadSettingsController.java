@@ -29,9 +29,32 @@ public class DataDownloadSettingsController extends SettingsTabController implem
     @FXML
     private Button uiDataSourceBtn;
 
+    private DataSourceSettings activeSetting;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initCommonEvents();
 
+        uiDataSourceBtn.setOnMouseClicked( ev -> {
+            if( activeSetting == DataSourceSettings.FLEET ){
+                uiDataSourceBtn.setText("Aktif Kaynak: Sunucu");
+                activeSetting = DataSourceSettings.SERVER;
+            } else {
+                uiDataSourceBtn.setText("Aktif Kaynak: Filo5");
+                activeSetting = DataSourceSettings.FLEET;
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void submitForm() {
+        SharedConfig.SETTINGS.put("fleet_cookie_url", uiFleetURLInput.getText());
+        SharedConfig.SETTINGS.put("server_cookie_url", uiAPIUrlInput.getText());
+        SharedConfig.SETTINGS.put("data_source", activeSetting.ordinal());
+        SharedConfig.overwriteStaticSettings();
     }
 
     /**
@@ -45,8 +68,10 @@ public class DataDownloadSettingsController extends SettingsTabController implem
         int dataSourceSetting = SharedConfig.SETTINGS.getInt("data_source");
         if( dataSourceSetting == DataSourceSettings.FLEET.ordinal() ){
             uiDataSourceBtn.setText("Aktif Kaynak: Filo5");
+            activeSetting = DataSourceSettings.FLEET;
         } else {
             uiDataSourceBtn.setText("Aktif Kaynak: Sunucu");
+            activeSetting = DataSourceSettings.SERVER;
         }
     }
 
