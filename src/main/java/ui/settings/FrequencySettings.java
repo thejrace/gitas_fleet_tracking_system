@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 import ui.UIComponent;
 
 @NoArgsConstructor
-public class DataDownloadSettings extends UIComponent implements SettingsTab{
+public class FrequencySettings extends UIComponent implements SettingsTab {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void initUI(){
-        loadFXML("data_download_settings");
+        loadFXML("frequency_settings");
     }
 
     /**
@@ -26,7 +26,7 @@ public class DataDownloadSettings extends UIComponent implements SettingsTab{
      */
     @Override
     public void fillForms() {
-        ((DataDownloadSettingsController)controller).fillForms();
+        ((FrequencySettingsController)controller).fillForms();
     }
 
 }

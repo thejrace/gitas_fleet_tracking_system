@@ -139,7 +139,7 @@ public class CaptchaWebviewController implements Initializable {
                                     " var logo = document.querySelectorAll(\".login-logo\"); hide(logo[0]); var infoText = document.querySelectorAll(\".login-box-msg\"); hide(infoText[0]); " +
                                     " var form_login = document.querySelectorAll('[name=\"login\"]');" +
                                     " var form_pass = document.querySelectorAll('[name=\"password\"]');" +
-                                    " if( form_login[0] != undefined ) hide(form_login[0]); form_login[0].value=\""+CookieAgent.LOGIN+"\"; if( form_pass[0] != undefined ) hide(form_pass[0]); form_pass[0].value=\""+CookieAgent.PASS+"\"; "+
+                                    " if( form_login[0] != undefined ) hide(form_login[0]); form_login[0].value=\""+CookieAgent.FILO5_LOGIN+"\"; if( form_pass[0] != undefined ) hide(form_pass[0]); form_pass[0].value=\""+CookieAgent.FILO5_PASS+"\"; "+
                                     " var cin = document.querySelectorAll('[name=\"captcha\"]'); cin[0].style.width = \"60px\"; cin[0].style.height = \"20px\"; cin[0].style.position = \"relative\"; cin[0].style.top = \"0px\"; cin[0].style.left = \"260px\";" +
                                     " var cimg = document.getElementById(\"captcha\"); cimg.style.position = \"relative\"; cimg.style.left = \"50px\"; cimg.style.top = \"-20px\";  " +
                                     " var submitbtn = document.querySelectorAll('[type=\"submit\"]'); submitbtn[0].style.width = \"40px\"; submitbtn[0].style.marginTop = \"-60px\"; submitbtn[0].style.marginLeft = \"260px\";" +

@@ -40,7 +40,19 @@
     -fx-box-border: transparent;
 }
 
+.overlay-loader {
+    -fx-background-color:rgba(0, 0,0,0.2);
+}
 
+/* HBox input container */
+.input-control {
+    -fx-spacing:10;
+}
+
+.input-control.align-label .label{
+    -fx-pref-width:120;
+    -fx-min-width:120;
+}
 
 .lbl-bold{
     -fx-font-family:"Montserrat Bold";
@@ -698,4 +710,11 @@
 
 .message-balloon .content .timestamp {
     -fx-font-size:9;
+}
+
+/* SETTINGS PAGE STYLES */
+
+.settings-tab-content{
+    -fx-spacing:15;
+    -fx-padding:10;
 }

@@ -48,8 +48,12 @@ public class StartSplashScreen extends Application {
             StartSplashScreenController controller = loader.getController();
 
             ThreadHelper.func(() -> {
+
+
+
+
                 // read config
-                if( SharedConfig.read() ){
+                if( SharedConfig.readAndUpdateStaticConfigStructure() ){
                     System.out.println(SharedConfig.DATA);
 
                     controller.updateStatus("Güncellemeler kontrol ediliyor..", "Lütfen bekleyin...");

@@ -7,6 +7,7 @@
  */
 package models;
 
+import cookie_agent.CookieAgent;
 import lombok.Data;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,6 +86,8 @@ public class User {
             this.email = data.getString("email");
             this.name = data.getString("name");
             this.apiToken = data.getString("api_token");
+            CookieAgent.FILO5_LOGIN = data.getString("filo5_login"); // @todo FIX THIS!!??
+            CookieAgent.FILO5_PASS = data.getString("filo5_pass");
         } catch( JSONException e ){
             e.printStackTrace();
         }

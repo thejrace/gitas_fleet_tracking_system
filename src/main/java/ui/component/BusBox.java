@@ -18,6 +18,7 @@ import ui.popup_pages.BusDriversPopup;
 import ui.popup_pages.BusMessagesPopup;
 import ui.popup_pages.BusPlanPopup;
 import utils.GitasEventBus;
+import utils.SharedConfig;
 import utils.ThreadHelper;
 
 public class BusBox extends UIComponent implements Subscriber {
@@ -41,6 +42,11 @@ public class BusBox extends UIComponent implements Subscriber {
      * PDKS data download thread guard
      */
     private boolean pdksDataDownloadFlag = true;
+
+    /**
+     * Plate data download thread guard
+     */
+    private boolean plateDataDownloadFlag = true;
 
     /**
      * BusController instance
@@ -82,14 +88,21 @@ public class BusBox extends UIComponent implements Subscriber {
         ThreadHelper.func( () -> {
             while( fleetDataDownloadFlag ){
                 downloadFleetData(false);
-                ThreadHelper.delay(50000); // @todo get from settings
+                ThreadHelper.delay(SharedConfig.SETTINGS.getInt("plan_download_freq")*1000);
             }
         });
 
         ThreadHelper.func(() -> {
             while( speedDataDownloadFlag ){
                 downloadSpeedData(false);
-                ThreadHelper.delay(50000); // @todo get from settings
+                ThreadHelper.delay(SharedConfig.SETTINGS.getInt("speed_download_freq")*1000);
+            }
+        });
+
+        ThreadHelper.func(() -> {
+            while( plateDataDownloadFlag ){
+                downloadPlateData(false);
+                ThreadHelper.delay(SharedConfig.SETTINGS.getInt("plate_download_freq")*1000);
             }
         });
 
@@ -97,10 +110,9 @@ public class BusBox extends UIComponent implements Subscriber {
             // for PDKS download, we wait for a while to FleetDataDownload action to finish
             // we need rundata to inject driver names
             ThreadHelper.delay(10000); // @todo get from settings
-
             while( pdksDataDownloadFlag ){
                 downloadPDKSData(false);
-                ThreadHelper.delay(15 * 60000 ); // @todo get from settings
+                ThreadHelper.delay(SharedConfig.SETTINGS.getInt("pdks_download_freq")*1000);
             }
         });
 
