@@ -4,13 +4,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="15.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.page.SettingsPageController">
+
+<VBox spacing="15.0" styleClass="settings-tab-content" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.page.SettingsPageController">
    <children>
       <Label styleClass="lbl-gray1" text="Sefer veri kaynağı ayarlarını buradan yapabilirsiniz." />
-      <VBox spacing="10.0">
+      <VBox spacing="15.0">
          <children>
             <Label text="Filo Ayarları">
                <styleClass>
@@ -18,15 +20,21 @@
                   <String fx:value="lbl-gray1" />
                </styleClass>
             </Label>
+            <HBox alignment="CENTER_LEFT" styleClass="input-control">
+               <children>
+                  <Label styleClass="lbl-gray1" text="URL" />
+                  <TextField fx:id="uiFleetURLInput" prefHeight="25.0" prefWidth="289.0" />
+               </children>
+            </HBox>
             <HBox spacing="15.0">
                <children>
-                  <Button fx:id="uiFleetActivateBtn" mnemonicParsing="false" text="Aktif Kaynak">
+                  <Button fx:id="uiEnableFleetBtn" mnemonicParsing="false" text="Aktif Kaynak">
                      <styleClass>
                         <String fx:value="content-btn" />
                         <String fx:value="content-btn-success" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="uiFleetCaptchaBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Captcha Gir">
+                  <Button fx:id="uiEnterCaptchaBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Captcha Gir">
                      <styleClass>
                         <String fx:value="content-btn" />
                         <String fx:value="content-btn-default" />
@@ -39,7 +47,7 @@
             <Insets left="20.0" />
          </padding>
       </VBox>
-      <VBox layoutX="20.0" layoutY="52.0" spacing="10.0">
+      <VBox layoutX="20.0" layoutY="52.0" spacing="15.0">
          <children>
             <Label text="Sunucu Ayarları">
                <styleClass>
@@ -47,9 +55,15 @@
                   <String fx:value="lbl-gray1" />
                </styleClass>
             </Label>
+            <HBox alignment="CENTER_LEFT" styleClass="input-control">
+               <children>
+                  <Label styleClass="lbl-gray1" text="URL" />
+                  <TextField fx:id="uiAPIUrlInput" prefHeight="25.0" prefWidth="289.0" />
+               </children>
+            </HBox>
             <HBox spacing="15.0">
                <children>
-                  <Button fx:id="uiServerActivateBtn" mnemonicParsing="false" text="Aktif Kaynak Yap">
+                  <Button fx:id="uiEnableAPIBtn" mnemonicParsing="false" text="Aktif Kaynak Yap">
                      <styleClass>
                         <String fx:value="content-btn" />
                         <String fx:value="content-btn-warning" />

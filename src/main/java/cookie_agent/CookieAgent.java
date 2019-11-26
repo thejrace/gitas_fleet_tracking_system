@@ -33,15 +33,15 @@ public class CookieAgent {
     public static boolean ReadyToCheckCookieFlag = false;
 
     /**
-     * Test login credentials
+     * Login credentials
      */
-    public static String LOGIN = "dk_gitas";
-    public static String PASS = "eVCb4Y/p";
+    public static String FILO5_LOGIN = "";
+    public static String FILO5_PASS = "";
 
     /**
      * Cookie server urls @todo will get from shared config?
      */
-    private static String[] COOKIE_SERVER_URLS = {
+    public static String[] COOKIE_SERVER_URLS = {
         "http://192.168.2.177/filotakip/get_cookie?key=nJAHJjksd13",
         "http://gitsistem.com/filotakip/get_cookie?key=nJAHJjksd13"
     };
@@ -93,7 +93,6 @@ public class CookieAgent {
             Platform.runLater(() -> {
                 Popup.setContent(captchaWebview.getUI());
             });
-
         }
     }
 
@@ -122,7 +121,6 @@ public class CookieAgent {
                     .execute();
 
             String newCookie = res.parse().text();
-            System.out.println(newCookie);
             try {
                 if( !FILO5_COOKIE.equals( newCookie ) ){
                     FILO5_COOKIE = newCookie;
@@ -184,7 +182,7 @@ public class CookieAgent {
             System.out.println( "Login without captcha");
             res = Jsoup.connect("https://filotakip.iett.gov.tr/login.php")
                     .method(org.jsoup.Connection.Method.POST)
-                    .data("login", CookieAgent.LOGIN, "password", CookieAgent.PASS, "captcha", "xxx")
+                    .data("login", CookieAgent.FILO5_LOGIN, "password", CookieAgent.FILO5_PASS, "captcha", "xxx")
                     .timeout(0)
                     .execute();
 

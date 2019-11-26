@@ -29,7 +29,7 @@ public class SharedConfig { // @todo Hash the static config files
     public static JSONObject SETTINGS = new JSONObject();
 
     /**
-     * Setup location, will be empty for release
+     * Setup location, will be empty for release ( configs and executable will be in the same folder )
      */
     private static String setupFolderTemp = "C://gfts/";
 

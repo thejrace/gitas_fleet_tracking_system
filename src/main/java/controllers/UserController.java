@@ -7,6 +7,7 @@
  */
 package controllers;
 
+import cookie_agent.CookieAgent;
 import interfaces.ActionCallback;
 import models.User;
 import org.json.JSONException;
