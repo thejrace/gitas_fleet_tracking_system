@@ -19,7 +19,7 @@ public class SharedConfig { // @todo Hash the static config files
     /**
      * Version string
      */
-    public static String VERSION = "1.0.0";
+    public static String VERSION = "1.0.1";
 
     /**
      * Application config data
@@ -34,7 +34,7 @@ public class SharedConfig { // @todo Hash the static config files
     /**
      * Setup location, will be empty for release ( configs and executable will be in the same folder )
      */
-    private static String setupFolderTemp = "C://gfts/";
+    private static String setupFolderTemp = "C://gfts/"; // @todo fix this
 
     /**
      * Method to read configuration resources
@@ -59,11 +59,12 @@ public class SharedConfig { // @todo Hash the static config files
     /**
      * Updates static config file to contain user credentials data after login
      */
-    public static void updateStaticConfigToRememberUser(String apiToken){
+    public static void updateStaticConfigToRememberUser(String apiToken, int userID){
         JSONObject oldData = new JSONObject(Common.readJSONFile(setupFolderTemp + "app_config.json"));
         if( oldData.has("init") ){
             oldData.remove("init");
             oldData.put("api_key", apiToken);
+            oldData.put("user_id", userID);
             Common.writeStaticData(setupFolderTemp + "app_config.json", oldData.toString());
         }
     }
@@ -76,7 +77,7 @@ public class SharedConfig { // @todo Hash the static config files
             try {
                 // @todo data contains base api urls, so how to validate it's structure?
                 DATA = new JSONObject( Common.readJSONFile(setupFolderTemp+"app_config.json") );
-                APIRequest.API_URL = DATA.getJSONArray("base_api").getString(0);
+                APIRequest.API_URL = DATA.getJSONArray("base_api").getString(1);
 
 
                 JSONObject settingsData = new JSONObject( Common.readJSONFile(setupFolderTemp+"settings.json") );
@@ -119,6 +120,7 @@ public class SharedConfig { // @todo Hash the static config files
     public static void resetStaticConfigToForgetUser(){
         JSONObject oldData = new JSONObject(Common.readJSONFile(setupFolderTemp + "app_config.json"));
         oldData.remove("api_key");
+        oldData.remove("user_id");
         oldData.put("init", true);
         Common.writeStaticData(setupFolderTemp + "app_config.json", oldData.toString());
     }

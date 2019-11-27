@@ -44,7 +44,7 @@ public class TopSubBarController implements Initializable {
             ControllerHub.AlarmController.markAllAsNotSeen();
         });
 
-        uiUserNameLabel.setText(ControllerHub.UserController.getModel().getName());
+        uiUserNameLabel.setText("Hoşgeldin, " + ControllerHub.UserController.getModel().getName());
 
     }
 

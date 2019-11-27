@@ -9,7 +9,7 @@ public class UpdateChecker {
 
     public static boolean action(){
         // check updates
-        JSONObject updateRequest = new JSONObject( APIRequest.GET(SharedConfig.DATA.getJSONArray("base_api").getString(0)+"fts/version") );
+        JSONObject updateRequest = new JSONObject( APIRequest.GET(SharedConfig.DATA.getJSONArray("base_api").getString(1)+"fts/version") );
         return !updateRequest.getString("last_version").equals(SharedConfig.VERSION);
     }
 

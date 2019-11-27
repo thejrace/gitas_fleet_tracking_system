@@ -38,6 +38,7 @@ public class UserController {
             // read api token from static config file
             model.setApiToken(SharedConfig.DATA.getString("api_key"));
             model.batchUpdate(UserRepository.remember());
+            updateStaticConfigAfterLogin();
             callback.onSuccess();
         } catch( JSONException e ){
             callback.onError(0);
@@ -49,7 +50,7 @@ public class UserController {
      * Update the static config data after login with form action
      */
     public void updateStaticConfigAfterLogin(){
-        SharedConfig.updateStaticConfigToRememberUser(getModel().getApiToken());
+        SharedConfig.updateStaticConfigToRememberUser(getModel().getApiToken(), getModel().getID());
     }
 
     /**
