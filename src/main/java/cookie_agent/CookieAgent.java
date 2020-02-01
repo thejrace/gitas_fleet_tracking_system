@@ -39,11 +39,6 @@ public class CookieAgent {
     public static String FILO5_PASS = "";
 
     /**
-     * Cookie server urls @todo will get from shared config?
-     */
-    public static String COOKIE_SERVER_URL;
-
-    /**
      * Initialize cookie agent
      */
     public static void initialize(){
@@ -98,7 +93,7 @@ public class CookieAgent {
      */
     private static void getCookieFromServer() {
         // get cookie from api
-        requestToCookieServer(COOKIE_SERVER_URL);
+        requestToCookieServer(SharedConfig.SETTINGS.getString("server_cookie_url"));
     }
 
     /**
@@ -116,6 +111,8 @@ public class CookieAgent {
                     .execute();
 
             String newCookie = res.parse().text();
+            System.out.println(newCookie);
+
             try {
                 if( !FILO5_COOKIE.equals( newCookie ) ){
                     FILO5_COOKIE = newCookie;
@@ -145,7 +142,7 @@ public class CookieAgent {
             res = Jsoup.connect("https://filotakip.iett.gov.tr/_FYS/000/sorgu.php?konum=ana&konu=sefer&hat=15BK")
                     .method(Connection.Method.GET)
                     .cookie("PHPSESSID", FILO5_COOKIE)
-                    .timeout(2000)
+                    .timeout(0)
                     .execute();
 
             Document document = res.parse();
@@ -161,7 +158,7 @@ public class CookieAgent {
                 return true;
             }
         } catch( IOException e) {
-            return false;
+            return false; // @todo handle timeout
         }
     }
 

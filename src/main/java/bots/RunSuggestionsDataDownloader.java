@@ -7,6 +7,7 @@
  */
 package bots;
 
+import controllers.ControllerHub;
 import enums.BusRunStatus;
 import events.RunSuggestionsStatusUpdateEvent;
 import interfaces.Subscriber;
@@ -74,7 +75,7 @@ public class RunSuggestionsDataDownloader extends IETTDataDownloader implements 
 
             // start all scans parallel
             ThreadHelper.func(() -> {
-                getClearance();
+                ControllerHub.DownloaderController.getClearance();
                 System.out.println(route.getCode() +" run suggestion scan!");
                 request(URL_PREFIX + route.getUrlSafeCode(), org.jsoup.Connection.Method.GET, 50000);
                 System.out.println(route.getCode() +" run suggestion scan FINISHED!");
@@ -88,7 +89,7 @@ public class RunSuggestionsDataDownloader extends IETTDataDownloader implements 
      * {@inheritDoc}
      */
     @Override
-    protected void parseData(Document document){
+    public void parseData(Document document){
         Elements table = null;
         Elements rows  = null;
         Element row    = null;

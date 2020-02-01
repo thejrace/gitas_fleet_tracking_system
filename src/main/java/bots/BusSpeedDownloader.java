@@ -49,7 +49,7 @@ public class BusSpeedDownloader extends IETTDataDownloader {
      * {@inheritDoc}
      */
     @Override
-    protected void parseData( Document document ){
+    public void parseData( Document document ){
         try {
             String page = document.toString();
             String dataString = page.substring( page.indexOf("veri_ilklendir")+14, page.indexOf("veri_hatcizgi") );

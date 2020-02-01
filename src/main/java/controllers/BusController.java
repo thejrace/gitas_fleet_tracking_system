@@ -29,9 +29,9 @@ public class BusController {
     private Bus bus;
 
     /**
-     * BusFleetDataDownloader instance
+     * FleetDataDownloader instance
      */
-    private BusFleetDataDownloader fleetDataDownloader;
+    private FleetDataDownloader fleetDataDownloader;
 
     /**
      * BusPlateDataDownloader instance
@@ -77,7 +77,7 @@ public class BusController {
      */
     public void initialize(){
         // init downloader
-        fleetDataDownloader = new BusFleetDataDownloader(bus.getCode());
+        fleetDataDownloader = new FleetDataDownloaderFactory().getSource(bus.getCode());
         // init repository
         statusRepository = new BusStatusRepository(bus.getCode());
         // init plate download

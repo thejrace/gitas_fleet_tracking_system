@@ -36,12 +36,12 @@ public class BusBox extends UIComponent implements Subscriber {
     /**
      * Speed data download thread guard
      */
-    private boolean speedDataDownloadFlag = true;
+    private boolean speedDataDownloadFlag = false;
 
     /**
      * PDKS data download thread guard
      */
-    private boolean pdksDataDownloadFlag = true;
+    private boolean pdksDataDownloadFlag = false;
 
     /**
      * Plate data download thread guard

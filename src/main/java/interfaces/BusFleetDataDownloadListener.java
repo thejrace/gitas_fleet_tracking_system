@@ -7,7 +7,7 @@
  */
 package interfaces;
 
-import bots.BusFleetDataDownloader;
+import bots.FleetDataDownloaderIETT;
 import models.Bus;
 import repositories.BusStatusRepository;
 
@@ -20,7 +20,7 @@ public interface BusFleetDataDownloadListener {
      * @param busFleetDataDownloader object itself
      * @param busStatusRepository object itself
      */
-    void onFinish(Bus bus, BusFleetDataDownloader busFleetDataDownloader, BusStatusRepository busStatusRepository);
+    void onFinish(Bus bus, FleetDataDownloaderIETT busFleetDataDownloader, BusStatusRepository busStatusRepository);
 
     /**
      * Called from BusController to trigger BusBox when data download resulted in error.

@@ -20,6 +20,17 @@ import java.util.Date;
 
 public class Common {
 
+    /**
+     * Fills the %%VAR%% in the download url with safe bus code
+     *
+     * @param url
+     * @param code
+     * @return
+     */
+    public static String fillDownloadUrl(String url, String code){
+        return url.replace("%%VAR%%", convertToSafeLink(code));
+    }
+
     public static boolean checkFile( String path ){
         File f = new File( path );
         return f.exists();

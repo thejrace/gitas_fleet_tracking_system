@@ -7,6 +7,8 @@
  */
 package controllers;
 
+import utils.ThreadHelper;
+
 public class DownloaderController {
 
     /**
@@ -24,6 +26,15 @@ public class DownloaderController {
      */
     public DownloaderController(){
 
+    }
+
+    /**
+     * Get clearance. Use it in threads
+     */
+    public synchronized void getClearance(){
+        while(request()){
+            ThreadHelper.delay(10);
+        }
     }
 
     /**

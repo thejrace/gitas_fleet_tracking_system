@@ -7,6 +7,7 @@
  */
 package bots;
 
+import controllers.ControllerHub;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -50,7 +51,7 @@ public class DriverInfoDownloader extends IETTDataDownloader {
             for( PDKSRecord pdksRecord : pdksRecords ){
                 // start all scans parallel
                 ThreadHelper.func(() -> {
-                    getClearance();
+                    ControllerHub.DownloaderController.getClearance();
                     request("https://filotakip.iett.gov.tr/fysDosya/sofor/"+pdksRecord.getSource()+".htm", org.jsoup.Connection.Method.GET, 50000 );
                     runnerThreadCounter++;
                 });
@@ -64,7 +65,7 @@ public class DriverInfoDownloader extends IETTDataDownloader {
      * {@inheritDoc}
      */
     @Override
-    protected void parseData(Document document){
+    public void parseData(Document document){
 
         Elements table = null;
         Elements rows  = null;

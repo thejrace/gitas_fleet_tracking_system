@@ -9,10 +9,12 @@ package bots;
 
 import controllers.ControllerHub;
 import cookie_agent.CookieAgent;
+import enums.DataSourceSettings;
 import lombok.Getter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import utils.ThreadHelper;
+import utils.APIRequest;
+import utils.SharedConfig;
 
 import java.io.IOException;
 
@@ -37,7 +39,7 @@ public class IETTDataDownloader {
         errorFlag = false;
         errorMessage = "";
 
-        getClearance();
+        ControllerHub.DownloaderController.getClearance();
     }
 
     /**
@@ -51,42 +53,40 @@ public class IETTDataDownloader {
      */
     protected void request(String url, org.jsoup.Connection.Method method, int timeout){
         try {
-            org.jsoup.Connection.Response response = Jsoup.connect(url)
-                    .cookie("PHPSESSID", CookieAgent.FILO5_COOKIE )
-                    .method(method)
-                    .timeout(timeout)
-                    .execute();
-
-            release();
-
-            parseData(response.parse());
+            int source = SharedConfig.SETTINGS.getInt("data_source");
+            if( source == DataSourceSettings.FLEET.ordinal() ){
+                org.jsoup.Connection.Response response = Jsoup.connect(url)
+                        .cookie("PHPSESSID", CookieAgent.FILO5_COOKIE )
+                        .method(method)
+                        .timeout(timeout)
+                        .execute();
+                ControllerHub.DownloaderController.release();
+                parseData(response.parse());
+            } else {
+                String response = APIRequest.GET(url);
+                ControllerHub.DownloaderController.release();
+                parseData(response);
+            }
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Data parser method, it's overridden in each child class
+     * Data parser method, it's overridden in each child class (fleet)
      *
      * @param document
      */
-    protected void parseData( Document document ){
+    public void parseData( Document document ){
 
     }
 
     /**
-     * Give back the clearance
+     * Data parser method, it's overridden in each child class (server)
+     *
+     * @param data
      */
-    protected void release(){
-        ControllerHub.DownloaderController.release();
-    }
+    public void parseData( String data ){
 
-    /**
-     *  Wait until we get clearance from fleet request limiter
-     */
-    protected void getClearance(){
-        while(!ControllerHub.DownloaderController.request()){
-            ThreadHelper.delay(10);
-        }
     }
 }

@@ -7,7 +7,6 @@
  */
 package utils;
 
-import cookie_agent.CookieAgent;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -94,8 +93,6 @@ public class SharedConfig { // @todo Hash the static config files
                 Common.writeStaticData(setupFolderTemp + "settings.json", settingsData.toString());
                 // cache new file
                 SETTINGS = settingsData;
-
-                CookieAgent.COOKIE_SERVER_URL = SETTINGS.getString("server_cookie_url");
 
                 System.out.println(SharedConfig.SETTINGS);
             } catch( JSONException e ) {

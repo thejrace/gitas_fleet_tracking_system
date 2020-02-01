@@ -8,85 +8,30 @@
 package bots;
 
 import enums.BusRunStatus;
-import lombok.Getter;
 import models.BusRun;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import utils.Common;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import utils.SharedConfig;
 
-public class BusFleetDataDownloader extends IETTDataDownloader {
-
-    /**
-     * Code of the bus
-     */
-    @Getter
-    private String code;
-
-    /**
-     * Route code of the bus
-     */
-    @Getter
-    private String routeCode;
-
-    /**
-     * Active run index counter
-     */
-    @Getter
-    private int activeRunIndex = -1;
-
-    /**
-     * All run data
-     */
-    @Getter
-    private ArrayList<BusRun> runData = new ArrayList<>();
-
-    /**
-     * Status summary
-     */
-    @Getter
-    private Map<String, Integer> runStatusSummary = new HashMap<>();
+public class FleetDataDownloaderIETT extends FleetDataDownloader {
 
     /**
      * Constructor
      *
      * @param code
      */
-    public BusFleetDataDownloader(String code){
-        this.code = code;
+    public FleetDataDownloaderIETT(String code) {
+        super(code);
+        urlPrefix = Common.fillDownloadUrl(SharedConfig.SETTINGS.getString("plan_download_url"), code);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void action(){
-        super.action();
-
-        // clear list
-        runData = new ArrayList<>();
-
-        // reset summary counters
-        runStatusSummary.put(BusRunStatus.A, 0);
-        runStatusSummary.put(BusRunStatus.B, 0);
-        runStatusSummary.put(BusRunStatus.T, 0);
-        runStatusSummary.put(BusRunStatus.I, 0);
-        runStatusSummary.put(BusRunStatus.Y, 0);
-        runStatusSummary.put("TOTAL", 0);
-
-        String URL_PREFIX = "https://filotakip.iett.gov.tr/_FYS/000/sorgu.php?konum=ana&konu=sefer&otobus="; // @todo get from settings
-
-        request(URL_PREFIX + code, org.jsoup.Connection.Method.GET, 50000 );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void parseData( Document document ){
+    public void parseData( Document document ){
 
         Elements table;
         Elements rows;
@@ -129,7 +74,6 @@ public class BusFleetDataDownloader extends IETTDataDownloader {
                     routeCodeFetchedFlag = true;
                     this.routeCode = routeCode;
                 }
-
 
                 String statusLabel = "";
                 String status = "";

@@ -72,7 +72,7 @@ public class RouteDataDownloader extends IETTDataDownloader {
      * {@inheritDoc}
      */
     @Override
-    protected void parseData(Document document) {
+    public void parseData(Document document) {
         try {
             Element routeSelect = document.getElementsByAttributeValue("name", "hatkodu").get(0);
             Elements options = routeSelect.getElementsByTag("option");

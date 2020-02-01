@@ -7,7 +7,7 @@
  */
 package events.bus_box;
 
-import bots.BusFleetDataDownloader;
+import bots.FleetDataDownloader;
 import interfaces.Postable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +24,6 @@ public class FleetDataDownloadFinishedEvent implements Postable {
     private BusStatusRepository busStatusRepository;
 
     @Getter
-    private BusFleetDataDownloader busFleetDataDownloader;
+    private FleetDataDownloader busFleetDataDownloader;
 
 }

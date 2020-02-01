@@ -54,7 +54,7 @@ public class PDKSDataDownloader extends IETTDataDownloader {
      * {@inheritDoc}
      */
     @Override
-    protected void parseData(Document document){
+    public void parseData(Document document){
 
         Elements table;
         Elements rows;
