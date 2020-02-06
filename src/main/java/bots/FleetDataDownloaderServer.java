@@ -57,7 +57,7 @@ public class FleetDataDownloaderServer extends FleetDataDownloader {
             String statusText = Common.regexTrim(tempJsonData.getString("status"));
             try {
                 status = statusText.substring(0, 1);
-                statusCode = statusText.substring(2);
+                statusCode = statusText.substring(1);
             } catch( StringIndexOutOfBoundsException e ){ }
 
             // find the current or next run
