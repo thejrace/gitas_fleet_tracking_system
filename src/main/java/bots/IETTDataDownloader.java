@@ -52,22 +52,34 @@ public class IETTDataDownloader {
      * @return
      */
     protected void request(String url, org.jsoup.Connection.Method method, int timeout){
+        int source = SharedConfig.SETTINGS.getInt("data_source");
+        if( source == DataSourceSettings.FLEET.ordinal() ){
+            requestToFleet(url, method, timeout);
+        } else {
+            requestToAPI(url);
+        }
+    }
+
+    public void requestToFleet(String url, org.jsoup.Connection.Method method, int timeout){
         try {
-            int source = SharedConfig.SETTINGS.getInt("data_source");
-            if( source == DataSourceSettings.FLEET.ordinal() ){
-                org.jsoup.Connection.Response response = Jsoup.connect(url)
-                        .cookie("PHPSESSID", CookieAgent.FILO5_COOKIE )
-                        .method(method)
-                        .timeout(timeout)
-                        .execute();
-                ControllerHub.DownloaderController.release();
-                parseData(response.parse());
-            } else {
-                String response = APIRequest.GET(url);
-                ControllerHub.DownloaderController.release();
-                parseData(response);
-            }
-        } catch (IOException | NullPointerException e) {
+            org.jsoup.Connection.Response response = Jsoup.connect(url)
+                    .cookie("PHPSESSID", CookieAgent.FILO5_COOKIE )
+                    .method(method)
+                    .timeout(timeout)
+                    .execute();
+            ControllerHub.DownloaderController.release();
+            parseData(response.parse());
+        } catch( IOException | NullPointerException e ){
+            e.printStackTrace();
+        }
+    }
+
+    public void requestToAPI(String url){
+        try {
+            String response = APIRequest.GET(url);
+            ControllerHub.DownloaderController.release();
+            parseData(response);
+        } catch( NullPointerException e ){
             e.printStackTrace();
         }
     }

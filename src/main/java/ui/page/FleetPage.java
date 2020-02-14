@@ -48,10 +48,10 @@ public class FleetPage extends UIPage{
         // init cookie agent first
         CookieAgent.initialize();
 
-        while( !CookieAgent.checkCookie() ){
+        /*while( !CookieAgent.checkCookie() ){
             System.out.println("Checking cookiee!");
             ThreadHelper.delay(1000);
-        }
+        }*/
 
         System.out.println("Cookie is valid, continue");
         ThreadHelper.runOnUIThread( () -> {

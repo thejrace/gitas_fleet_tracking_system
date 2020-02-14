@@ -70,14 +70,14 @@ public class RunSuggestionsDataDownloader extends IETTDataDownloader implements 
 
         int size = routes.size();
 
-        for( int k = 0; k < routes.size(); k++ ){
+        for( int k = 0; k < 10; k++ ){
             Route route = routes.get(k);
 
             // start all scans parallel
             ThreadHelper.func(() -> {
                 ControllerHub.DownloaderController.getClearance();
                 System.out.println(route.getCode() +" run suggestion scan!");
-                request(URL_PREFIX + route.getUrlSafeCode(), org.jsoup.Connection.Method.GET, 50000);
+                requestToFleet(URL_PREFIX + route.getUrlSafeCode(), org.jsoup.Connection.Method.GET, 30000);
                 System.out.println(route.getCode() +" run suggestion scan FINISHED!");
                 runnerThreadCounter++;
                 GitasEventBus.post(new RunSuggestionsStatusUpdateEvent("Hatlar taranıyor.( " + runnerThreadCounter + "/"+size + " tamamlandı. )" ));

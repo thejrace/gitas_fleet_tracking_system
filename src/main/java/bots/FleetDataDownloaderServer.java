@@ -72,17 +72,17 @@ public class FleetDataDownloaderServer extends FleetDataDownloader {
             tempRunData = new BusRun(
                     code,
                     Common.regexTrim(tempJsonData.getString("bline")),
-                    tempJsonData.getString("driver_id"), // driverCode
+                    String.valueOf(tempJsonData.get("driver_id")), // driverCode
                     k+1, // departureNo
-                    tempJsonData.getString("service"), // serviceCode
-                    Common.regexTrim(tempJsonData.getString("location")),
-                    Common.regexTrim(tempJsonData.getString("coming")), // arrival
-                    Common.regexTrim(tempJsonData.getString("orer")), // ORER
-                    Common.regexTrim(tempJsonData.getString("chief")), // alternativeORER
-                    Common.regexTrim(tempJsonData.getString("going")), // departureTime
+                    String.valueOf(tempJsonData.get("service")), // serviceCode
+                    Common.regexTrim(String.valueOf(tempJsonData.get("location"))),
+                    Common.regexTrim(String.valueOf(tempJsonData.get("coming"))), // arrival
+                    Common.regexTrim(String.valueOf(tempJsonData.get("orer"))), // ORER
+                    Common.regexTrim(String.valueOf(tempJsonData.get("chief"))), // alternativeORER
+                    Common.regexTrim(String.valueOf(tempJsonData.get("going"))), // departureTime
                     Common.regexTrim(String.valueOf(tempJsonData.get("guess"))), // estimatedEndTime
-                    Common.regexTrim(tempJsonData.getString("finish")), // endTime
-                    tempJsonData.getString("route"), // routeDetail
+                    Common.regexTrim(String.valueOf(tempJsonData.getString("finish"))), // endTime
+                    String.valueOf(tempJsonData.getString("route")), // routeDetail
                     status,
                     statusCode
             );
