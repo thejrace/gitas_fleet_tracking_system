@@ -16,19 +16,23 @@ public class BusRunStatusStyleClass {
      * @return
      */
     public static String get(String status){
-        switch(status){
-            case BusRunStatus.A:
-                return "green";
-            case BusRunStatus.B:
-                return "white";
-            case BusRunStatus.T:
-                return "gray";
-            case BusRunStatus.I:
-                return "red";
-            case BusRunStatus.Y:
-                return "pink";
-            default:
-                return "default";
+        try {
+            switch(status){
+                case BusRunStatus.A:
+                    return "green";
+                case BusRunStatus.B:
+                    return "white";
+                case BusRunStatus.T:
+                    return "gray";
+                case BusRunStatus.I:
+                    return "red";
+                case BusRunStatus.Y:
+                    return "pink";
+                default:
+                    return "default";
+            }
+        } catch( NullPointerException e ){
+            return "default";
         }
     }
 }
