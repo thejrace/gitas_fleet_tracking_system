@@ -18,7 +18,7 @@ public class SharedConfig { // @todo Hash the static config files
     /**
      * Version string
      */
-    public static String VERSION = "1.0.0";
+    public static String VERSION = "1.0.2";
 
     /**
      * Application config data
