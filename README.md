@@ -2,12 +2,12 @@
 
 Monitor Individual Buses
 
-![GUI](https://octodex.github.com/images/yaktocat.png)
+![GUI](https://raw.githubusercontent.com/thejrace/gitas_fleet_tracking_system/master/gfts_1.png)
 
 Adjustable Alarm System
 
-![GUI](https://octodex.github.com/images/yaktocat.png)
+![GUI](https://raw.githubusercontent.com/thejrace/gitas_fleet_tracking_system/master/gfts_2.png)
 
 Plan Details
 
-![GUI](https://octodex.github.com/images/yaktocat.png)
+![GUI](https://raw.githubusercontent.com/thejrace/gitas_fleet_tracking_system/master/gfts_3.png)
