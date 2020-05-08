@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="630.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.login.LoginScreenController">
+   <children>
+      <ImageView fitHeight="350.0" fitWidth="630.0">
+         <image>
+            <Image url="@../img/login_bg.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="uiErrorNotf" alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="25.0" prefHeight="17.0" prefWidth="523.0" styleClass="lbl-h4" textFill="#ff3737" />
+      <Group layoutX="198.0" layoutY="75.0">
+         <children>
+            <ImageView fitHeight="35.0" fitWidth="55.0" layoutX="87.0">
+               <image>
+                  <Image url="@../img/glogo.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="TOP_CENTER" layoutY="73.0" spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <FontAwesomeIconView fill="#4a153d" glyphName="USER" size="15" />
+                        <TextField fx:id="uiEmailInput" prefHeight="25.0" prefWidth="210.0" promptText="Email" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="10.0">
+                     <children>
+                        <FontAwesomeIconView fill="#4a153d" glyphName="KEY" size="15" />
+                        <PasswordField fx:id="uiPassInput" prefWidth="210.0" promptText="Pass" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="uiActionBtn" layoutX="83.0" layoutY="173.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="64.0">
+               <styleClass>
+                  <String fx:value="content-btn-gitas" />
+                  <String fx:value="content-btn" />
+               </styleClass>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CHECK_CIRCLE" size="15" />
+               </graphic>
+            </Button>
+         </children>
+      </Group>
+      <FontAwesomeIconView fx:id="uiCloseBtn" glyphName="CLOSE" layoutX="594.0" layoutY="35.0" size="15" styleClass="button" />
+   </children>
+</AnchorPane>

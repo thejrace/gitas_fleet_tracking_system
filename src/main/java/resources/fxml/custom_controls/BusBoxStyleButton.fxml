@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<fx:root type="javafx.scene.control.Button" xmlns:fx="http://javafx.com/fxml" mnemonicParsing="false">
+    <graphic>
+        <FontAwesomeIconView glyphName="EYE" size="15" styleClass="icon" />
+    </graphic>
+    <styleClass>
+        <String fx:value="filter-btn" />
+        <String fx:value="gray" />
+    </styleClass>
+</fx:root>

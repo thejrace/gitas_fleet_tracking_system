@@ -1,0 +1,156 @@
+.bus-box-default {
+    -fx-pref-width:300;
+    /*-fx-pref-height:210;*/
+    -fx-padding:10;
+}
+
+.bus-box-default-header {
+    -fx-pref-height:30;
+    /*-fx-background-color:#a13e97;*/
+    /*-fx-background-color: linear-gradient(to top left, #a13e97 0%, #c965bf 75%);*/
+    -fx-background-image: url("../img/bg_box_header.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 310 50;
+    -fx-background-position: center center;
+}
+
+.bus-box-default-content {
+    /*-fx-background-color:#fff;*/
+    -fx-background-color: linear-gradient(to bottom right, #fff 0%, #f0f0f0 40%);
+}
+
+.bus-box-header-label {
+    -fx-font-size:15;
+    -fx-text-fill:#ffffff;
+    -fx-font-family:"Montserrat Bold";
+}
+
+.status-led {
+    -fx-stroke-width:0;
+}
+
+.status-led.default {
+    -fx-fill: #000;
+}
+.status-led.green {
+    -fx-fill: #00ff36;
+}
+.status-led.gray{
+    -fx-fill: #c5c5c5;
+}
+.status-led.white {
+    -fx-fill: #fff;
+}
+.status-led.pink{
+    -fx-fill: #ff8686;
+}
+.status-led.red {
+    -fx-fill: #ff4242;
+}
+
+.box-header-plate,
+.box-header-plate.warning {
+    -fx-font-size:12;
+    -fx-font-family:"Montserrat SemiBold";
+    -fx-background-color:#fff;
+    -fx-border-width:0 0 0 7;
+    -fx-border-color:#009ddb;
+    -fx-padding:2 4 2 3;
+    -fx-cursor:hand;
+
+}
+
+.box-header-plate .text {
+    -fx-fill:#000;
+}
+.box-header-plate.warning .text {
+    -fx-fill:#ff0000;
+}
+
+.box-sub-notf {
+    -fx-font-size:11;
+    -fx-text-fill:#656565;
+    -fx-text-alignment:center;
+
+}
+.box-notf {
+    -fx-font-size:14;
+}
+
+.box-summary-item {
+    -fx-pref-width:40;
+    -fx-pref-height:28;
+    -fx-border-width:1;
+    -fx-border-color:#e3e3e3;
+    -fx-text-fill:#4e4e4e;
+    -fx-font-weight:bold;
+}
+
+.box-summary-item.green {
+    -fx-background-color:#caeaae;
+}
+.box-summary-item.gray {
+    -fx-background-color:#e6e6e6;
+}
+.box-summary-item.white {
+    -fx-background-color:#fff;
+}
+.box-summary-item.pink {
+    -fx-background-color:#ffe8e8;
+}
+.box-summary-item.red {
+    -fx-background-color:#f4bcbc;
+}
+
+.box-nav-btn {
+    -fx-min-height:30;
+    -fx-background-color:#272626;
+    -fx-background-radius:0;
+}
+
+.box-nav-btn:hover {
+    -fx-background-color: #111010;
+}
+.box-nav-btn:hover .icon {
+    -fx-fill: #8d8b8b
+}
+.box-nav-btn .icon{
+    -fx-fill: #4c4a4a
+}
+
+
+.box-nav-btn:hover {
+    -fx-text-fill:#ff3600;
+}
+
+.box-vd-log-container {
+    -fx-background-color:#353535;
+    -fx-padding:2 0 2 0;
+}
+.box-vd-log-container .label .text {
+    -fx-fill:#c7c7c7;
+    -fx-font-size:10;
+}
+.box-vd-log-container .button {
+
+    -fx-padding:2 4 2 4;
+    -fx-border-radius:0;
+}
+.box-vd-log-container .button .text{
+    -fx-fill:#c7c7c7;
+    -fx-font-family:"Montserrat SemiBold";
+    -fx-font-size:10;
+}
+
+.btn-vd-log-default {
+    -fx-background-color:#585858;
+}
+.btn-vd-log-green {
+    -fx-background-color:#526441;
+}
+.btn-vd-log-red {
+    -fx-background-color:#593232;
+}
+.btn-vd-log-blue {
+    -fx-background-color:#3f5b66;
+}

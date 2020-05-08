@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox styleClass="settings-tab-content" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.settings.DataDownloadSettingsController">
+   <children>
+      <Label styleClass="lbl-gray1" text="Veri kaynağı ayarlarını buradan yapabilirsiniz." />
+      <VBox layoutX="20.0" layoutY="52.0" spacing="10.0">
+         <children>
+            <Label text="Aktif Kaynak Ayarları">
+               <styleClass>
+                  <String fx:value="lbl-h4" />
+                  <String fx:value="lbl-yellow" />
+                  <String fx:value="lbl-bold" />
+               </styleClass>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" styleClass="lbl-gray1" text="Değişikliklerin uygulanması için programı kapatıp açmanız gerekir." />
+            <Button fx:id="uiDataSourceBtn" mnemonicParsing="false" styleClass="content-btn-gitas" text="Filo5" />
+         </children>
+      </VBox>
+      <VBox spacing="10.0">
+         <children>
+            <Label text="URL Ayarları">
+               <styleClass>
+                  <String fx:value="lbl-h4" />
+                  <String fx:value="lbl-yellow" />
+                  <String fx:value="lbl-bold" />
+               </styleClass>
+            </Label>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label styleClass="lbl-gray1" text="Sunucu URL" />
+                  <TextField fx:id="uiAPIUrlInput" prefHeight="25.0" prefWidth="500.0" />
+               </children>
+               <styleClass>
+                  <String fx:value="input-control" />
+                  <String fx:value="align-label" />
+               </styleClass>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label styleClass="lbl-gray1" text="Filo URL" />
+                  <TextField fx:id="uiFleetURLInput" prefHeight="25.0" prefWidth="500.0" />
+               </children>
+               <styleClass>
+                  <String fx:value="align-label" />
+                  <String fx:value="input-control" />
+               </styleClass>
+            </HBox>
+            <HBox spacing="15.0" />
+         </children>
+      </VBox>
+      <Button fx:id="uiSaveBtn" mnemonicParsing="false" text="Kaydet">
+         <styleClass>
+            <String fx:value="content-btn" />
+            <String fx:value="content-btn-warning" />
+         </styleClass>
+      </Button>
+   </children>
+</VBox>

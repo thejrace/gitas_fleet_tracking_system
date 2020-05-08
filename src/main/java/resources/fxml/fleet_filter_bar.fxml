@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.HBox?>
+<?import ui.custom_control.FleetFilterButton?>
+<?import ui.custom_control.BusBoxStyleButton?>
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="40.0" styleClass="fleet-filter-container" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.block.FleetFilterBarController">
+   <children>
+
+      <HBox spacing="10.0">
+         <children>
+            <FleetFilterButton className="green" text="AKTİF" action="0"/>
+            <FleetFilterButton className="red" text="ZAYİ" action="1"/>
+            <FleetFilterButton className="gray" text="PLAKA" action="2"/>
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
+         <children>
+            <BusBoxStyleButton mnemonicParsing="false" action="0"/>
+            <BusBoxStyleButton mnemonicParsing="false" action="1"/>
+            <BusBoxStyleButton mnemonicParsing="false" action="2"/>
+         </children>
+      </HBox>
+   </children>
+</HBox>

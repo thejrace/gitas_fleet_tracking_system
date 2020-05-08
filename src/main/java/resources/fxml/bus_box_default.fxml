@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<?import ui.custom_control.BusBoxButton?>
+<VBox styleClass="bus-box-default" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.component.BusBoxController" fx:id="uiBusBoxWrapper">
+   <stylesheets>
+      <URL value="@../css/bus_box_default.css" />
+   </stylesheets>
+   <children>
+      <AnchorPane prefHeight="200.0" styleClass="bus-box-default-header">
+         <children>
+            <Circle fx:id="uiLed" radius="11.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0">
+               <styleClass>
+                  <String fx:value="status-led" />
+                  <String fx:value="default" />
+               </styleClass>
+            </Circle>
+            <Label fx:id="uiBusCodeLabel" styleClass="bus-box-header-label" text="A-1636" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="5.0" />
+            <Label fx:id="uiPlateLabel" styleClass="box-header-plate" text="34 AG 3882" AnchorPane.leftAnchor="95.0" AnchorPane.topAnchor="5.0" />
+            <Label fx:id="uiRouteLabel" layoutX="42.0" layoutY="15.0" styleClass="bus-box-header-label" text="15BK" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+         </children>
+      </AnchorPane>
+      <VBox spacing="5.0" styleClass="bus-box-default-content" fx:id="uiSummaryBlock">
+         <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <Label styleClass="box-notf" text="Veri bekleniyor..."  fx:id="uiNotfLabel"/>
+                  <Label styleClass="box-sub-notf" text="Veri bekleniyor..." fx:id="uiSubNotfLabel" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" spacing="10.0" >
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="0" fx:id="uiSummary0" >
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="gray" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="0" fx:id="uiSummary1">
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="white" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="0" fx:id="uiSummary2">
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="green" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="10.0" text="0" fx:id="uiSummary3">
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="pink" />
+                     </styleClass>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="10.0" text="0" fx:id="uiSummary4">
+                     <styleClass>
+                        <String fx:value="box-summary-item" />
+                        <String fx:value="red" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0" fx:id="uiNavBlock">
+         <children>
+
+            <BusBoxButton tooltipText="Plan" mnemonicParsing="false" iconName="CALENDAR" action="0" fx:id="uiBB0"/>
+            <BusBoxButton tooltipText="Rapor" mnemonicParsing="false" iconName="BAR_CHART" action="3" fx:id="uiBB3" />
+            <BusBoxButton tooltipText="Mesaj" mnemonicParsing="false" iconName="COMMENT" action="1" fx:id="uiBB1"/>
+            <BusBoxButton tooltipText="Sürücü" mnemonicParsing="false" iconName="USER" action="2" fx:id="uiBB2"/>
+            <BusBoxButton tooltipText="IYS" mnemonicParsing="false" iconName="INFO" action="4" fx:id="uiBB4" />
+            <BusBoxButton tooltipText="Harita" mnemonicParsing="false" iconName="MAP_MARKER" action="5" fx:id="uiBB5"/>
+
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
+      </FlowPane>
+      <AnchorPane styleClass="box-vd-log-container" fx:id="uiDataControlBlock">
+         <children>
+            <HBox alignment="CENTER" spacing="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="1.0">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="btn-vd-log-default" text="F" fx:id="uiFleetDataDownloadBtn" />
+                  <Label text="xx:xx (x)" fx:id="uiFleetDataDownloadTimestampLabel" />
+                  <Button mnemonicParsing="false" styleClass="btn-vd-log-default" text="P" fx:id="uiPlateDataDownloadBtn"/>
+                  <Label text="xx:xx" fx:id="uiPlateDataDownloadTimestampLabel" />
+                  <Button layoutX="74.0" layoutY="10.0" mnemonicParsing="false" styleClass="btn-vd-log-blue" text="G" fx:id="uiDataDownloadLogBtn" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="20.0" layoutY="13.0" spacing="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="1.0">
+               <children>
+                  <Label text="HIZ: 15 km/s" fx:id="uiSpeedLabel"/>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

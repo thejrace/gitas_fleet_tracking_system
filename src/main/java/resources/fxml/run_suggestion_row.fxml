@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="uiContainer" styleClass="bus-plan-tr-transparent" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.component.RunSuggestionRowController">
+   <children>
+      <Label alignment="CENTER" text="C-1844">
+         <styleClass>
+            <String fx:value="bus-plan-tbody-main" />
+            <String fx:value="bus-plan-td-80" />
+         </styleClass>
+      </Label>
+      <Label alignment="CENTER" text="HAT - GÜZ">
+         <styleClass>
+            <String fx:value="bus-plan-tbody-main" />
+            <String fx:value="bus-plan-td-150" />
+         </styleClass>
+      </Label>
+      <Label alignment="CENTER" text="ORER">
+         <styleClass>
+            <String fx:value="bus-plan-tbody-main" />
+            <String fx:value="bus-plan-td-80" />
+         </styleClass>
+      </Label>
+   </children>
+</HBox>
